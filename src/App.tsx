@@ -26,7 +26,7 @@ const Router = () => {
 };
 
 const App = () => {
-  const { theme } = useAppStore();
+  const { isLightMode } = useAppStore();
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -41,7 +41,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
-        <ThemeProvider mode={theme}>
+        <ThemeProvider mode={isLightMode ? 'light' : 'dark'}>
           <Router />
         </ThemeProvider>
       </SnackbarProvider>

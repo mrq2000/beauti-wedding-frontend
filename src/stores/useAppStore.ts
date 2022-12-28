@@ -3,7 +3,7 @@ import create from 'zustand';
 import { getItem, setItem } from '@/helpers/storage';
 
 interface AppContext {
-  theme: string;
+  isLightMode: boolean;
   setTheme: (theme?: string) => void;
 }
 
@@ -14,11 +14,11 @@ export interface IUseAppStore extends AppContext {
 const defaultTheme = getItem('theme');
 
 const useAppStore = create<IUseAppStore>((set, get) => ({
-  theme: defaultTheme,
+  isLightMode: defaultTheme == 'light',
   setTheme: (theme?: string) => {
-    const newTheme = theme ? theme : get().theme == 'light' ? 'dark' : 'light';
+    const newTheme = theme ? theme : get().isLightMode ? 'dark' : 'light';
     setItem('theme', newTheme);
-    set({ theme: newTheme });
+    set({ isLightMode: newTheme == 'light' });
   },
   setApp: (App) => set(() => App),
 }));

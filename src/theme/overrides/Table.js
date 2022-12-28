@@ -1,4 +1,4 @@
-export default function Table(theme, mode) {
+export default function Table(theme, isLightMode) {
   return {
     MuiTable: {
       styleOverrides: {
@@ -13,7 +13,7 @@ export default function Table(theme, mode) {
           '& tr': {
             borderBottom: 'none',
             '& th': {
-              backgroundColor: mode == 'light' ? theme.palette.grey[200] : `${theme.palette.grey[700]}4D`,
+              backgroundColor: isLightMode ? theme.palette.grey[200] : `${theme.palette.grey[700]}4D`,
             },
           },
           '& th:first-of-type': {
@@ -30,7 +30,7 @@ export default function Table(theme, mode) {
     MuiTableRow: {
       styleOverrides: {
         root: {
-          borderBottom: `0.5px solid ${mode == 'light' ? theme.palette.grey[400] : theme.palette.grey[700]}`,
+          borderBottom: `0.5px solid ${isLightMode ? theme.palette.grey[400] : theme.palette.grey[700]}`,
         },
       },
     },

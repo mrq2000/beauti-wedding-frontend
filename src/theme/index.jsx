@@ -18,7 +18,7 @@ ThemeProvider.propTypes = {
 export default function ThemeProvider({ children, mode }) {
   const themeOptions = useMemo(
     () => ({
-      palette: getPalette(mode),
+      palette: getPalette(mode == 'light'),
       shape: { borderRadius: 8 },
       typography,
       shadows,
@@ -28,7 +28,7 @@ export default function ThemeProvider({ children, mode }) {
   );
 
   const theme = createTheme(themeOptions);
-  theme.components = componentsOverride(theme, mode);
+  theme.components = componentsOverride(theme, mode == 'light');
 
   return (
     <StyledEngineProvider injectFirst>

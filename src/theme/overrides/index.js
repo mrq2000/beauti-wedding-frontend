@@ -17,7 +17,7 @@ import Svg from './Svg';
 
 // ----------------------------------------------------------------------
 
-export default function ComponentsOverrides(theme, mode) {
+export default function ComponentsOverrides(theme, isLightMode) {
   return Object.assign(
     Card(theme),
     Link(theme),
@@ -25,13 +25,13 @@ export default function ComponentsOverrides(theme, mode) {
     IconButton(theme),
     Paper(theme),
     Dialog(theme),
-    Pagination(theme, mode),
-    Table(theme, mode),
+    Pagination(theme, isLightMode),
+    Table(theme, isLightMode),
     Button(theme),
     Backdrop(theme),
     Typography(theme),
     CssBaseline(theme),
     Autocomplete(theme),
-    Svg(theme, mode),
+    Svg(theme, isLightMode),
   );
 }

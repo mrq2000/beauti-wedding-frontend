@@ -29,20 +29,20 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: '#F5E9FF',
-  light: '#DA9EFF',
-  main: '#B454FF',
-  dark: '#6906A3',
-  darker: '#3F146A',
+  lighter: '#C8FACD',
+  light: '#5BE584',
+  main: '#00AB55',
+  dark: '#007B55',
+  darker: '#005249',
   contrastText: '#fff',
 };
 
 const SECONDARY = {
-  lighter: '#C4D8FF',
-  light: '#8FA7FF',
-  main: '#3763FE',
-  dark: '#2822B8',
-  darker: '#1F1C78',
+  lighter: '#D6E4FF',
+  light: '#84A9FF',
+  main: '#3366FF',
+  dark: '#1939B7',
+  darker: '#091A7A',
   contrastText: '#fff',
 };
 
@@ -98,7 +98,7 @@ const CHART_COLORS = {
   red: ['#FF6C40', '#FF8F6D', '#FFBD98', '#FFF2D4'],
 };
 
-const getPalette = (mode = 'light') => ({
+const getPalette = (isLightMode) => ({
   common: { black: '#000', white: '#fff' },
   primary: { ...PRIMARY },
   secondary: { ...SECONDARY },
@@ -109,19 +109,17 @@ const getPalette = (mode = 'light') => ({
   grey: GREY,
   gradients: GRADIENTS,
   chart: CHART_COLORS,
-  divider: mode == 'light' ? GREY[400] : GREY[700],
-  text:
-    mode == 'light'
-      ? { primary: '#000000', secondary: GREY[700], disabled: GREY[500] }
-      : {
-          primary: '#fff',
-          secondary: GREY[400],
-          disabled: GREY[600],
-        },
-  background:
-    mode == 'light'
-      ? { paper: '#ffffff', default: '#F6F6F8', neutral: GREY[200] }
-      : { paper: '#333841', default: '#2D3139', neutral: GREY[200] },
+  divider: isLightMode ? GREY[400] : GREY[700],
+  text: isLightMode
+    ? { primary: '#000000', secondary: GREY[700], disabled: GREY[500] }
+    : {
+        primary: '#fff',
+        secondary: GREY[400],
+        disabled: GREY[600],
+      },
+  background: isLightMode
+    ? { paper: '#ffffff', default: '#F6F6F8', neutral: GREY[200] }
+    : { paper: '#333841', default: '#2D3139', neutral: GREY[200] },
   action: {
     active: GREY[600],
     hover: GREY[500_8],
