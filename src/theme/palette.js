@@ -118,7 +118,7 @@ const getPalette = (isLightMode) => ({
         disabled: GREY[600],
       },
   background: isLightMode
-    ? { paper: '#ffffff', default: '#F6F6F8', neutral: GREY[200] }
+    ? { paper: '#dde1e7', default: '#dde1e7', neutral: GREY[200] }
     : { paper: '#333841', default: '#2D3139', neutral: GREY[200] },
   action: {
     active: GREY[600],

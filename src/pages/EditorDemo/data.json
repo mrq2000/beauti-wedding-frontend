@@ -1,0 +1,52 @@
+{
+  "info": {
+    "bride": {
+      "name": "NGUYEN THI A",
+      "age": "optional",
+      "mom": "optional",
+      "dad": "optional"
+    },
+    "groom": {
+      "name": "NGUYEN THI B",
+      "age": "optional",
+      "mom": "optional",
+      "dad": "optional"
+    },
+    "location": {
+      "title": "Dong Anh Duc Noi",
+      "long": 1.22,
+      "lat": 2.22
+    },
+    "time": {
+      "date": "1111"
+    }
+  },
+  "settings": {
+    "cover": {
+      "displayName": "Cover",
+      "props": {
+        "settings": {
+          "background": {
+            "usingImage": true,
+            "color": "#fff",
+            "url": "https://"
+          }
+        }
+      },
+      "type": "Page",
+      "nodes": ["image1"]
+    },
+    "pageRight": {},
+    "pageLeft": {
+      
+    },
+    "image1": {
+      "displayName": "Image",
+      "props": {
+        "url" :"https://"
+      },
+      "type": "Image",
+      "nodes": []
+    }
+  }
+}
