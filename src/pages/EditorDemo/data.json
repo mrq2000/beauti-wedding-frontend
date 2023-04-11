@@ -23,7 +23,6 @@
   },
   "settings": {
     "cover": {
-      "displayName": "Cover",
       "props": {
         "settings": {
           "background": {
@@ -36,16 +35,12 @@
       "type": "Page",
       "nodes": ["image1"]
     },
-    "pageRight": {},
-    "pageLeft": {
-      
-    },
     "image1": {
       "displayName": "Image",
       "props": {
         "url" :"https://"
       },
-      "type": "Image",
+      "type": "Page",
       "nodes": []
     }
   }

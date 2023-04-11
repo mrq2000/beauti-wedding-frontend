@@ -1,8 +1,8 @@
-import { ElementType, FunctionComponent } from 'react';
+import { ElementType, FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { Info } from './info';
-import { Nodes } from './node';
+import { NodeId, Nodes } from './node';
 
-export type Resolver = Record<string, ElementType>;
+export type Resolver = Record<string, BuilderComponent>;
 
 export interface EditorState {
   info: Info;
@@ -15,9 +15,21 @@ export interface EditorState {
   resolver: Resolver;
 }
 
-export interface BuilderComponent extends FunctionComponent {
-  settings: {
-    displayName: string;
-    options?: string;
-  };
+export type OptionSetting = {
+  label: ReactNode;
+  element: ElementType;
+  key: string;
+  title?: string;
+};
+
+export interface BuilderComponentSetting {
+  displayName: string;
+  options?: OptionSetting[];
+}
+
+export interface NodeProps {
+  id: NodeId;
+}
+export interface BuilderComponent extends FunctionComponent<PropsWithChildren<NodeProps>> {
+  settings: BuilderComponentSetting;
 }

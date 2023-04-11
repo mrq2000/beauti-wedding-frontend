@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
 import { useEditor } from '@/builder/hooks/useEditor';
 import { Button } from '@mui/material';
+import RenderNode from '@/builder/render/RenderNode';
+import { useUpdateData } from '@/builder/hooks/useUpdateData';
+import data from './data.json';
 
 const EditDemo: FC = () => {
-  const {
-    state,
-    actions: { selectNode },
-  } = useEditor();
+  useUpdateData(JSON.stringify(data.settings));
 
   return (
     <>
-      {JSON.stringify(state.selected)} <Button onClick={() => selectNode(`${Math.random()}`)}>Select</Button>
+      <RenderNode nodeId="cover" />
     </>
   );
 };
