@@ -1,18 +1,23 @@
 import React, { Fragment, useMemo } from 'react';
+import { useEditor } from '../hooks/useEditor';
 import { BuilderComponent, Node, NodeId } from '../interface';
 import RenderNode from './RenderNode';
 
 interface DefaultRenderProps {
-  node: Node;
-  component: BuilderComponent;
   nodeId: NodeId;
 }
-export const DefaultRender = ({ node, component, nodeId }: DefaultRenderProps) => {
+export const DefaultRender = ({ nodeId }: DefaultRenderProps) => {
+  const { state } = useEditor();
   const defaultProps: any = {
     id: nodeId,
   };
+  const node = state.nodes[nodeId];
 
   return useMemo(() => {
+    console.log(node?.data?.nodes?.toString());
+    if (!node) return null;
+    const component = state.resolver[node.data.type];
+
     if (!node.data.nodes.length) return React.createElement(component, defaultProps);
     return React.createElement(
       component,
@@ -23,5 +28,5 @@ export const DefaultRender = ({ node, component, nodeId }: DefaultRenderProps) =
         ))}
       </Fragment>,
     );
-  }, [node.data.nodes]);
+  }, [node?.data?.nodes?.toString()]);
 };

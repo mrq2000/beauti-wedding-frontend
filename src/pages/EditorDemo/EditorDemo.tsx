@@ -1,12 +1,19 @@
 import { Page } from '@/builder/components/page/Page';
 import React, { FC } from 'react';
-import Editor from '@/builder/editor/Editor';
-import EditDemo from './EditDemo';
+import { Editor, Frame, Element } from '@craftjs/core';
+import RenderNode from './RenderNode';
+import data from './data.json';
 
 const EditorDemo: FC = () => {
   return (
-    <Editor info={undefined} enabled={false} resolver={{ Page }}>
-      <EditDemo />
+    <Editor resolver={{ Page }} onRender={RenderNode}>
+      sssssss
+      {/* <Frame json={JSON.stringify(data.test1)}>
+      </Frame> */}
+
+--------------------------------------------
+      <Frame json={JSON.stringify(data.test2)}>
+      </Frame>
     </Editor>
   );
 };

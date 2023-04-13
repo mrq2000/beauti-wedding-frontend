@@ -32,16 +32,61 @@
           }
         }
       },
-      "type": "Page",
+      "type": {
+        "resolvedName": "Page"
+      },
       "nodes": ["image1"]
     },
     "image1": {
+      "type": {
+        "resolvedName": "Page"
+      },
       "displayName": "Image",
       "props": {
         "url" :"https://"
       },
-      "type": "Page",
       "nodes": []
+    }
+  },
+  "test1": {
+    "ROOT": {
+      "type": {
+        "resolvedName": "Page"
+      },
+      "isCanvas": false,
+      "props": {},
+      "displayName": "Page",
+      "custom": {},
+      "hidden": false,
+      "nodes": [],
+      "linkedNodes": {}
+    }
+  },
+  "test2": {
+    "ROOT": {
+      "type": {
+        "resolvedName": "Page"
+      },
+      "isCanvas": false,
+      "props": {},
+      "displayName": "Page",
+      "custom": {},
+      "hidden": false,
+      "nodes": ["a"],
+      "linkedNodes": {}
+    }, 
+    "a": {
+      "type": {
+        "resolvedName": "Page"
+      },
+      "isCanvas": false,
+      "props": {},
+      "displayName": "Page",
+      "parent": "ROOT",
+      "custom": {},
+      "hidden": false,
+      "nodes": [],
+      "linkedNodes": {}
     }
   }
 }

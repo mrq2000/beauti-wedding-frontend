@@ -1,8 +1,9 @@
-import { ElementType, FunctionComponent, PropsWithChildren, ReactNode } from 'react';
+import { ElementType, FunctionComponent, PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { Info } from './info';
 import { NodeId, Nodes } from './node';
 
 export type Resolver = Record<string, BuilderComponent>;
+export type RenderNodeFC = ElementType<{ render: ReactElement; id: NodeId }>;
 
 export interface EditorState {
   info: Info;
@@ -13,6 +14,7 @@ export interface EditorState {
   nodes: Nodes;
   enabled: boolean;
   resolver: Resolver;
+  onRender: RenderNodeFC;
 }
 
 export type OptionSetting = {

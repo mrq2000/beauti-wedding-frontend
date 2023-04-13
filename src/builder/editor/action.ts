@@ -20,5 +20,14 @@ export const actions = (state: EditorState) => {
     addNode: (id: NodeId, node: Node) => {
       state.nodes[id] = node;
     },
+    setDOM(id: NodeId, dom: HTMLElement | null) {
+      // console.log(id);
+
+      if (!state.nodes[id] || !dom) {
+        return;
+      }
+
+      state.nodes[id].dom = dom;
+    },
   };
 };

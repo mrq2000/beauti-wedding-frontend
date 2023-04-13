@@ -11,7 +11,7 @@ export type NodeData = SerializedNode & BuilderComponentSetting;
 export type Node = {
   id: NodeId;
   data: NodeData;
-  // dom: HTMLElement | null;
+  dom?: HTMLElement;
 };
 export type Nodes = Record<NodeId, Node>;
 

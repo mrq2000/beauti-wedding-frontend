@@ -10,14 +10,12 @@ interface RenderNodeProps {
 const RenderNode: FC<RenderNodeProps> = ({ nodeId }) => {
   const { state } = useEditor();
 
-  const node = state.nodes[nodeId];
-
-  if (!node) return <></>;
-  const component = state.resolver[node.data.type];
-
   return (
     <Fragment>
-      <DefaultRender nodeId={nodeId} node={node} component={component} />
+      {React.createElement(state.onRender, {
+        render: <DefaultRender nodeId={nodeId} />,
+        id: nodeId,
+      })}
     </Fragment>
   );
 };

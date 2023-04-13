@@ -7,6 +7,8 @@ interface ActionType {
   type: string;
   payload: any;
 }
+type test = keyof ActionFunction;
+console.log();
 
 export const useMethods = (initialState: EditorState) => {
   const reducer = (state: EditorState, action: ActionType): EditorState => {
@@ -26,21 +28,18 @@ export const useMethods = (initialState: EditorState) => {
 
   const formatActions = useMemo(() => {
     return {
-      ...Object.keys(editorActions(state)).reduce((accum, type) => {
+      ...Object.keys(editorActions(initialState)).reduce((accum, type) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         accum[type] = (...payload: any) => dispatch({ type, payload });
         return accum;
       }, {} as ActionFunction),
     };
-  }, [state]);
+  }, []);
 
-  return useMemo(
-    () => ({
-      actions: formatActions,
-      query,
-      state,
-    }),
-    [formatActions, query, state],
-  );
+  return {
+    actions: formatActions,
+    query,
+    state,
+  };
 };
