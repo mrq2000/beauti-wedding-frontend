@@ -9,9 +9,9 @@ const LIGHT_MODE = palette.grey[500];
 
 const createShadow = () => {
   return [
-    'inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)',
-    `-5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)`,
-    `inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)`,
+    'none',
+    '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+    '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
   ];
 };
 
@@ -21,7 +21,7 @@ const createCustomShadow = (color) => {
   return {
     down: `0 1px 2px 0 ${transparent}`,
     up: `0 8px 16px 0 ${transparent}`,
-    primary: `box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)`,
+    primary: `-5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)`,
     secondary: `0 8px 16px 0 ${alpha(palette.secondary.main, 0.24)}`,
     info: `0 8px 16px 0 ${alpha(palette.info.main, 0.24)}`,
     success: `0 8px 16px 0 ${alpha(palette.success.main, 0.24)}`,

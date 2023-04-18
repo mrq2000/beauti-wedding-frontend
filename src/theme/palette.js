@@ -29,11 +29,11 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: '#C8FACD',
-  light: '#5BE584',
-  main: '#00AB55',
-  dark: '#007B55',
-  darker: '#005249',
+  lighter: '#d1e6ff',
+  light: '#a3cdff',
+  main: '#1f306e',
+  dark: '#162f4d',
+  darker: '#162f4d',
   contrastText: '#fff',
 };
 
@@ -118,7 +118,7 @@ const getPalette = (isLightMode) => ({
         disabled: GREY[600],
       },
   background: isLightMode
-    ? { paper: '#dde1e7', default: '#dde1e7', neutral: GREY[200] }
+    ? { paper: '#fff', default: '#f9f9f9', neutral: GREY[200] }
     : { paper: '#333841', default: '#2D3139', neutral: GREY[200] },
   action: {
     active: GREY[600],

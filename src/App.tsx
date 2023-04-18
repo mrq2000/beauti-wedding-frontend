@@ -11,7 +11,7 @@ import Home from '@/pages/Home';
 import Demo from '@/pages/EditorDemo/Demo';
 import EditorDemo from './pages/EditorDemo/EditorDemo';
 
-const LayouOutlet = () => (
+const LayoutOutlet = () => (
   <MainLayout>
     <Outlet />
   </MainLayout>
@@ -20,7 +20,7 @@ const LayouOutlet = () => (
 const Router = () => {
   return (
     <Routes>
-      <Route path="" element={<LayouOutlet />}>
+      <Route path="" element={<LayoutOutlet />}>
         <Route index element={<Home />} />
       </Route>
       <Route path="/demo" element={<Demo />} />

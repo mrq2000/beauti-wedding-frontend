@@ -1,19 +1,29 @@
-import { Page } from '@/builder/components/page/Page';
-import React, { FC } from 'react';
-import { Editor, Frame, Element } from '@craftjs/core';
-import RenderNode from './RenderNode';
-import data from './data.json';
+import React, { FC, useState } from 'react';
+import { Editor, Frame } from '@craftjs/core';
+import RenderNode from './setting/RenderNode';
+import { Box } from '@mui/material';
+import { Text } from '@/editor/components';
+import Header, { HEADER_HEIGHT } from './components/Header';
+import SideBarSetting from './setting/SidebarSetting';
+
+export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 
 const EditorDemo: FC = () => {
-  return (
-    <Editor resolver={{ Page }} onRender={RenderNode}>
-      sssssss
-      {/* <Frame json={JSON.stringify(data.test1)}>
-      </Frame> */}
+  const [viewMode, setViewMode] = useState<VIEW_MODE>('EDIT');
 
---------------------------------------------
-      <Frame json={JSON.stringify(data.test2)}>
-      </Frame>
+  return (
+    <Editor resolver={{ Text }} onRender={RenderNode}>
+      <Box flex={1} flexDirection="column" height="100%">
+        <Header viewMode={viewMode} />
+        <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">
+          <Box sx={{ padding: 1 }} display="flex" alignItems="center" justifyContent="center" flex={1}>
+            <Frame>
+              <Text />
+            </Frame>
+          </Box>
+          <SideBarSetting />
+        </Box>
+      </Box>
     </Editor>
   );
 };

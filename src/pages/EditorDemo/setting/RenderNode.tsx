@@ -4,15 +4,8 @@ import { useEditor } from '@craftjs/core';
 
 const RenderNode = ({ render }: any) => {
   const { query } = useEditor();
-  console.log(query.serialize());
-  
-  return (
-    <Box>
-      Render Node
-      {render}
-      asdsadasd
-    </Box>
-  );
+
+  return <Box>{render}</Box>;
 };
 
 export default RenderNode;
