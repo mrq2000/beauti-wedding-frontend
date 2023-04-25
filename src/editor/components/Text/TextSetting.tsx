@@ -1,12 +1,15 @@
 import { FontSetting } from '@/editor/interface/setting';
+import { DeepPartial } from '@/interface';
+import { mergeWithoutArray } from '@/utils/merge';
 import { useNode } from '@craftjs/core';
-import { FormControl, FormLabel, Slider } from '@mui/material';
+import FontSettingComp from '../common/FontSetting';
 
+export interface TextStyle {
+  font: FontSetting;
+}
 export interface ITextSetting {
   text: string;
-  color: string;
-  font: FontSetting;
-  textAlign: 'left' | 'right' | 'center';
+  style: TextStyle;
 }
 const TextSetting = () => {
   const {
@@ -16,20 +19,21 @@ const TextSetting = () => {
     textProps: node.data.props as ITextSetting,
   }));
 
+  const onChangeFont = (data: DeepPartial<TextStyle>) => {
+    setProp((props: ITextSetting) => {
+      props.style = mergeWithoutArray(props.style, data);
+    });
+  };
   return (
     <>
-      <FormControl size="small" component="fieldset">
-        <FormLabel component="legend">Font size</FormLabel>
-        <Slider
-          value={textProps.font.fontSize || 7}
-          step={7}
-          min={1}
-          max={50}
-          onChange={(_, value) => {
-            setProp((props: ITextSetting) => (props.font.fontSize = value as number), 1000);
-          }}
-        />
-      </FormControl>
+      <FontSettingComp
+        font={textProps.style.font}
+        onChange={(value) => {
+          onChangeFont({
+            font: value,
+          });
+        }}
+      />
     </>
   );
 };

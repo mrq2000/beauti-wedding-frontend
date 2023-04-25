@@ -3,14 +3,13 @@ import ContentEditable from 'react-contenteditable';
 import React, { useState, useEffect } from 'react';
 import TextSetting, { ITextSetting } from './TextSetting';
 
-export const Text = ({ text, textAlign, color, font }: ITextSetting) => {
+export const Text = ({ text, style: { font } }: ITextSetting) => {
   const {
     connectors: { connect, drag },
     selected,
     actions: { setProp },
   } = useNode((state) => ({
     selected: state.events.selected,
-    dragged: state.events.dragged,
   }));
 
   const [editable, setEditable] = useState(false);
@@ -37,21 +36,31 @@ export const Text = ({ text, textAlign, color, font }: ITextSetting) => {
         disabled={!editable}
         onChange={(e) => setProp((props: ITextSetting) => (props.text = e.target.value), 500)}
         tagName="p"
-        style={{ fontSize: `${font.fontSize}px`, textAlign, color, fontFamily: font.fontFamily }}
+        style={{
+          fontSize: `${font.fontSize}px`,
+          textAlign: font.textAlign,
+          color: font.color,
+          fontFamily: font.fontFamily,
+          fontStyle: font.fontStyle,
+          fontWeight: font.fontWeight,
+        }}
       />
     </div>
   );
 };
 
 export const TextDefaultProps: ITextSetting = {
-  text: 'Click here to edit!',
-  font: {
-    fontSize: 20,
-    fontFamily: 'inherit',
-    fontWeight: '400',
+  text: 'Click vào đây để chỉnh sửa!',
+  style: {
+    font: {
+      fontSize: 20,
+      fontFamily: 'inherit',
+      fontWeight: '400',
+      color: '#000000',
+      textAlign: 'left',
+      fontStyle: 'unset',
+    },
   },
-  color: 'black',
-  textAlign: 'left',
 };
 
 Text.craft = {

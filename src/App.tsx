@@ -10,6 +10,7 @@ import MainLayout from '@/components/layout/MainLayout';
 import Home from '@/pages/Home';
 import Demo from '@/pages/EditorDemo/Demo';
 import EditorDemo from './pages/EditorDemo/EditorDemo';
+import { GlobalStyle } from './utils/GlobalStyle';
 
 const LayoutOutlet = () => (
   <MainLayout>
@@ -46,6 +47,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
         <ThemeProvider mode={'light'}>
+          <GlobalStyle />
           <Router />
         </ThemeProvider>
       </SnackbarProvider>

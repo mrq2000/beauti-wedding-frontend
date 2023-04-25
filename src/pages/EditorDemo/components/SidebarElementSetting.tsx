@@ -1,7 +1,6 @@
 import { Typography, Fade, styled, Drawer as MuiDrawer, Theme, CSSObject, Box } from '@mui/material';
 import React, { FC } from 'react';
-import { HEADER_HEIGHT } from '../components/Header';
-import { TransitionGroup } from 'react-transition-group';
+import { HEADER_HEIGHT } from './Header';
 import { useEditor } from '@craftjs/core';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
@@ -49,9 +48,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 }));
 
-// interface SideBarSettingProps {}
+// interface SidebarElementSettingProps {}
 
-const SideBarSetting: FC = () => {
+const SidebarElementSetting: FC = () => {
   const {
     actions: { selectNode },
     selectedNode,
@@ -89,29 +88,14 @@ const SideBarSetting: FC = () => {
             <HighlightOffIcon color="action" />
           </Box>
         </Box>
-        <TransitionGroup className={`flex flex-col flex-auto overflow-y-auto`}>
-          {selectedNode ? (
-            <Fade
-              key={selectedNode.id}
-              timeout={{
-                appear: 0,
-                enter: 700,
-                exit: 0,
-              }}
-            >
-              <Box className={`flex flex-col flex-auto overflow-y-auto`}>
-                {React.createElement(selectedNode.related.settings)}
-              </Box>
-            </Fade>
-          ) : (
-            <Fade>
-              <Box></Box>
-            </Fade>
-          )}
-        </TransitionGroup>
+        {selectedNode && (
+          <Box className={`flex flex-col flex-auto overflow-y-auto`}>
+            {React.createElement(selectedNode.related.settings)}
+          </Box>
+        )}
       </Box>
     </Drawer>
   );
 };
 
-export default SideBarSetting;
+export default SidebarElementSetting;
