@@ -6,3 +6,10 @@ export interface FontSetting {
   textAlign: 'left' | 'right' | 'center' | 'justify';
   fontStyle: string;
 }
+
+export interface Spacing {
+  top: number;
+  left: number;
+  bottom: number;
+  right: number;
+}

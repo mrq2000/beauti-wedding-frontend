@@ -18,8 +18,6 @@ const ColorPicker: FC<ColorPickerProps> = ({ color, onChange }) => {
     setAnchorEl(null);
   };
 
-  console.log('color', color);
-
   const open = Boolean(anchorEl);
 
   return (

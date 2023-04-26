@@ -6,12 +6,13 @@ import {
   Typography,
   MenuItem,
   FormControl,
-  Select,
   ToggleButtonGroup,
   ToggleButton,
   styled,
   Paper,
   Divider,
+  Autocomplete,
+  TextField,
 } from '@mui/material';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
@@ -47,12 +48,12 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 }));
 
 const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, onChange }) => {
-  console.log(font);
   return (
     <Box display="flex" flex={1} flexDirection="column">
-      <Typography>Cỡ chữ</Typography>
+      <Typography sx={{ fontWeight: 600 }}>Cỡ chữ</Typography>
       <Slider
         value={font.fontSize || 7}
+        size="small"
         step={1}
         min={minSize}
         max={maxSize}
@@ -62,7 +63,7 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, on
         sx={{ width: '100%' }}
       />
 
-      <Typography sx={{ mt: 2 }}>Kiểu chữ</Typography>
+      <Typography sx={{ mt: 2, fontWeight: 600 }}>Kiểu chữ</Typography>
       <Paper
         elevation={0}
         sx={{
@@ -100,7 +101,6 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, on
           value={font.fontWeight}
           exclusive
           onChange={(e, value) => {
-            console.log(value);
             onChange({
               fontWeight: value ? value : '400',
             });
@@ -139,23 +139,38 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, on
       </Paper>
 
       <FormControl fullWidth sx={{ marginTop: 2 }}>
-        <Typography>Phông chữ</Typography>
+        <Typography sx={{ fontWeight: 600 }}>Phông chữ</Typography>
 
-        <Select
+        <Autocomplete
+          disablePortal
+          disableClearable={true}
+          options={fontList.map((font) => font.fontFamily)}
           value={font.fontFamily}
-          sx={{ fontFamily: font.fontFamily }}
-          onChange={(e) => {
-            onChange({
-              fontFamily: e.target.value || 'inherit',
-            });
+          sx={{ fontFamily: font.fontFamily, color: 'blue' }}
+          onChange={(event: any, newValue: string | null) => {
+            if (newValue) {
+              onChange({
+                fontFamily: newValue,
+              });
+            }
           }}
-        >
-          {fontList.map((font) => (
-            <MenuItem value={font.fontFamily} key={font.fontFamily} sx={{ fontFamily: font.fontFamily }}>
-              {font.fontFamily}
+          renderOption={(props, option) => (
+            <MenuItem value={option} sx={{ fontFamily: option }} {...props}>
+              {option}
             </MenuItem>
-          ))}
-        </Select>
+          )}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              inputProps={{
+                ...params.inputProps,
+                style: {
+                  fontFamily: font.fontFamily,
+                },
+              }}
+            />
+          )}
+        />
       </FormControl>
     </Box>
   );

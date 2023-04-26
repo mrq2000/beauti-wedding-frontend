@@ -2,8 +2,10 @@ import { useNode } from '@craftjs/core';
 import ContentEditable from 'react-contenteditable';
 import React, { useState, useEffect } from 'react';
 import TextSetting, { ITextSetting } from './TextSetting';
+import { Box } from '@mui/material';
+import { genPaddingSpacing } from '@/utils/spacing';
 
-export const Text = ({ text, style: { font } }: ITextSetting) => {
+export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -23,12 +25,15 @@ export const Text = ({ text, style: { font } }: ITextSetting) => {
   }, [selected]);
 
   return (
-    <div
+    <Box
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
       onClick={() => {
         if (selected) {
           setEditable(true);
         }
+      }}
+      sx={{
+        ...genPaddingSpacing(padding),
       }}
     >
       <ContentEditable
@@ -45,7 +50,7 @@ export const Text = ({ text, style: { font } }: ITextSetting) => {
           fontWeight: font.fontWeight,
         }}
       />
-    </div>
+    </Box>
   );
 };
 
@@ -54,11 +59,23 @@ export const TextDefaultProps: ITextSetting = {
   style: {
     font: {
       fontSize: 20,
-      fontFamily: 'inherit',
+      fontFamily: 'Dancing Script',
       fontWeight: '400',
       color: '#000000',
       textAlign: 'left',
       fontStyle: 'unset',
+    },
+    margin: {
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    },
+    padding: {
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
     },
   },
 };

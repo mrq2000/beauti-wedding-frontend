@@ -1,11 +1,14 @@
-import { FontSetting } from '@/editor/interface/setting';
+import { FontSetting, Spacing } from '@/editor/interface/setting';
 import { DeepPartial } from '@/interface';
 import { mergeWithoutArray } from '@/utils/merge';
 import { useNode } from '@craftjs/core';
+import { Box } from '@mui/material';
 import FontSettingComp from '../common/FontSetting';
+import SpacingSetting from '../common/SpacingSetting';
 
 export interface TextStyle {
   font: FontSetting;
+  padding: Spacing;
 }
 export interface ITextSetting {
   text: string;
@@ -34,6 +37,19 @@ const TextSetting = () => {
           });
         }}
       />
+
+      <Box mt={2}>
+        <SpacingSetting
+          title="Khoảng cách"
+          spacing={textProps.style.padding}
+          max={100}
+          onChange={(value) => {
+            onChangeFont({
+              padding: value,
+            });
+          }}
+        />
+      </Box>
     </>
   );
 };
