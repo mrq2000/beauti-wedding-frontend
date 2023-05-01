@@ -1,15 +1,16 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { SnackbarProvider } from 'notistack';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import ThemeProvider from '@/theme';
 // import useAppStore from '@/stores/useAppStore';
 import MainLayout from '@/components/layout/MainLayout';
 import Home from '@/pages/Home';
-import Demo from '@/pages/EditorDemo/Demo';
-import EditorDemo from './pages/EditorDemo/EditorDemo';
+import Demo from '@/pages/menu-design/Demo';
+import EditorDemo from './pages/menu-design/EditorDemo';
 import { GlobalStyle } from './utils/GlobalStyle';
 
 const LayoutOutlet = () => (
@@ -45,12 +46,14 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
-        <ThemeProvider mode={'light'}>
-          <GlobalStyle />
-          <Router />
-        </ThemeProvider>
-      </SnackbarProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <SnackbarProvider maxSnack={3} anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}>
+          <ThemeProvider mode={'light'}>
+            <GlobalStyle />
+            <Router />
+          </ThemeProvider>
+        </SnackbarProvider>
+      </LocalizationProvider>
     </QueryClientProvider>
   );
 };

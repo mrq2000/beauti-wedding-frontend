@@ -1,10 +1,10 @@
 import { useEditor, useNode } from '@craftjs/core';
 import React, { useState, useEffect, PropsWithChildren } from 'react';
-import PageSetting, { IPageSetting } from './PageSetting';
+import BroomAndBrideSetting, { IBroomAndBrideSetting } from './BroomAndBrideSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
 
-export const Page = ({ children, style }: PropsWithChildren<IPageSetting>) => {
+export const BroomAndBride = ({ children, style }: PropsWithChildren<IBroomAndBrideSetting>) => {
   const {
     connectors: { connect, drag },
   } = useNode((state) => ({
@@ -30,7 +30,7 @@ export const Page = ({ children, style }: PropsWithChildren<IPageSetting>) => {
   );
 };
 
-export const PageDefaultProps: IPageSetting = {
+export const BroomAndBrideDefaultProps: IBroomAndBrideSetting = {
   style: {
     padding: {
       top: 16,
@@ -42,11 +42,11 @@ export const PageDefaultProps: IPageSetting = {
   },
 };
 
-Page.craft = {
-  displayName: 'Page',
+BroomAndBride.craft = {
+  displayName: 'Broom And Bride',
   isCanvas: true,
-  props: PageDefaultProps,
+  props: BroomAndBrideDefaultProps,
   related: {
-    settings: PageSetting,
+    settings: BroomAndBrideSetting,
   },
 };

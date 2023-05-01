@@ -22,17 +22,18 @@ const TextSetting = () => {
     textProps: node.data.props as ITextSetting,
   }));
 
-  const onChangeFont = (data: DeepPartial<TextStyle>) => {
+  const onChange = (data: DeepPartial<TextStyle>) => {
     setProp((props: ITextSetting) => {
       props.style = mergeWithoutArray(props.style, data);
     });
   };
+
   return (
     <>
       <FontSettingComp
         font={textProps.style.font}
         onChange={(value) => {
-          onChangeFont({
+          onChange({
             font: value,
           });
         }}
@@ -40,11 +41,11 @@ const TextSetting = () => {
 
       <Box mt={2}>
         <SpacingSetting
-          title="Khoảng cách"
+          title="Padding"
           spacing={textProps.style.padding}
           max={100}
           onChange={(value) => {
-            onChangeFont({
+            onChange({
               padding: value,
             });
           }}

@@ -50,9 +50,10 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, onChange }) => {
   return (
     <Box display="flex" flex={1} flexDirection="column">
-      <Typography sx={{ fontWeight: 600 }}>Cỡ chữ</Typography>
+      <Typography sx={{ fontWeight: 600 }}>Font size</Typography>
       <Slider
         value={font.fontSize || 7}
+        valueLabelDisplay="auto"
         size="small"
         step={1}
         min={minSize}
@@ -63,7 +64,7 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, on
         sx={{ width: '100%' }}
       />
 
-      <Typography sx={{ mt: 2, fontWeight: 600 }}>Kiểu chữ</Typography>
+      <Typography sx={{ mt: 2, fontWeight: 600 }}>Font style</Typography>
       <Paper
         elevation={0}
         sx={{
@@ -139,7 +140,7 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, on
       </Paper>
 
       <FormControl fullWidth sx={{ marginTop: 2 }}>
-        <Typography sx={{ fontWeight: 600 }}>Phông chữ</Typography>
+        <Typography sx={{ fontWeight: 600 }}>Font Family</Typography>
 
         <Autocomplete
           disablePortal

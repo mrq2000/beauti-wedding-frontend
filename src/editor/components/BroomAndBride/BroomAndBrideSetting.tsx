@@ -1,30 +1,29 @@
-import { Spacing } from '@/editor/interface/setting';
+import { FontSetting, Spacing } from '@/editor/interface/setting';
 import { useNode } from '@craftjs/core';
 import { FormControl, Box, Slider } from '@mui/material';
 import { DeepPartial } from '@/interface';
 import { mergeWithoutArray } from '@/utils/merge';
 import SpacingSetting from '../common/SpacingSetting';
 import BorderRadiusSetting from '../common/BorderRadiusSetting';
-import AddPictureButton from '@/components/common/AddPictureButton';
-import CardImageUpload from '@/components/common/CardImgUpload';
 
-export interface PageStyle {
+export interface BroomAndBrideStyle {
   padding: Spacing;
-  borderRadius: number;
+  font: FontSetting;
+  direction: 'column' | 'row';
 }
-export interface IPageSetting {
-  style: PageStyle;
+export interface IBroomAndBrideSetting {
+  style: BroomAndBrideStyle;
 }
-const PageSetting = () => {
+const BroomAndBride = () => {
   const {
     actions: { setProp },
     pageProps,
   } = useNode((node) => ({
-    pageProps: node.data.props as IPageSetting,
+    pageProps: node.data.props as IBroomAndBrideSetting,
   }));
 
-  const onChangeStyle = (data: DeepPartial<PageStyle>) => {
-    setProp((props: IPageSetting) => {
+  const onChangeStyle = (data: DeepPartial<BroomAndBrideStyle>) => {
+    setProp((props: IBroomAndBrideSetting) => {
       props.style = mergeWithoutArray(props.style, data);
     });
   };
@@ -41,7 +40,6 @@ const PageSetting = () => {
           });
         }}
       />
-
       <Box mt={2}>
         <BorderRadiusSetting
           borderRadius={pageProps.style.borderRadius}
@@ -52,14 +50,8 @@ const PageSetting = () => {
           }}
         />
       </Box>
-
-      <Box mt={2} width="100%" height={150}>
-        <AddPictureButton labelKey="upload-background-img" handleSetFile={() => console.log('done')}>
-          <CardImageUpload url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzJl6LV6ahrWNO7JpoIhy9aghnyj7BqAXWg&usqp=CAU" />
-        </AddPictureButton>
-      </Box>
     </>
   );
 };
 
-export default PageSetting;
+export default BroomAndBride;

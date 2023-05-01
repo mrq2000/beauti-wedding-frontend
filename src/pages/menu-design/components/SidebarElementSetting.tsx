@@ -80,7 +80,7 @@ const SidebarElementSetting: FC = () => {
       open={!!selectedNode && !!selectedNode.related.settings}
     >
       <Box px={2} pt={2} display="flex" flexDirection="column" overflow="auto" height="100%">
-        <Box justifyContent="space-between" width="100%" display="flex">
+        <Box justifyContent="space-between" width="100%" display="flex" mb={2}>
           <Typography variant="h4" component="div">
             {selectedNode?.data?.displayName}
           </Typography>
@@ -89,7 +89,7 @@ const SidebarElementSetting: FC = () => {
           </Box>
         </Box>
         {selectedNode && (
-          <Box className={`flex flex-col flex-auto overflow-y-auto`}>
+          <Box display="flex" flexDirection="column" sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
             {React.createElement(selectedNode.related.settings)}
           </Box>
         )}

@@ -18,7 +18,7 @@ const SpacingSetting: FC<SpacingSettingProps> = ({ title, spacing, min = 0, max 
       flexDirection="column"
       sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px' }}
     >
-      <Typography sx={{ fontWeight: 600 }}>{title}</Typography>
+      <Typography sx={{ fontWeight: 600, mb: 1 }}>{title}</Typography>
       {['top', 'left', 'right', 'bottom'].map((key: any) => (
         <Box display="flex" flex={1} key={key}>
           <Box mr={1} width={70} sx={{ textTransform: 'capitalize' }}>
@@ -26,6 +26,7 @@ const SpacingSetting: FC<SpacingSettingProps> = ({ title, spacing, min = 0, max 
           </Box>
           <Slider
             value={spacing[key] as number}
+            valueLabelDisplay="auto"
             step={1}
             min={min}
             max={max}

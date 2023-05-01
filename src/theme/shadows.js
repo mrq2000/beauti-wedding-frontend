@@ -39,6 +39,4 @@ const createCustomShadow = (color) => {
 
 export const customShadows = createCustomShadow(LIGHT_MODE);
 
-const shadows = createShadow(LIGHT_MODE);
-
 export default shadows;
