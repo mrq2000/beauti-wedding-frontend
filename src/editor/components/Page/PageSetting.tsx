@@ -14,6 +14,7 @@ export interface PageStyle {
 }
 export interface IPageSetting {
   style: PageStyle;
+  backgroundUrl?: string;
 }
 const PageSetting = () => {
   const {
@@ -55,7 +56,7 @@ const PageSetting = () => {
 
       <Box mt={2} width="100%" height={150}>
         <AddPictureButton labelKey="upload-background-img" handleSetFile={() => console.log('done')}>
-          <CardImageUpload url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzJl6LV6ahrWNO7JpoIhy9aghnyj7BqAXWg&usqp=CAU" />
+          <CardImageUpload url={pageProps.backgroundUrl} />
         </AddPictureButton>
       </Box>
     </>

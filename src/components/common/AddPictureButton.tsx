@@ -48,7 +48,12 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const AddPictureButton = ({ handleSetFile, children, labelKey, aspect = 9 / 14 }: PropsWithChildren<IAddPictureProps>) => {
+const AddPictureButton = ({
+  handleSetFile,
+  children,
+  labelKey,
+  aspect = 12 / 17,
+}: PropsWithChildren<IAddPictureProps>) => {
   const theme = useTheme();
   const [src, setSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState<Crop>();
@@ -83,13 +88,18 @@ const AddPictureButton = ({ handleSetFile, children, labelKey, aspect = 9 / 14 }
   useDebounceEffect(
     async () => {
       if (completedCrop?.width && completedCrop?.height && imgRef.current && previewCanvasRef.current) {
-        console.log(222222222);
         canvasPreview(imgRef.current, previewCanvasRef.current, completedCrop);
       }
     },
     100,
     [completedCrop, previewCanvasRef, imgRef],
   );
+
+  useEffect(() => {
+    if (src == null && inputRef.current) {
+      inputRef.current.value = '';
+    }
+  }, [src, inputRef]);
 
   return (
     <>
@@ -128,13 +138,13 @@ const AddPictureButton = ({ handleSetFile, children, labelKey, aspect = 9 / 14 }
             py: 5,
           }}
         >
-          <Box width="45%" sx={{ overflow: 'auto' }}>
+          <Box width="45%" sx={{ overflow: 'auto', display: 'flex', justifyContent: 'center' }}>
             <ReactCrop
               onChange={(_, percentCrop) => setCrop(percentCrop)}
               aspect={aspect}
               crop={crop}
               onComplete={(c) => setCompletedCrop(c)}
-              style={{ width: '100%' }}
+              style={{ width: '80%' }}
             >
               <img alt="Crop me" src={src || 'null'} style={{ width: '100%' }} onLoad={onImageLoad} ref={imgRef} />
             </ReactCrop>
@@ -148,8 +158,8 @@ const AddPictureButton = ({ handleSetFile, children, labelKey, aspect = 9 / 14 }
             <canvas
               ref={previewCanvasRef}
               style={{
-                width: 450,
-                height: 700,
+                width: 480,
+                height: 480 / aspect,
                 outline: `1px dashed ${theme.palette.primary.main}`,
               }}
             />

@@ -43,7 +43,6 @@ const TextSetting = () => {
         <SpacingSetting
           title="Padding"
           spacing={textProps.style.padding}
-          max={100}
           onChange={(value) => {
             onChange({
               padding: value,

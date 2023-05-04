@@ -10,8 +10,10 @@ import ThemeProvider from '@/theme';
 import MainLayout from '@/components/layout/MainLayout';
 import Home from '@/pages/Home';
 import Demo from '@/pages/menu-design/Demo';
-import EditorDemo from './pages/menu-design/EditorDemo';
+import MenuDesignPage from './pages/menu-design/MenuDesignPage';
 import { GlobalStyle } from './utils/GlobalStyle';
+
+import './App.css';
 
 const LayoutOutlet = () => (
   <MainLayout>
@@ -26,7 +28,7 @@ const Router = () => {
         <Route index element={<Home />} />
       </Route>
       <Route path="/demo" element={<Demo />} />
-      <Route path="/editor" element={<EditorDemo />} />
+      <Route path="/editor" element={<MenuDesignPage />} />
     </Routes>
   );
 };

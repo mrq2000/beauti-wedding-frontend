@@ -1,31 +1,40 @@
-import { useEditor, useNode } from '@craftjs/core';
-import React, { useState, useEffect, PropsWithChildren } from 'react';
+import React, { useContext } from 'react';
+import { useNode } from '@craftjs/core';
 import BroomAndBrideSetting, { IBroomAndBrideSetting } from './BroomAndBrideSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
+import { InfoContext } from '@/pages/menu-design/InfoContext';
+import { genFont } from '@/utils/font';
 
-export const BroomAndBride = ({ children, style }: PropsWithChildren<IBroomAndBrideSetting>) => {
+export const BroomAndBride = ({ style, textBetween }: IBroomAndBrideSetting) => {
   const {
     connectors: { connect, drag },
-  } = useNode((state) => ({
-    selected: state.events.selected,
-    dragged: state.events.dragged,
-  }));
+  } = useNode();
+  const { broom, bride } = useContext(InfoContext);
+  const isColumnMode = style.direction == 'column';
 
   return (
     <Box
+      display="flex"
+      flex={1}
+      flexDirection={style.direction}
       sx={{
         ...genPaddingSpacing(style.padding),
-        height: 700,
-        backgroundColor: '#fff',
-        width: 450,
-        borderRadius: `${style.borderRadius}px`,
-        overflow: 'hidden',
-        backgroundSize: 'cover',
+        ...genFont(style.font),
       }}
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
     >
-      {children}
+      <Box>{broom.name}</Box>
+      <Box
+        sx={{
+          padding: isColumnMode ? `${style.spaceBetween}rem 0` : `0 ${style.spaceBetween}rem`,
+          alignSelf: isColumnMode ? 'unset' : 'center',
+          fontSize: style.middleWordSize,
+        }}
+      >
+        {textBetween}
+      </Box>
+      <Box>{bride.name}</Box>
     </Box>
   );
 };
@@ -38,12 +47,23 @@ export const BroomAndBrideDefaultProps: IBroomAndBrideSetting = {
       left: 16,
       right: 16,
     },
-    borderRadius: 0,
+    direction: 'column',
+    font: {
+      fontSize: 50,
+      fontFamily: 'Dancing Script',
+      fontWeight: '400',
+      color: '#602e2e',
+      textAlign: 'center',
+      fontStyle: 'unset',
+    },
+    spaceBetween: 0,
+    middleWordSize: 24,
   },
+  textBetween: '&',
 };
 
 BroomAndBride.craft = {
-  displayName: 'Broom And Bride',
+  displayName: 'Broom and Bride',
   isCanvas: true,
   props: BroomAndBrideDefaultProps,
   related: {

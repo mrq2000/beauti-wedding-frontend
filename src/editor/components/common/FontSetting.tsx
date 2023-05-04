@@ -47,9 +47,9 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 48, minSize = 8, onChange }) => {
+const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 64, minSize = 8, onChange }) => {
   return (
-    <Box display="flex" flex={1} flexDirection="column">
+    <Box display="flex" flexDirection="column">
       <Typography sx={{ fontWeight: 600 }}>Font size</Typography>
       <Slider
         value={font.fontSize || 7}

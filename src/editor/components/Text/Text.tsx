@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TextSetting, { ITextSetting } from './TextSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
+import { genFont } from '@/utils/font';
 
 export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
   const {
@@ -41,14 +42,7 @@ export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
         disabled={!editable}
         onChange={(e) => setProp((props: ITextSetting) => (props.text = e.target.value), 500)}
         tagName="p"
-        style={{
-          fontSize: `${font.fontSize}px`,
-          textAlign: font.textAlign,
-          color: font.color,
-          fontFamily: font.fontFamily,
-          fontStyle: font.fontStyle,
-          fontWeight: font.fontWeight,
-        }}
+        style={genFont(font)}
       />
     </Box>
   );
@@ -59,17 +53,11 @@ export const TextDefaultProps: ITextSetting = {
   style: {
     font: {
       fontSize: 20,
-      fontFamily: 'Dancing Script',
+      fontFamily: 'Roboto Slab',
       fontWeight: '400',
       color: '#000000',
-      textAlign: 'left',
+      textAlign: 'center',
       fontStyle: 'unset',
-    },
-    margin: {
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
     },
     padding: {
       top: 0,

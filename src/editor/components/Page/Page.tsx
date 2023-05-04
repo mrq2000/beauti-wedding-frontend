@@ -3,25 +3,24 @@ import React, { useState, useEffect, PropsWithChildren } from 'react';
 import PageSetting, { IPageSetting } from './PageSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
+import demo from '@/assets/demo.jpg';
 
-export const Page = ({ children, style }: PropsWithChildren<IPageSetting>) => {
+export const Page = ({ children, style, backgroundUrl }: PropsWithChildren<IPageSetting>) => {
   const {
     connectors: { connect, drag },
-  } = useNode((state) => ({
-    selected: state.events.selected,
-    dragged: state.events.dragged,
-  }));
+  } = useNode();
 
   return (
     <Box
       sx={{
         ...genPaddingSpacing(style.padding),
-        height: 700,
+        height: 680,
         backgroundColor: '#fff',
-        width: 450,
+        width: 480,
         borderRadius: `${style.borderRadius}px`,
         overflow: 'hidden',
         backgroundSize: 'cover',
+        backgroundImage: backgroundUrl,
       }}
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
     >
@@ -38,8 +37,9 @@ export const PageDefaultProps: IPageSetting = {
       left: 16,
       right: 16,
     },
-    borderRadius: 0,
+    borderRadius: 8,
   },
+  backgroundUrl: `url(${demo})`,
 };
 
 Page.craft = {

@@ -105,7 +105,7 @@ const Drawer = styled(MuiDrawer, {
 
 const MenuSidebar: FC = () => {
   const theme = useTheme();
-  const [open, setOpen] = useState<null | string>(null);
+  const [open, setOpen] = useState<null | string>(SIDEBAR_TABS[0].id);
 
   return (
     <Fragment>
@@ -165,7 +165,15 @@ const MenuSidebar: FC = () => {
             height={`calc(100% - ${HEADER_HEIGHT}px)`}
             width={`${contentWidth - iconDrawer}px`}
           >
-            <Box display="flex" flex={1} flexDirection="column" overflow="auto" padding="20px 16px">
+            <Box
+              display="flex"
+              flex={1}
+              flexDirection="column"
+              overflow="auto"
+              padding="20px 16px"
+              height="100%"
+              className="custom-scrollbar"
+            >
               <Box justifyContent="space-between" width="100%" display="flex" mb="20px">
                 <Typography variant="h4" component="div">
                   {tab.tooltipTitle}

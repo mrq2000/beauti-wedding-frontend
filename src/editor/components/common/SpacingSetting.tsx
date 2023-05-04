@@ -10,14 +10,9 @@ interface SpacingSettingProps {
   onChange: (val: Record<string, number>) => void;
 }
 
-const SpacingSetting: FC<SpacingSettingProps> = ({ title, spacing, min = 0, max = 64, onChange }) => {
+const SpacingSetting: FC<SpacingSettingProps> = ({ title, spacing, min = 0, max = 150, onChange }) => {
   return (
-    <Box
-      display="flex"
-      flex={1}
-      flexDirection="column"
-      sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px' }}
-    >
+    <Box display="flex" flexDirection="column" sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px' }}>
       <Typography sx={{ fontWeight: 600, mb: 1 }}>{title}</Typography>
       {['top', 'left', 'right', 'bottom'].map((key: any) => (
         <Box display="flex" flex={1} key={key}>

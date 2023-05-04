@@ -12,7 +12,6 @@ const BorderRadiusSetting: FC<BorderRadiusSettingProps> = ({ borderRadius, min =
   return (
     <Box
       display="flex"
-      flex={1}
       flexDirection="column"
       sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px', overFlow: 'hidden' }}
     >

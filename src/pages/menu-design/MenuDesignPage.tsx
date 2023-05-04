@@ -6,6 +6,8 @@ import { Page, Text } from '@/editor/components';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import SidebarElementSetting from './components/SidebarElementSetting';
 import MenuSidebar from './components/MenuSidebar';
+import { DEMO_INFO, InfoContext } from './InfoContext';
+import { BroomAndBride } from '@/editor/components/BroomAndBride/BroomAndBride';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 
@@ -27,27 +29,31 @@ const EditDesign = () => {
           <Page>
             <Text />
             <Text />
+            <BroomAndBride />
           </Page>
         </Frame>
       </Box>
     </Box>
   );
 };
-const EditorDemo: FC = () => {
+const MenuDesignPage: FC = () => {
   const [viewMode, setViewMode] = useState<VIEW_MODE>('EDIT');
+  const [info, setInfo] = useState(DEMO_INFO);
 
   return (
-    <Editor resolver={{ Text, Page }} onRender={RenderNode}>
-      <Box flex={1} flexDirection="column" height="100%">
-        <Header viewMode={viewMode} />
-        <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">
-          <MenuSidebar />
-          <EditDesign />
-          <SidebarElementSetting />
+    <InfoContext.Provider value={info}>
+      <Editor resolver={{ Text, Page, BroomAndBride }} onRender={RenderNode}>
+        <Box flex={1} flexDirection="column" height="100%">
+          <Header viewMode={viewMode} />
+          <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">
+            <MenuSidebar />
+            <EditDesign />
+            <SidebarElementSetting />
+          </Box>
         </Box>
-      </Box>
-    </Editor>
+      </Editor>
+    </InfoContext.Provider>
   );
 };
 
-export default EditorDemo;
+export default MenuDesignPage;

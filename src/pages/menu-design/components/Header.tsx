@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import React, { FC } from 'react';
-import { VIEW_MODE } from '../EditorDemo';
+import { VIEW_MODE } from '../MenuDesignPage';
 
 interface HeaderProps {
   viewMode: VIEW_MODE;

@@ -33,7 +33,7 @@ const FadeBox = styled(Box)(() => ({
   },
 }));
 
-const LABEL_HEIGHT = 22;
+const LABEL_HEIGHT = 24;
 const RenderNode = ({ render }: any) => {
   const { id } = useNode();
   const theme = useTheme();
@@ -137,25 +137,26 @@ const RenderNode = ({ render }: any) => {
                     position: 'fixed',
                     backgroundColor: (theme) => (isActive ? theme.palette.primary.main : theme.palette.primary.light),
                     borderTopLeftRadius: '4px',
-                    fontSize: '12px',
+                    fontSize: '14px',
                   }}
                 >
                   <Box sx={{ mr: '4px' }}>{name}</Box>
                   {moveable ? (
-                    <Box sx={{ mr: '2px', cursor: 'move' }} ref={drag}>
-                      <DragHandleRoundedIcon sx={{ fontSize: '12px', mr: '2px', cursor: 'move' }} />
+                    <Box display="flex" sx={{ mr: '2px', cursor: 'move' }} ref={drag}>
+                      <DragHandleRoundedIcon sx={{ fontSize: '14px', mr: '2px', cursor: 'move' }} />
                     </Box>
                   ) : null}
 
                   {deletable ? (
                     <Box
+                      display="flex"
                       sx={{ cursor: 'pointer' }}
                       onMouseDown={(e: React.MouseEvent) => {
                         e.stopPropagation();
                         actions.delete(id);
                       }}
                     >
-                      <DeleteRoundedIcon sx={{ fontSize: '12px' }} />
+                      <DeleteRoundedIcon sx={{ fontSize: '14px' }} />
                     </Box>
                   ) : null}
                 </Box>
