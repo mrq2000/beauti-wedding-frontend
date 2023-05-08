@@ -1,5 +1,4 @@
-// export * from './Image';
-// export * from './Name';
+export * from './BroomAndBride';
 export * from './Page';
-// export * from './Time';
+export * from './Time';
 export * from './Text';

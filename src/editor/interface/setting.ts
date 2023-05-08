@@ -13,3 +13,9 @@ export interface Spacing {
   bottom: number;
   right: number;
 }
+
+export interface Border {
+  borderWidth: number;
+  borderColor: string;
+  borderStyle: string;
+}

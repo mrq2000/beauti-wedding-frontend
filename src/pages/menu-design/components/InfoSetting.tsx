@@ -3,7 +3,11 @@ import React, { FC, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 import { InfoContext } from '../InfoContext';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface FormValues {
   broomName: string;
@@ -13,7 +17,19 @@ interface FormValues {
   brideMotherName?: string;
   brideFatherName?: string;
   location: string;
+  time: string;
 }
+
+export const infoSchema = yup.object().shape({
+  broomName: yup.string().required('Vui lòng không bỏ trống trường này'),
+  brideName: yup.string().required('Vui lòng không bỏ trống trường này'),
+  broomMotherName: yup.string().nullable(),
+  broomFatherName: yup.string().nullable(),
+  brideMotherName: yup.string().nullable(),
+  brideFatherName: yup.string().nullable(),
+  location: yup.string().nullable(),
+  time: yup.string().required(),
+});
 
 const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
   {
@@ -22,7 +38,7 @@ const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
   },
   {
     key: 'broomName',
-    label: 'Tên cô dâu *',
+    label: 'Tên chú rể *',
   },
   {
     key: 'brideFatherName',
@@ -47,10 +63,12 @@ const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
 ];
 
 const InfoSetting: FC = () => {
-  const info = useContext(InfoContext);
+  const { info, setInfo } = useContext(InfoContext);
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     mode: 'onSubmit',
@@ -61,8 +79,30 @@ const InfoSetting: FC = () => {
       brideName: info.bride.name,
       brideMotherName: info.bride.motherName,
       brideFatherName: info.bride.fartherName,
+      location: info.location.name,
+      time: info.time,
     },
+    resolver: yupResolver(infoSchema),
   });
+
+  const onSubmit = (data: FormValues) => {
+    setInfo({
+      broom: {
+        name: data.broomName,
+        fartherName: data.broomFatherName,
+        motherName: data.broomMotherName,
+      },
+      bride: {
+        name: data.brideName,
+        fartherName: data.brideFatherName,
+        motherName: data.brideMotherName,
+      },
+      location: {
+        name: data.location,
+      },
+      time: data.time,
+    });
+  };
 
   return (
     <>
@@ -79,6 +119,8 @@ const InfoSetting: FC = () => {
             key={field.key}
             label={field.label}
             fullWidth
+            helperText={errors && errors[field.key]?.message}
+            error={!!errors[field.key]}
             InputProps={{
               ...register(field.key),
             }}
@@ -87,11 +129,20 @@ const InfoSetting: FC = () => {
 
         <Box>
           <DemoContainer components={['DatePicker']}>
-            <DatePicker label="Ngày cưới" sx={{ width: '100%' }} format="DD/MM/YYYY" />
+            <DatePicker
+              label="Ngày cưới"
+              sx={{ width: '100%' }}
+              format="DD/MM/YYYY"
+              defaultValue={dayjs(info.time)}
+              onChange={(date) => {
+                setValue('time', dayjs(date as Dayjs).toISOString());
+                console.log(dayjs(date as Dayjs).toISOString());
+              }}
+            />
           </DemoContainer>
         </Box>
       </Box>
-      <Button sx={{ mt: 2 }} variant="contained">
+      <Button sx={{ mt: 2 }} variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
         Update
       </Button>
     </>

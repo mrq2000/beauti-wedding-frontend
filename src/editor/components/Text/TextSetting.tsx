@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import FontSettingComp from '../common/FontSetting';
 import SpacingSetting from '../common/SpacingSetting';
 
-export interface TextStyle {
+interface TextStyle {
   font: FontSetting;
   padding: Spacing;
 }

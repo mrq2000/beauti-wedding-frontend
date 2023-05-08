@@ -94,6 +94,7 @@ const BroomAndBrideSetting = () => {
         </Typography>
         <TextField
           fullWidth
+          size="small"
           sx={{ mb: 1 }}
           value={pageProps.textBetween}
           onChange={(e) => {

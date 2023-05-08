@@ -29,6 +29,7 @@ interface FontSettingProps {
   minSize?: number;
   maxSize?: number;
   onChange: (data: DeepPartial<IFontSetting>) => void;
+  isSubSetting?: boolean;
 }
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
@@ -47,10 +48,12 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 64, minSize = 8, onChange }) => {
+const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 64, minSize = 8, onChange, isSubSetting = false }) => {
   return (
     <Box display="flex" flexDirection="column">
-      <Typography sx={{ fontWeight: 600 }}>Font size</Typography>
+      <Typography sx={{ fontWeight: isSubSetting ? 400 : 600, fontSize: isSubSetting ? 12 : 'inherit' }}>
+        Font size
+      </Typography>
       <Slider
         value={font.fontSize || 7}
         valueLabelDisplay="auto"
@@ -64,7 +67,9 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 64, minSize = 8, on
         sx={{ width: '100%' }}
       />
 
-      <Typography sx={{ mt: 2, fontWeight: 600 }}>Font style</Typography>
+      <Typography sx={{ fontWeight: isSubSetting ? 400 : 600, fontSize: isSubSetting ? 12 : 'inherit' }}>
+        Font style
+      </Typography>
       <Paper
         elevation={0}
         sx={{
@@ -140,7 +145,9 @@ const FontSetting: FC<FontSettingProps> = ({ font, maxSize = 64, minSize = 8, on
       </Paper>
 
       <FormControl fullWidth sx={{ marginTop: 2 }}>
-        <Typography sx={{ fontWeight: 600 }}>Font Family</Typography>
+        <Typography sx={{ fontWeight: isSubSetting ? 400 : 600, fontSize: isSubSetting ? 12 : 'inherit' }}>
+          Font Family
+        </Typography>
 
         <Autocomplete
           disablePortal

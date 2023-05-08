@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Editor, Frame, useEditor } from '@craftjs/core';
 import RenderNode from './setting/RenderNode';
 import { Box } from '@mui/material';
-import { Page, Text } from '@/editor/components';
+import { Page, Text, BroomAndBride, Time } from '@/editor/components';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import SidebarElementSetting from './components/SidebarElementSetting';
 import MenuSidebar from './components/MenuSidebar';
 import { DEMO_INFO, InfoContext } from './InfoContext';
-import { BroomAndBride } from '@/editor/components/BroomAndBride/BroomAndBride';
+import { InviteeName } from '@/editor/components/InviteeName';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 
@@ -28,8 +28,9 @@ const EditDesign = () => {
         <Frame>
           <Page>
             <Text />
-            <Text />
             <BroomAndBride />
+            <Time />
+            <InviteeName />
           </Page>
         </Frame>
       </Box>
@@ -41,8 +42,14 @@ const MenuDesignPage: FC = () => {
   const [info, setInfo] = useState(DEMO_INFO);
 
   return (
-    <InfoContext.Provider value={info}>
-      <Editor resolver={{ Text, Page, BroomAndBride }} onRender={RenderNode}>
+    <InfoContext.Provider
+      value={{
+        info,
+        setInfo,
+        inviteeName: 'Tên Người Nhận',
+      }}
+    >
+      <Editor resolver={{ Text, Page, BroomAndBride, Time, InviteeName }} onRender={RenderNode}>
         <Box flex={1} flexDirection="column" height="100%">
           <Header viewMode={viewMode} />
           <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">

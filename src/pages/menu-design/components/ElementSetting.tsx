@@ -1,8 +1,29 @@
 import { Text } from '@/editor/components';
 import { BroomAndBride } from '@/editor/components/BroomAndBride/BroomAndBride';
+import { InviteeName } from '@/editor/components/InviteeName';
+import { Time } from '@/editor/components/Time/Time';
 import { useEditor } from '@craftjs/core';
 import { Box, Button, Typography } from '@mui/material';
 import React, { FC, Fragment } from 'react';
+
+const ELEMENTS = [
+  {
+    title: 'Text',
+    element: <Text />,
+  },
+  {
+    title: 'Broom and Bride',
+    element: <BroomAndBride />,
+  },
+  {
+    title: 'Time',
+    element: <Time />,
+  },
+  {
+    title: `Invitee's Name`,
+    element: <InviteeName />,
+  },
+];
 
 const ElementSetting: FC = () => {
   const { connectors } = useEditor();
@@ -13,26 +34,19 @@ const ElementSetting: FC = () => {
           Kéo thả để thêm
         </Typography>
       </Box>
-      <Box
-        textAlign="center"
-        width="100%"
-        border="1px dashed"
-        sx={{ cursor: 'move', py: '12px' }}
-        ref={(ref: HTMLElement) => connectors.create(ref, <Text />)}
-      >
-        Text
-      </Box>
 
-      <Box
-        textAlign="center"
-        width="100%"
-        border="1px dashed"
-        sx={{ cursor: 'move', py: '12px' }}
-        ref={(ref: HTMLElement) => connectors.create(ref, <BroomAndBride />)}
-        mt={2}
-      >
-        Broom and Bride
-      </Box>
+      {ELEMENTS.map((element, index) => (
+        <Box
+          key={index}
+          textAlign="center"
+          width="100%"
+          border="1px dashed"
+          sx={{ cursor: 'move', py: '12px', my: '8px' }}
+          ref={(ref: HTMLElement) => connectors.create(ref, element.element)}
+        >
+          {element.title}
+        </Box>
+      ))}
     </Fragment>
   );
 };
