@@ -3,7 +3,7 @@ import { BroomAndBride } from '@/editor/components/BroomAndBride/BroomAndBride';
 import { InviteeName } from '@/editor/components/InviteeName';
 import { Time } from '@/editor/components/Time/Time';
 import { useEditor } from '@craftjs/core';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { FC, Fragment } from 'react';
 
 const ELEMENTS = [

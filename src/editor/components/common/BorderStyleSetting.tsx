@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
-import { Box, FormControl, InputLabel, MenuItem, Select, Slider, Typography } from '@mui/material';
+import { Box, FormControl, MenuItem, Select, Typography } from '@mui/material';
 import { Border } from '@/editor/interface/setting';
-import { time } from 'console';
-import dayjs from 'dayjs';
-import { ITimeSetting, TimeLayouts } from '../Time';
 import ColorPicker from './ColorPicker';
 
 interface BorderStyleSettingProps {

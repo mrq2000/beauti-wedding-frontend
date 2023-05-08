@@ -1,12 +1,13 @@
 import { useNode, useEditor } from '@craftjs/core';
-import { ROOT_NODE } from '@craftjs/utils';
 import { Box, Button, styled, useTheme } from '@mui/material';
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import ReactDOM from 'react-dom';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import DragHandleRoundedIcon from '@mui/icons-material/DragHandleRounded';
 import { CSSTransition } from 'react-transition-group';
 import { HEADER_HEIGHT } from '../components/Header';
+import CustomTooltip from '@/components/common/CustomTooltip';
+import ConfirmModal from '@/components/common/ConfirmModal';
 
 const FadeBox = styled(Box)(() => ({
   opacity: 0,
@@ -35,6 +36,7 @@ const FadeBox = styled(Box)(() => ({
 
 const LABEL_HEIGHT = 24;
 const RenderNode = ({ render }: any) => {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { id } = useNode();
   const theme = useTheme();
   const { actions, query, isActive } = useEditor((_, query) => ({
@@ -142,23 +144,46 @@ const RenderNode = ({ render }: any) => {
                 >
                   <Box sx={{ mr: '4px' }}>{name}</Box>
                   {moveable ? (
-                    <Box display="flex" sx={{ mr: '2px', cursor: 'move' }} ref={drag}>
-                      <DragHandleRoundedIcon sx={{ fontSize: '14px', mr: '2px', cursor: 'move' }} />
-                    </Box>
+                    <CustomTooltip title="Move" placement="top">
+                      <Box display="flex" sx={{ mr: '2px', cursor: 'move' }} ref={drag}>
+                        <DragHandleRoundedIcon sx={{ fontSize: '14px', mr: '2px', cursor: 'move' }} />
+                      </Box>
+                    </CustomTooltip>
                   ) : null}
 
                   {deletable ? (
-                    <Box
-                      display="flex"
-                      sx={{ cursor: 'pointer' }}
-                      onMouseDown={(e: React.MouseEvent) => {
+                    <CustomTooltip title="Delete" placement="top">
+                      <Box
+                        display="flex"
+                        sx={{ cursor: 'pointer' }}
+                        onMouseDown={(e: React.MouseEvent) => {
+                          e.stopPropagation();
+                          setOpenDeleteModal(true);
+                        }}
+                      >
+                        <DeleteRoundedIcon sx={{ fontSize: '14px' }} />
+                      </Box>
+                    </CustomTooltip>
+                  ) : null}
+
+                  <ConfirmModal
+                    title={`Delete ${name} Block`}
+                    content={`Are you sure to delete this ${name}?`}
+                    open={openDeleteModal}
+                    onClose={() => setOpenDeleteModal(false)}
+                  >
+                    <Button
+                      sx={{ width: '120px' }}
+                      variant="contained"
+                      color="error"
+                      onClick={(e) => {
                         e.stopPropagation();
                         actions.delete(id);
                       }}
                     >
-                      <DeleteRoundedIcon sx={{ fontSize: '14px' }} />
-                    </Box>
-                  ) : null}
+                      Delete
+                    </Button>
+                  </ConfirmModal>
                 </Box>
               </FadeBox>
             </CSSTransition>,

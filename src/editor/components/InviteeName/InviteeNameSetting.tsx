@@ -68,6 +68,7 @@ const InviteeNameSetting = () => {
           });
         }}
       />
+
       <Box mt={2}>
         <BorderStyleSetting
           border={inviteeNameProps.style.inviteeNameBorderBottom}

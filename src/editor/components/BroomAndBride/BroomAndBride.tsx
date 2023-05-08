@@ -66,7 +66,6 @@ export const BroomAndBrideDefaultProps: IBroomAndBrideSetting = {
 
 BroomAndBride.craft = {
   displayName: 'Broom and Bride',
-  isCanvas: true,
   props: BroomAndBrideDefaultProps,
   related: {
     settings: BroomAndBrideSetting,
