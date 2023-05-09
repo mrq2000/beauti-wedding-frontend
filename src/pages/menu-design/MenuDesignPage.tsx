@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { Editor, Frame, useEditor } from '@craftjs/core';
 import RenderNode from './setting/RenderNode';
 import { Box } from '@mui/material';
-import { Page, Text, BroomAndBride, Time } from '@/editor/components';
+import { Page, Text, BroomAndBride, Time, Location } from '@/editor/components';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import SidebarElementSetting from './components/SidebarElementSetting';
 import MenuSidebar from './components/MenuSidebar';
@@ -31,6 +31,7 @@ const EditDesign = () => {
             <BroomAndBride />
             <Time />
             <InviteeName />
+            <Location />
           </Page>
         </Frame>
       </Box>
@@ -49,7 +50,7 @@ const MenuDesignPage: FC = () => {
         inviteeName: 'Tên Người Nhận',
       }}
     >
-      <Editor resolver={{ Text, Page, BroomAndBride, Time, InviteeName }} onRender={RenderNode}>
+      <Editor resolver={{ Text, Page, BroomAndBride, Time, InviteeName, Location }} onRender={RenderNode}>
         <Box flex={1} flexDirection="column" height="100%">
           <Header viewMode={viewMode} />
           <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">

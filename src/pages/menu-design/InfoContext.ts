@@ -13,7 +13,7 @@ export const DEMO_INFO: Info = {
     motherName: '',
   },
   location: {
-    name: '',
+    name: 'Địa chỉ nơi tổ chức tiệc cưới',
   },
   time: '2023-05-04T17:00:00.000Z',
 };
