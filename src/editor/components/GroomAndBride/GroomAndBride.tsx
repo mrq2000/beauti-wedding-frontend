@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { useNode } from '@craftjs/core';
-import BroomAndBrideSetting, { IBroomAndBrideSetting } from './BroomAndBrideSetting';
+import GroomAndBrideSetting, { IGroomAndBrideSetting } from './GroomAndBrideSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
 import { InfoContext } from '@/pages/menu-design/InfoContext';
 import { genFont } from '@/utils/font';
 
-export const BroomAndBride = ({ style, textBetween }: IBroomAndBrideSetting) => {
+export const GroomAndBride = ({ style, textBetween }: IGroomAndBrideSetting) => {
   const {
     connectors: { connect, drag },
   } = useNode();
   const {
-    info: { broom, bride },
+    info: { groom, bride },
   } = useContext(InfoContext);
   const isColumnMode = style.direction == 'column';
 
@@ -36,12 +36,12 @@ export const BroomAndBride = ({ style, textBetween }: IBroomAndBrideSetting) => 
       >
         {textBetween}
       </Box>
-      <Box>{broom.name}</Box>
+      <Box>{groom.name}</Box>
     </Box>
   );
 };
 
-export const BroomAndBrideDefaultProps: IBroomAndBrideSetting = {
+export const GroomAndBrideDefaultProps: IGroomAndBrideSetting = {
   style: {
     padding: {
       top: 16,
@@ -64,10 +64,10 @@ export const BroomAndBrideDefaultProps: IBroomAndBrideSetting = {
   textBetween: '&',
 };
 
-BroomAndBride.craft = {
-  displayName: 'Broom and Bride',
-  props: BroomAndBrideDefaultProps,
+GroomAndBride.craft = {
+  displayName: 'Groom and Bride',
+  props: GroomAndBrideDefaultProps,
   related: {
-    settings: BroomAndBrideSetting,
+    settings: GroomAndBrideSetting,
   },
 };

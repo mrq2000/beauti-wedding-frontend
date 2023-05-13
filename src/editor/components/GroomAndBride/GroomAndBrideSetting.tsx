@@ -9,27 +9,27 @@ import { mergeWithoutArray } from '@/utils/merge';
 import SpacingSetting from '../common/SpacingSetting';
 import FontSettingComp from '../common/FontSetting';
 
-export interface BroomAndBrideStyle {
+export interface GroomAndBrideStyle {
   padding: Spacing;
   font: FontSetting;
   direction: 'column' | 'row';
   spaceBetween: number;
   middleWordSize: number;
 }
-export interface IBroomAndBrideSetting {
-  style: BroomAndBrideStyle;
+export interface IGroomAndBrideSetting {
+  style: GroomAndBrideStyle;
   textBetween?: string;
 }
-const BroomAndBrideSetting = () => {
+const GroomAndBrideSetting = () => {
   const {
     actions: { setProp },
     pageProps,
   } = useNode((node) => ({
-    pageProps: node.data.props as IBroomAndBrideSetting,
+    pageProps: node.data.props as IGroomAndBrideSetting,
   }));
 
-  const onChangeStyle = (data: DeepPartial<BroomAndBrideStyle>) => {
-    setProp((props: IBroomAndBrideSetting) => {
+  const onChangeStyle = (data: DeepPartial<GroomAndBrideStyle>) => {
+    setProp((props: IGroomAndBrideSetting) => {
       props.style = mergeWithoutArray(props.style, data);
     });
   };
@@ -98,7 +98,7 @@ const BroomAndBrideSetting = () => {
           sx={{ mb: 1 }}
           value={pageProps.textBetween}
           onChange={(e) => {
-            setProp((props: IBroomAndBrideSetting) => {
+            setProp((props: IGroomAndBrideSetting) => {
               props.textBetween = e.target.value;
             });
           }}
@@ -134,4 +134,4 @@ const BroomAndBrideSetting = () => {
   );
 };
 
-export default BroomAndBrideSetting;
+export default GroomAndBrideSetting;

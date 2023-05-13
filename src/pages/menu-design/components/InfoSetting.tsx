@@ -4,15 +4,15 @@ import { useForm } from 'react-hook-form';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
 import { InfoContext } from '../InfoContext';
 import dayjs, { Dayjs } from 'dayjs';
+import yup from '@/helpers/validator';
 
 interface FormValues {
-  broomName: string;
-  broomMotherName?: string;
-  broomFatherName?: string;
+  groomName: string;
+  groomMotherName?: string;
+  groomFatherName?: string;
   brideName: string;
   brideMotherName?: string;
   brideFatherName?: string;
@@ -21,13 +21,13 @@ interface FormValues {
 }
 
 export const infoSchema = yup.object().shape({
-  broomName: yup.string().required('Vui lòng không bỏ trống trường này'),
-  brideName: yup.string().required('Vui lòng không bỏ trống trường này'),
-  broomMotherName: yup.string().nullable(),
-  broomFatherName: yup.string().nullable(),
-  brideMotherName: yup.string().nullable(),
-  brideFatherName: yup.string().nullable(),
-  location: yup.string().nullable(),
+  groomName: yup.string().required().max(30),
+  brideName: yup.string().required().max(30),
+  groomMotherName: yup.string().max(30).nullable(),
+  groomFatherName: yup.string().max(30).nullable(),
+  brideMotherName: yup.string().max(30).nullable(),
+  brideFatherName: yup.string().max(30).nullable(),
+  location: yup.string().nullable().max(200),
   time: yup.string().required(),
 });
 
@@ -37,7 +37,7 @@ const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
     label: 'Tên cô dâu *',
   },
   {
-    key: 'broomName',
+    key: 'groomName',
     label: 'Tên chú rể *',
   },
   {
@@ -49,11 +49,11 @@ const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
     label: 'Tên mẹ cô dâu',
   },
   {
-    key: 'broomFatherName',
+    key: 'groomFatherName',
     label: 'Tên bố chú rể',
   },
   {
-    key: 'broomMotherName',
+    key: 'groomMotherName',
     label: 'Tên mẹ chú rể',
   },
   {
@@ -73,9 +73,9 @@ const InfoSetting: FC = () => {
   } = useForm<FormValues>({
     mode: 'onSubmit',
     defaultValues: {
-      broomName: info.broom.name,
-      broomMotherName: info.broom.motherName,
-      broomFatherName: info.broom.fartherName,
+      groomName: info.groom.name,
+      groomMotherName: info.groom.motherName,
+      groomFatherName: info.groom.fartherName,
       brideName: info.bride.name,
       brideMotherName: info.bride.motherName,
       brideFatherName: info.bride.fartherName,
@@ -87,10 +87,10 @@ const InfoSetting: FC = () => {
 
   const onSubmit = (data: FormValues) => {
     setInfo({
-      broom: {
-        name: data.broomName,
-        fartherName: data.broomFatherName,
-        motherName: data.broomMotherName,
+      groom: {
+        name: data.groomName,
+        fartherName: data.groomFatherName,
+        motherName: data.groomMotherName,
       },
       bride: {
         name: data.brideName,

@@ -5,7 +5,7 @@ export interface UserInfo {
 }
 
 export interface Info {
-  broom: UserInfo;
+  groom: UserInfo;
   bride: UserInfo;
   location: {
     name: string;

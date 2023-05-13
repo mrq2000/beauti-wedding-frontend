@@ -1,5 +1,5 @@
 import { Text } from '@/editor/components';
-import { BroomAndBride } from '@/editor/components/BroomAndBride/BroomAndBride';
+import { GroomAndBride } from '@/editor/components/GroomAndBride/GroomAndBride';
 import { InviteeName } from '@/editor/components/InviteeName';
 import { Time } from '@/editor/components/Time';
 import { Location } from '@/editor/components/Location';
@@ -13,8 +13,8 @@ const ELEMENTS = [
     element: <Text />,
   },
   {
-    title: 'Broom and Bride',
-    element: <BroomAndBride />,
+    title: 'Groom and Bride',
+    element: <GroomAndBride />,
   },
   {
     title: 'Time',

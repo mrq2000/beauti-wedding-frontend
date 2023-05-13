@@ -2,7 +2,7 @@ import { Info } from '@/interface/info';
 import { createContext } from 'react';
 
 export const DEMO_INFO: Info = {
-  broom: {
+  groom: {
     name: 'Tên Chú Rể',
     fartherName: '',
     motherName: '',

@@ -8,10 +8,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ThemeProvider from '@/theme';
 // import useAppStore from '@/stores/useAppStore';
 import MainLayout from '@/components/layout/MainLayout';
+import { GlobalStyle } from '@/utils/GlobalStyle';
+
 import Home from '@/pages/Home';
 import Demo from '@/pages/menu-design/Demo';
-import MenuDesignPage from './pages/menu-design/MenuDesignPage';
-import { GlobalStyle } from './utils/GlobalStyle';
+import MenuDesignPage from '@/pages/menu-design/MenuDesignPage';
+import SignIn from '@/pages/auth/SignIn';
+import SignUp from '@/pages/auth/SignUp';
+import AuthOutlet from '@/pages/auth/AuthOutlet';
 
 import './App.css';
 
@@ -26,6 +30,11 @@ const Router = () => {
     <Routes>
       <Route path="" element={<LayoutOutlet />}>
         <Route index element={<Home />} />
+      </Route>
+
+      <Route path="" element={<AuthOutlet />}>
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
       </Route>
       <Route path="/demo" element={<Demo />} />
       <Route path="/editor" element={<MenuDesignPage />} />

@@ -1,4 +1,4 @@
-export * from './BroomAndBride';
+export * from './GroomAndBride';
 export * from './Page';
 export * from './Time';
 export * from './Text';
