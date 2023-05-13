@@ -40,7 +40,7 @@ export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
       <ContentEditable
         html={text}
         disabled={!editable}
-        onChange={(e) => setProp((props: ITextSetting) => (props.text = e.target.value), 500)}
+        onChange={(e) => setProp((props: ITextSetting) => (props.text = e.target.value), 1000)}
         tagName="p"
         style={genFont(font)}
       />

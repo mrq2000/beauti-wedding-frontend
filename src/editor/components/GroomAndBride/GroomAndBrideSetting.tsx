@@ -31,7 +31,7 @@ const GroomAndBrideSetting = () => {
   const onChangeStyle = (data: DeepPartial<GroomAndBrideStyle>) => {
     setProp((props: IGroomAndBrideSetting) => {
       props.style = mergeWithoutArray(props.style, data);
-    });
+    }, 1000);
   };
 
   const isColumnMode = pageProps.style.direction === 'column';
@@ -100,7 +100,7 @@ const GroomAndBrideSetting = () => {
           onChange={(e) => {
             setProp((props: IGroomAndBrideSetting) => {
               props.textBetween = e.target.value;
-            });
+            }, 1000);
           }}
         />
         <Typography sx={{ fontWeight: 600 }}>Font Size</Typography>

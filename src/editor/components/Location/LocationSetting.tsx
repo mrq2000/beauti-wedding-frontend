@@ -26,7 +26,7 @@ const LocationSetting = () => {
   const onChange = (data: DeepPartial<LocationStyle>) => {
     setProp((props: ILocationSetting) => {
       props.style = mergeWithoutArray(props.style, data);
-    });
+    }, 1000);
   };
 
   return (

@@ -7,6 +7,7 @@ yup.setLocale({
   },
   string: {
     max: 'Vui lòng nhập không quá ${max} ký tự',
+    min: 'Vui lòng nhập ít nhất ${min} ký tự',
   },
 });
 

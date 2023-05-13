@@ -33,7 +33,7 @@ const TimeSetting = () => {
   const onChange = (data: DeepPartial<TimeStyle>) => {
     setProp((props: ITimeSetting) => {
       props.style = mergeWithoutArray(props.style, data);
-    });
+    }, 1000);
   };
 
   return (
@@ -67,7 +67,7 @@ const TimeSetting = () => {
           onChange={(e) => {
             setProp((props: ITimeSetting) => {
               props.timeLayoutId = e.target.value;
-            });
+            }, 1000);
           }}
         >
           {Object.keys(TimeLayouts).map((layoutId) => (

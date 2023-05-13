@@ -2,7 +2,7 @@ import axios from 'axios';
 import { setToken as setTokenStorage, getToken as getTokenStorage, getRefreshToken, setRefreshToken } from './storage';
 
 export const api = axios.create({
-  baseURL: import.meta.env.REACT_APP_API || `${window.location.protocol}//${window.location.host}/api`,
+  baseURL: import.meta.env.VITE_BACKEND_API || `${window.location.protocol}//${window.location.host}/api`,
   timeout: 20000,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',

@@ -27,7 +27,7 @@ const PageSetting = () => {
   const onChangeStyle = (data: DeepPartial<PageStyle>) => {
     setProp((props: IPageSetting) => {
       props.style = mergeWithoutArray(props.style, data);
-    });
+    }, 1000);
   };
 
   return (

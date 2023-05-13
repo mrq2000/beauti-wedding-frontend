@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 // import packageJson from '../package.json';
 
-// if (import.meta.env.REACT_APP_ENV === 'mainnet') {
+// if (import.meta.env.VITE_APP_ENV === 'mainnet') {
 //   Sentry.init({
 //     release: `${packageJson.version}`,
 //     dsn: import.meta.env.REACT_APP_SENTRY_DSN, //paste copied DSN value here

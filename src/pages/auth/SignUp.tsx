@@ -1,13 +1,15 @@
 import React from 'react';
-import { Typography, Box, Button, TextField, IconButton, InputAdornment } from '@mui/material';
+import { Typography, Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
-
-import { api, setToken } from '@/helpers/api';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
+
 import yup from '@/helpers/validator';
+import { api, setToken } from '@/helpers/api';
+import { getErrorMessage } from '@/helpers/error';
 
 interface FormValues {
   username: string;
@@ -15,7 +17,7 @@ interface FormValues {
   email: string;
 }
 
-export const accountSchema = yup.object().shape({
+const accountSchema = yup.object().shape({
   username: yup.string().required().max(16),
   password: yup.string().required().max(16),
   email: yup.string().email().required(),
@@ -25,20 +27,17 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
-  const {
-    isLoading,
-    error,
-    data,
-    mutate: signIn,
-  } = useMutation(async (accessToken) => {
-    const res = await api.post('/sign-up', {
-      username: 'GOOGLE',
-      password: accessToken,
+  const { isLoading, mutate: signUp } = useMutation(async (data: FormValues) => {
+    const res = await api.post('/auth/sign-up', {
+      username: data.username,
+      password: data.password,
+      email: data.email,
     });
     return res.data;
   });
@@ -46,7 +45,6 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     mode: 'onSubmit',
@@ -55,12 +53,25 @@ const SignUp = () => {
       password: '',
       email: '',
     },
+    resolver: yupResolver(accountSchema),
   });
 
-  if (data && data.accessToken) {
-    setToken(data.accessToken);
-    navigate('/');
-  }
+  const onSubmit = (data: FormValues) => {
+    setErrorMessage('');
+    signUp(data, {
+      onSuccess: (data) => {
+        if (data && data.accessToken) {
+          setToken(data.accessToken);
+          navigate('/');
+        }
+      },
+      onError: (e) => {
+        const errorMessage = getErrorMessage(e);
+        console.log(errorMessage);
+        setErrorMessage(errorMessage);
+      },
+    });
+  };
 
   return (
     <Box display="flex" alignItems="center" flexDirection="column" gap="16px">
@@ -109,7 +120,13 @@ const SignUp = () => {
         }}
       />
 
-      <LoadingButton fullWidth variant="contained" sx={{ mt: 2 }} size="large">
+      <Box width="100%" height="20px">
+        <Typography color="error" variant="subtitle2">
+          {errorMessage}
+        </Typography>
+      </Box>
+
+      <LoadingButton fullWidth variant="contained" size="large" loading={isLoading} onClick={handleSubmit(onSubmit)}>
         Đăng ký
       </LoadingButton>
 

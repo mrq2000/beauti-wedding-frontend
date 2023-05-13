@@ -25,7 +25,7 @@ const TextSetting = () => {
   const onChange = (data: DeepPartial<TextStyle>) => {
     setProp((props: ITextSetting) => {
       props.style = mergeWithoutArray(props.style, data);
-    });
+    }, 1000);
   };
 
   return (

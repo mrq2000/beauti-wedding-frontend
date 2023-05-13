@@ -37,9 +37,10 @@ const AuthOutlet = () => {
         direction="column"
         justifyContent="center"
         alignItems="center"
-        sx={{ display: 'flex', height: '100vh' }}
+        className="scrollbar-hide"
+        sx={{ display: 'flex', height: '100vh', overflow: 'auto' }}
       >
-        <TransitionGroup sx={{ width: '80%' }}>
+        <TransitionGroup style={{ width: '80%' }}>
           <Fade
             key={`${pathname}`}
             timeout={{

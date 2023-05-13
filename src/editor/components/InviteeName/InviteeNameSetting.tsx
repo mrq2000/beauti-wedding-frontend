@@ -28,7 +28,7 @@ const InviteeNameSetting = () => {
   const onChange = (data: DeepPartial<InviteeNameStyle>) => {
     setProp((props: IInviteeNameSetting) => {
       props.style = mergeWithoutArray(props.style, data);
-    });
+    }, 1000);
   };
 
   return (
@@ -43,7 +43,7 @@ const InviteeNameSetting = () => {
         onChange={(e) => {
           setProp((props: IInviteeNameSetting) => {
             props.label = e.target.value;
-          });
+          }, 1000);
         }}
       />
       <FontSettingComp

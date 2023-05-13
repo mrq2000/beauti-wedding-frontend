@@ -1,7 +1,8 @@
 import { toast } from './notify';
 
-const getErrorMessage = (error: any): string => {
-  return error?.response?.data?.message || 'Something went wrong';
+export const getErrorMessage = (error: any): string => {
+  const message = error?.response?.data?.message;
+  return typeof message === 'string' ? message : 'Something went wrong';
 };
 
 export const handleErrorMessage = (error: any): void => {
