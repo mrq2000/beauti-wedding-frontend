@@ -72,7 +72,6 @@ const SidebarElementSetting: FC = () => {
       variant="permanent"
       anchor="right"
       PaperProps={{
-        className: 'custom-scrollbar',
         style: {
           zIndex: 900,
         },
@@ -95,7 +94,6 @@ const SidebarElementSetting: FC = () => {
             display="flex"
             flexDirection="column"
             sx={{ overflowY: 'auto', overflowX: 'hidden', flex: 1 }}
-            className="custom-scrollbar"
           >
             {React.createElement(selectedNode.related.settings)}
           </Box>

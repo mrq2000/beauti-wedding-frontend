@@ -111,7 +111,6 @@ const InfoSetting: FC = () => {
         flex={1}
         flexDirection="column"
         gap="16px"
-        className="custom-scrollbar"
         sx={{ overflowY: 'auto', margin: '-16px', padding: '16px' }}
       >
         {FORM_TEXT_FIELDS.map((field) => (

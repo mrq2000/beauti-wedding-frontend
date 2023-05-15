@@ -40,7 +40,7 @@ const ConfirmModal: FC<PropsWithChildren<ConfirmModalProps>> = ({ content, onClo
             variant="outlined"
             onClick={onClose}
           >
-            Cancel
+            Hủy
           </Button>
           {children}
         </Box>

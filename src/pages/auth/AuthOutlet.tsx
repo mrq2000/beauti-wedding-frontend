@@ -40,7 +40,7 @@ const AuthOutlet = () => {
         className="scrollbar-hide"
         sx={{ display: 'flex', height: '100vh', overflow: 'auto' }}
       >
-        <TransitionGroup style={{ width: '80%' }}>
+        <TransitionGroup style={{ width: '80%', maxWidth: 400 }}>
           <Fade
             key={`${pathname}`}
             timeout={{

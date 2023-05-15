@@ -125,7 +125,7 @@ const MenuSidebar: FC = () => {
               <CustomTooltip title={tab.tooltipTitle} arrow placement="right" key={tab.id}>
                 <IconButton
                   sx={{
-                    color: (theme) => (isActive ? theme.palette.primary.light : theme.palette.grey[500]),
+                    color: (theme) => (isActive ? theme.palette.grey[100] : theme.palette.grey[500]),
                     backgroundColor: (theme) => (isActive ? theme.palette.primary.main : 'inherit'),
                     height: '36px',
                     width: '36px',
@@ -165,15 +165,7 @@ const MenuSidebar: FC = () => {
             height={`calc(100% - ${HEADER_HEIGHT}px)`}
             width={`${contentWidth - iconDrawer}px`}
           >
-            <Box
-              display="flex"
-              flex={1}
-              flexDirection="column"
-              overflow="auto"
-              padding="20px 16px"
-              height="100%"
-              className="custom-scrollbar"
-            >
+            <Box display="flex" flex={1} flexDirection="column" overflow="auto" padding="20px 16px" height="100%">
               <Box justifyContent="space-between" width="100%" display="flex" mb="20px">
                 <Typography variant="h4" component="div">
                   {tab.tooltipTitle}

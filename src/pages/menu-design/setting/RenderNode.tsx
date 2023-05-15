@@ -62,7 +62,6 @@ const RenderNode = ({ render }: any) => {
 
   const currentRef = useRef<HTMLDivElement>();
   const fadeRef = useRef<HTMLDivElement>();
-
   const getPos = useCallback((dom: HTMLElement) => {
     const { top, left } = dom
       ? {
@@ -134,17 +133,18 @@ const RenderNode = ({ render }: any) => {
                     top: getPos(dom).top,
                     zIndex: 999,
                     height: `${LABEL_HEIGHT}px`,
-                    paddingX: '4px',
+                    paddingX: '8px',
                     color: '#fff',
                     position: 'fixed',
                     backgroundColor: (theme) => (isActive ? theme.palette.primary.main : theme.palette.primary.light),
                     borderTopLeftRadius: '4px',
+                    borderTopRightRadius: '4px',
                     fontSize: '14px',
                   }}
                 >
                   <Box sx={{ mr: '4px' }}>{name}</Box>
                   {moveable ? (
-                    <CustomTooltip title="Move" placement="top">
+                    <CustomTooltip title="Di chuyển" placement="top">
                       <Box display="flex" sx={{ mr: '2px', cursor: 'move' }} ref={drag}>
                         <DragHandleRoundedIcon sx={{ fontSize: '14px', mr: '2px', cursor: 'move' }} />
                       </Box>
@@ -152,7 +152,7 @@ const RenderNode = ({ render }: any) => {
                   ) : null}
 
                   {deletable ? (
-                    <CustomTooltip title="Delete" placement="top">
+                    <CustomTooltip title="Xóa" placement="top">
                       <Box
                         display="flex"
                         sx={{ cursor: 'pointer' }}
@@ -167,8 +167,8 @@ const RenderNode = ({ render }: any) => {
                   ) : null}
 
                   <ConfirmModal
-                    title={`Delete ${name} Block`}
-                    content={`Are you sure to delete this ${name}?`}
+                    title={`Xóa ${name}`}
+                    content={`Bạn có chắc chắn muốn xóa ${name}?`}
                     open={openDeleteModal}
                     onClose={() => setOpenDeleteModal(false)}
                   >
@@ -181,7 +181,7 @@ const RenderNode = ({ render }: any) => {
                         actions.delete(id);
                       }}
                     >
-                      Delete
+                      Xóa
                     </Button>
                   </ConfirmModal>
                 </Box>

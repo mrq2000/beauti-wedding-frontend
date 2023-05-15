@@ -138,15 +138,21 @@ const AddPictureButton = ({
             py: 5,
           }}
         >
-          <Box width="45%" sx={{ overflow: 'auto', display: 'flex', justifyContent: 'center' }}>
+          <Box width="45%" sx={{ overflow: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <ReactCrop
               onChange={(_, percentCrop) => setCrop(percentCrop)}
               aspect={aspect}
               crop={crop}
               onComplete={(c) => setCompletedCrop(c)}
-              style={{ width: '80%' }}
+              style={{ width: '80%', height: 'fit-content' }}
             >
-              <img alt="Crop me" src={src || 'null'} style={{ width: '100%' }} onLoad={onImageLoad} ref={imgRef} />
+              <img
+                alt="Crop me"
+                src={src || 'null'}
+                style={{ width: '100%', objectFit: 'contain' }}
+                onLoad={onImageLoad}
+                ref={imgRef}
+              />
             </ReactCrop>
           </Box>
 

@@ -34,8 +34,18 @@ const ElementSetting: FC = () => {
   const { connectors } = useEditor();
   return (
     <Fragment>
-      <Box pb="12px">
-        <Typography sx={{ fontSize: '16px', color: (theme) => theme.palette.primary.main, fontWeight: 500 }}>
+      <Box pb="12px" display="flex" justifyContent="flex-end">
+        <Typography
+          sx={{
+            fontSize: '16px',
+            color: '#fff',
+            fontWeight: 500,
+            backgroundColor: (theme) => theme.palette.primary.light,
+            width: 'fit-content',
+            p: '4px 12px',
+            borderRadius: '16px',
+          }}
+        >
           Kéo thả để thêm
         </Typography>
       </Box>

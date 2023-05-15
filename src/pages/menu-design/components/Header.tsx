@@ -1,6 +1,6 @@
 import { useEditor } from '@craftjs/core';
 import { Box, Button, IconButton } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 
@@ -13,11 +13,28 @@ interface HeaderProps {
 export const HEADER_HEIGHT = 56;
 
 const Header: FC<HeaderProps> = ({ viewMode }) => {
-  const { canUndo, canRedo, actions } = useEditor((state, query) => ({
+  const { canUndo, canRedo, actions, enabled } = useEditor((state, query) => ({
     enabled: state.options.enabled,
     canUndo: query.history.canUndo(),
     canRedo: query.history.canRedo(),
   }));
+
+  useEffect(() => {
+    if (!enabled) return;
+    const handleKeyboard = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === 'z' && canUndo) {
+        actions.history.undo();
+      }
+      if (event.ctrlKey && event.key === 'y' && canRedo) {
+        actions.history.redo();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyboard);
+    return () => {
+      window.removeEventListener('keydown', handleKeyboard);
+    };
+  }, [enabled, canUndo, canRedo]);
 
   return (
     <Box
@@ -35,20 +52,54 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
       }}
     >
       <Box sx={{ flex: 1 }}></Box>
-      <Box sx={{ gap: '16px' }}>
-        <CustomTooltip title="Undo">
-          <IconButton component="label" disabled={!canUndo} onClick={() => actions.history.undo()} color="primary">
-            <UndoRoundedIcon />
-          </IconButton>
-        </CustomTooltip>
+      <Box sx={{ gap: '16px', display: 'flex' }}>
+        <Box
+          sx={{
+            padding: '4px 16px',
+            borderRadius: '20px',
+            background: '#edf2fa',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <CustomTooltip title="Hoàn tác (Ctrl + Z)">
+            <IconButton
+              size="small"
+              component="label"
+              disabled={!canUndo}
+              onClick={() => actions.history.undo()}
+              color="primary"
+              sx={{
+                '&.Mui-disabled': {
+                  pointerEvents: 'auto',
+                },
+              }}
+            >
+              <UndoRoundedIcon />
+            </IconButton>
+          </CustomTooltip>
 
-        <CustomTooltip title="Redo">
-          <IconButton component="label" disabled={!canRedo} onClick={() => actions.history.redo()} color="primary">
-            <RedoRoundedIcon />
-          </IconButton>
-        </CustomTooltip>
+          <CustomTooltip title="Làm lại (Ctrl + Y)">
+            <IconButton
+              size="small"
+              component="label"
+              disabled={!canRedo}
+              onClick={() => actions.history.redo()}
+              color="primary"
+              sx={{
+                '&.Mui-disabled': {
+                  pointerEvents: 'auto',
+                },
+              }}
+            >
+              <RedoRoundedIcon />
+            </IconButton>
+          </CustomTooltip>
+        </Box>
 
-        <Button variant="contained" sx={{ ml: 1 }}>Next Step</Button>
+        <Button variant="contained" sx={{ ml: 1 }}>
+          Tiếp tục
+        </Button>
       </Box>
     </Box>
   );

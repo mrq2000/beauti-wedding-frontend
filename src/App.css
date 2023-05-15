@@ -7,23 +7,23 @@
 }
 
 
-.custom-scrollbar::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 6px;
     border-radius: 10px;
 }
-    /* Track */
-.custom-scrollbar::-webkit-scrollbar-track {
+/* Track */
+::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
-    /* Handle */
-.custom-scrollbar::-webkit-scrollbar-thumb {
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #cccccc;
     border-radius: 10px;
 }
 
-    /* Handle on hover */
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
