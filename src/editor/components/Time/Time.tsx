@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
 import { genFont } from '@/utils/font';
 import { TimeLayouts } from './TimeLayout';
-import { InfoContext } from '@/pages/menu-design/InfoContext';
+import { InfoContext } from '@/editor/InfoContext';
 import dayjs from 'dayjs';
 
 export const Time = ({ style: { font, padding }, timeLayoutId }: ITimeSetting) => {

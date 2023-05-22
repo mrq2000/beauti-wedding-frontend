@@ -3,7 +3,7 @@ import { useNode } from '@craftjs/core';
 import GroomAndBrideSetting, { IGroomAndBrideSetting } from './GroomAndBrideSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
-import { InfoContext } from '@/pages/menu-design/InfoContext';
+import { InfoContext } from '@/editor/InfoContext';
 import { genFont } from '@/utils/font';
 
 export const GroomAndBride = ({ style, textBetween }: IGroomAndBrideSetting) => {

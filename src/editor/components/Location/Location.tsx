@@ -4,7 +4,7 @@ import LocationSetting, { ILocationSetting } from './LocationSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
 import { genFont } from '@/utils/font';
-import { InfoContext } from '@/pages/menu-design/InfoContext';
+import { InfoContext } from '@/editor/InfoContext';
 
 export const Location = ({ style: { font, padding, borderBottom } }: ILocationSetting) => {
   const {

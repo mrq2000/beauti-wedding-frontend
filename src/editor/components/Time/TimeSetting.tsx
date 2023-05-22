@@ -8,7 +8,7 @@ import FontSettingComp from '../common/FontSetting';
 import SpacingSetting from '../common/SpacingSetting';
 import { TimeLayouts } from './TimeLayout';
 import dayjs from 'dayjs';
-import { InfoContext } from '@/pages/menu-design/InfoContext';
+import { InfoContext } from '@/editor/InfoContext';
 
 interface TimeStyle {
   font: FontSetting;

@@ -1,24 +1,13 @@
-import { Box, TextField, Button } from '@mui/material';
 import React, { FC, useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import { Box, Button, TextField } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs, { Dayjs } from 'dayjs';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { InfoContext } from '../InfoContext';
-import dayjs, { Dayjs } from 'dayjs';
 import yup from '@/helpers/validator';
-
-interface FormValues {
-  groomName: string;
-  groomMotherName?: string;
-  groomFatherName?: string;
-  brideName: string;
-  brideMotherName?: string;
-  brideFatherName?: string;
-  location: string;
-  time: string;
-}
+import { CreateDesignContext } from '../CreateDesignContext';
 
 export const infoSchema = yup.object().shape({
   groomName: yup.string().required().max(30),
@@ -31,7 +20,18 @@ export const infoSchema = yup.object().shape({
   time: yup.string().required(),
 });
 
-const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
+export interface FormValues {
+  groomName: string;
+  groomMotherName?: string;
+  groomFatherName?: string;
+  brideName: string;
+  brideMotherName?: string;
+  brideFatherName?: string;
+  location: string;
+  time: string;
+}
+
+export const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
   {
     key: 'brideName',
     label: 'Tên cô dâu *',
@@ -58,12 +58,16 @@ const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
   },
   {
     key: 'location',
-    label: 'Nơi tổ chức đám cưới',
+    label: 'Nơi tổ chức đám cưới *',
   },
 ];
 
-const InfoSetting: FC = () => {
-  const { info, setInfo } = useContext(InfoContext);
+interface InfoStepProps {
+  handleNextStep: () => void;
+}
+
+const InfoStep: FC<InfoStepProps> = ({ handleNextStep }) => {
+  const { info, setInfo } = useContext(CreateDesignContext);
 
   const {
     register,
@@ -102,50 +106,54 @@ const InfoSetting: FC = () => {
       },
       time: data.time,
     });
+    handleNextStep();
   };
 
   return (
-    <>
-      <Box
-        display="flex"
-        flex={1}
-        flexDirection="column"
-        gap="16px"
-        sx={{ overflowY: 'auto', margin: '-16px', padding: '16px' }}
-      >
+    <Box display="flex" flex={1} width="100%" alignItems="center" justifyContent="center">
+      <Box sx={{ gap: 2, display: 'flex', justifyContent: 'space-between', maxWidth: 800 }} flexWrap="wrap">
         {FORM_TEXT_FIELDS.map((field) => (
-          <TextField
-            key={field.key}
-            label={field.label}
-            fullWidth
-            helperText={errors && errors[field.key]?.message}
-            error={!!errors[field.key]}
-            InputProps={{
-              ...register(field.key),
-            }}
-          />
+          <Box width={{ xs: '100%', sm: '48%' }} key={field.key}>
+            <TextField
+              key={field.key}
+              label={field.label}
+              fullWidth
+              helperText={errors && errors[field.key]?.message}
+              error={!!errors[field.key]}
+              InputProps={{
+                ...register(field.key),
+              }}
+            />
+          </Box>
         ))}
 
-        <Box>
-          <DemoContainer components={['DatePicker']}>
+        <Box width={{ xs: '100%', sm: '48%' }}>
+          <DemoContainer components={['DatePicker']} sx={{ width: '100%' }}>
             <DatePicker
-              label="Ngày cưới"
+              label="Ngày cưới *"
               sx={{ width: '100%' }}
               format="DD/MM/YYYY"
               defaultValue={dayjs(info.time)}
               onChange={(date) => {
                 setValue('time', dayjs(date as Dayjs).toISOString());
-                console.log(dayjs(date as Dayjs).toISOString());
               }}
             />
           </DemoContainer>
         </Box>
+
+        <Box width="100%" display="flex" flex={1} justifyContent="center" mt={2}>
+          <Button
+            size="large"
+            variant="contained"
+            sx={{ width: { xs: '100%', sm: '48%' } }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Tiếp tục
+          </Button>
+        </Box>
       </Box>
-      <Button sx={{ mt: 2 }} variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
-        Update
-      </Button>
-    </>
+    </Box>
   );
 };
 
-export default InfoSetting;
+export default InfoStep;

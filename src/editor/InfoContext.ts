@@ -1,4 +1,4 @@
-import { Info } from '@/interface/info';
+import { Info } from './interface/info';
 import { createContext } from 'react';
 
 export const DEMO_INFO: Info = {

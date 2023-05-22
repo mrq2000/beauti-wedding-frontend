@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { SnackbarProvider } from 'notistack';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -7,37 +7,33 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // @ts-ignore
 import ThemeProvider from '@/theme';
 // import useAppStore from '@/stores/useAppStore';
-import MainLayout from '@/components/layout/MainLayout';
 import { GlobalStyle } from '@/utils/GlobalStyle';
 
 import Home from '@/pages/Home';
-import Demo from '@/pages/menu-design/Demo';
-import MenuDesignPage from '@/pages/menu-design/MenuDesignPage';
+import Demo from '@/pages/invitation-design/Demo';
+import InvitationDesignPage from '@/pages/invitation-design/InvitationDesignPage';
 import SignIn from '@/pages/auth/SignIn';
 import SignUp from '@/pages/auth/SignUp';
 import AuthOutlet from '@/pages/auth/AuthOutlet';
 
 import './App.css';
-
-const LayoutOutlet = () => (
-  <MainLayout>
-    <Outlet />
-  </MainLayout>
-);
+import PrivateOutlet from './PrivateOutlet';
+import CreateDesignPage from './pages/create-design/CreateDesignPage';
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="" element={<LayoutOutlet />}>
+      <Route path="" element={<PrivateOutlet />}>
         <Route index element={<Home />} />
+        <Route path="/demo" element={<Demo />} />
       </Route>
+      <Route path="/design" element={<InvitationDesignPage />} />
+      <Route path="/get-started" element={<CreateDesignPage />} />
 
       <Route path="" element={<AuthOutlet />}>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Route>
-      <Route path="/demo" element={<Demo />} />
-      <Route path="/editor" element={<MenuDesignPage />} />
     </Routes>
   );
 };

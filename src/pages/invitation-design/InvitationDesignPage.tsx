@@ -1,17 +1,20 @@
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Editor, Frame, useEditor } from '@craftjs/core';
-import RenderNode from './setting/RenderNode';
 import { Box, Button } from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
+
+import RenderNode from './setting/RenderNode';
 import { Page, Text, GroomAndBride, Time, Location } from '@/editor/components';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import SidebarElementSetting from './components/SidebarElementSetting';
 import MenuSidebar from './components/MenuSidebar';
-import { DEMO_INFO, InfoContext } from './InfoContext';
+import { DEMO_INFO, InfoContext } from '@/editor/InfoContext';
 import { InviteeName } from '@/editor/components/InviteeName';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { fakeData } from './data';
 import ConfirmModal from '@/components/common/ConfirmModal';
+import { genNewPage } from '@/utils/editor';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 const MAX_PAGE = 3;
@@ -20,10 +23,12 @@ const EditDesign = () => {
   const elements = useRef<string[]>([fakeData, fakeData]);
   const [elementIndex, setElementIndex] = useState(0);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [hiddenPage, setHiddenPage] = useState(false);
 
-  const { connectors, query, actions, serializeElement } = useEditor((state, query) => ({
+  const { connectors, rootNode, actions, serializeElement } = useEditor((state, query) => ({
     enabled: state.options.enabled,
     serializeElement: query.serialize(),
+    rootNode: query.getNodes()['ROOT'],
   }));
 
   useEffect(() => {
@@ -41,8 +46,8 @@ const EditDesign = () => {
 
   const handleAddPage = () => {
     const currentLength = elements.current.length;
-    const lastElement = elements.current[currentLength - 1];
-    elements.current.push(lastElement);
+    const newElement = genNewPage(rootNode.data.props?.backgroundUrl);
+    elements.current.push(newElement);
     setElementIndex(currentLength);
   };
 
@@ -88,6 +93,7 @@ const EditDesign = () => {
       </ConfirmModal>
       <Box
         p="30px"
+        pb="46px"
         display="flex"
         justifyContent="center"
         flex={1}
@@ -107,9 +113,10 @@ const EditDesign = () => {
       <Box
         width="100%"
         display="flex"
-        justifyContent="center"
+        alignItems="center"
+        justifyContent="flex-end"
         gap="16px"
-        sx={{ position: 'absolute', bottom: 30, width: '100%' }}
+        sx={{ position: 'sticky', bottom: 30, width: '100%', pr: 2 }}
       >
         {[...Array(elements.current.length).keys()].map((key) => {
           const isActive = key === elementIndex;
@@ -128,6 +135,8 @@ const EditDesign = () => {
                 borderRadius: '8px',
                 boxShadow: '-2px 3px 5px #00000015',
                 cursor: 'pointer',
+                transition: 'all 0.2s ease-in',
+                opacity: hiddenPage ? 0 : 1,
                 color: (theme) => (isActive ? theme.palette.primary.main : theme.palette.grey[400]),
                 border: (theme) => `2px solid ${isActive ? theme.palette.primary.main : theme.palette.grey[400]}`,
                 ...(!isActive
@@ -175,6 +184,8 @@ const EditDesign = () => {
               borderRadius: '8px',
               boxShadow: '-2px 3px 5px #00000015',
               cursor: 'pointer',
+              transition: 'all 0.2s ease-in',
+              opacity: hiddenPage ? 0 : 1,
               color: (theme) => theme.palette.grey[400],
               border: (theme) => `2px dashed ${theme.palette.grey[400]}`,
               ':hover': {
@@ -186,11 +197,17 @@ const EditDesign = () => {
             <AddRoundedIcon />
           </Box>
         )}
+
+        <ExpandCircleDownOutlinedIcon
+          fontSize="medium"
+          onClick={() => setHiddenPage(!hiddenPage)}
+          sx={{ cursor: 'pointer', transform: `rotate(${hiddenPage ? 90 : 270}deg)`, transition: 'all 0.2s ease-in' }}
+        />
       </Box>
     </Box>
   );
 };
-const MenuDesignPage: FC = () => {
+const InvitationDesignPage: FC = () => {
   const [viewMode, setViewMode] = useState<VIEW_MODE>('EDIT');
   const [info, setInfo] = useState(DEMO_INFO);
 
@@ -216,4 +233,4 @@ const MenuDesignPage: FC = () => {
   );
 };
 
-export default MenuDesignPage;
+export default InvitationDesignPage;

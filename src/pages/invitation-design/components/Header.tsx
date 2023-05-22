@@ -4,7 +4,7 @@ import React, { FC, useEffect } from 'react';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 
-import { VIEW_MODE } from '../MenuDesignPage';
+import { VIEW_MODE } from '../InvitationDesignPage';
 import CustomTooltip from '@/components/common/CustomTooltip';
 
 interface HeaderProps {
