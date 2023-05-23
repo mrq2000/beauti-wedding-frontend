@@ -9,25 +9,17 @@ import { DEMO_INFO } from '@/editor/InfoContext';
 import { CreateDesignContext, DesignSetting } from './CreateDesignContext';
 import ChooseTemplate from './components/ChooseTenplateStep';
 import InfoStep from './components/InfoStep';
+import SettingStep from './components/SettingStep';
 
 const STEPS = [
   {
-    label: 'Chọn Template',
-    description: 'Bạn có thể thay đổi Template bât cứ lúc nào trong khi chỉnh sửa',
-    icon: <BrushOutlinedIcon />,
     element: ChooseTemplate,
   },
   {
-    label: 'Thông tin chính',
-    description: 'Một vài thông tin sẽ không thể thay đổi sau khi public website.',
-    icon: <PeopleAltOutlinedIcon />,
     element: InfoStep,
   },
   {
-    label: 'Cài đặt',
-    description: 'Mộ số cài đặt cơ bản khi public website',
-    icon: <SettingsOutlinedIcon />,
-    element: ChooseTemplate,
+    element: SettingStep,
   },
 ];
 
@@ -66,12 +58,6 @@ const CreateDesignPage: FC = () => {
             }}
           >
             <Box display="flex" flex={1} flexDirection="column" maxWidth={1400}>
-              <Typography variant="h3" mb={1}>
-                {currentStep?.label}
-              </Typography>
-              <Typography variant="caption" mb={4} fontSize={16}>
-                {currentStep.description}
-              </Typography>
               {React.createElement(currentStep.element, { handleNextStep })}
             </Box>
           </Fade>

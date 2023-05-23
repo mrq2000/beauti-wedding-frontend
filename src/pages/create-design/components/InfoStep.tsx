@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
@@ -110,8 +110,16 @@ const InfoStep: FC<InfoStepProps> = ({ handleNextStep }) => {
   };
 
   return (
-    <Box display="flex" flex={1} width="100%" alignItems="center" justifyContent="center">
+    <Box display="flex" width="100%" alignItems="center" justifyContent="center" flex={1}>
       <Box sx={{ gap: 2, display: 'flex', justifyContent: 'space-between', maxWidth: 800 }} flexWrap="wrap">
+        <Box mb={4}>
+          <Typography variant="h3" mb={1}>
+            Thông tin chính
+          </Typography>
+          <Typography variant="caption" mb={4} fontSize={16}>
+            Một vài thông tin sẽ không thể thay đổi sau khi public website.
+          </Typography>
+        </Box>
         {FORM_TEXT_FIELDS.map((field) => (
           <Box width={{ xs: '100%', sm: '48%' }} key={field.key}>
             <TextField

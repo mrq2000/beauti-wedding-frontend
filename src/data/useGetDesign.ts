@@ -5,7 +5,7 @@ const useGetDesign = () => {
   return useQuery(
     'get design',
     async () => {
-      const response = await api.get(`/design`);
+      const response = await api.get('/design');
 
       return response.data;
     },

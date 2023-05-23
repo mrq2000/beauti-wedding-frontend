@@ -14,7 +14,7 @@ const useGetTemplate = ({ offset, limit }: IUseGetTemplate): UseQueryResult<Temp
   return useQuery(
     ['getTemplate', offset, limit],
     async () => {
-      const response = await api.get(`/templates`, {
+      const response = await api.get('/templates', {
         params: {
           offset,
           limit,
