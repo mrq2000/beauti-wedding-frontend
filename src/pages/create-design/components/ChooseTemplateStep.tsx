@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
 
 import CustomLoading from '@/components/common/CustomLoading';
-import SomeThingError from '@/components/common/SomeThingError';
+import SomeThingError from '@/components/error-page/SomeThingError';
 import useGetTemplate from '@/data/useGetTemplate';
 import { CreateDesignContext } from '../CreateDesignContext';
 

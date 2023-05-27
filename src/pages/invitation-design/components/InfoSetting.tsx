@@ -7,7 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { InfoContext } from '@/editor/InfoContext';
 import dayjs, { Dayjs } from 'dayjs';
-import { FORM_TEXT_FIELDS, infoSchema, FormValues } from '@/pages/create-design/components/InfoStep';
+import { FORM_TEXT_FIELDS, infoSchema } from '@/pages/create-design/components/InfoStep';
+import { Info } from '@/editor/interface/info';
 
 const InfoSetting: FC = () => {
   const { info, setInfo } = useContext(InfoContext);
@@ -17,38 +18,16 @@ const InfoSetting: FC = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<Info>({
     mode: 'onSubmit',
     defaultValues: {
-      groomName: info.groom.name,
-      groomMotherName: info.groom.motherName,
-      groomFatherName: info.groom.fartherName,
-      brideName: info.bride.name,
-      brideMotherName: info.bride.motherName,
-      brideFatherName: info.bride.fartherName,
-      location: info.location.name,
-      time: info.time,
+      ...info,
     },
     resolver: yupResolver(infoSchema),
   });
 
-  const onSubmit = (data: FormValues) => {
-    setInfo({
-      groom: {
-        name: data.groomName,
-        fartherName: data.groomFatherName,
-        motherName: data.groomMotherName,
-      },
-      bride: {
-        name: data.brideName,
-        fartherName: data.brideFatherName,
-        motherName: data.brideMotherName,
-      },
-      location: {
-        name: data.location,
-      },
-      time: data.time,
-    });
+  const onSubmit = (data: Info) => {
+    setInfo(data);
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { FC, useContext, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { LoadingButton } from '@mui/lab';
 
 import yup from '@/helpers/validator';
 import { CreateDesignContext } from '../CreateDesignContext';
@@ -26,7 +27,7 @@ interface SettingStepProps {
 
 const SettingStep: FC<SettingStepProps> = ({ handleNextStep }) => {
   const { setting, setSetting } = useContext(CreateDesignContext);
-  const { mutate: checkDomain } = useCheckDomain();
+  const { mutate: checkDomain, isLoading } = useCheckDomain();
   const [errorMessage, setErrorMessage] = React.useState('');
 
   const {
@@ -51,16 +52,13 @@ const SettingStep: FC<SettingStepProps> = ({ handleNextStep }) => {
   }, [watch]);
 
   const onSubmit = (data: FormValues) => {
-    // setSetting({
-    //   domain: data.domain,
-    // });
     checkDomain(data.domain, {
       onError: (e) => {
         handleErrorMessage(e);
       },
       onSuccess: (res) => {
-        if (!res.isExist) {
-          setErrorMessage('Domain đã tồn tại! Vui lòng')
+        if (res.isExist) {
+          setErrorMessage('Domain đã tồn tại! Vui lòng');
           return;
         }
         setSetting({
@@ -93,14 +91,15 @@ const SettingStep: FC<SettingStepProps> = ({ handleNextStep }) => {
         />
 
         <Box width="100%" display="flex" flex={1} justifyContent="center" mt={2}>
-          <Button
+          <LoadingButton
             size="large"
             variant="contained"
+            loading={isLoading}
             sx={{ width: { xs: '100%', sm: '48%' } }}
             onClick={handleSubmit(onSubmit)}
           >
             Xác Nhận
-          </Button>
+          </LoadingButton>
         </Box>
       </Box>
     </Box>

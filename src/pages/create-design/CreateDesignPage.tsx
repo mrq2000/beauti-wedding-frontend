@@ -1,15 +1,17 @@
-import React, { FC, useMemo, useState } from 'react';
-import { Box, Fade, Typography } from '@mui/material';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { Box, Fade } from '@mui/material';
 import { TransitionGroup } from 'react-transition-group';
-import BrushOutlinedIcon from '@mui/icons-material/BrushOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 import { DEMO_INFO } from '@/editor/InfoContext';
 import { CreateDesignContext, DesignSetting } from './CreateDesignContext';
-import ChooseTemplate from './components/ChooseTenplateStep';
+import ChooseTemplate from './components/ChooseTemplateStep';
 import InfoStep from './components/InfoStep';
 import SettingStep from './components/SettingStep';
+import useCreateDesign from '@/data/useCreateDesign';
+import CustomLoading from '@/components/common/CustomLoading';
+import { useNavigate } from 'react-router-dom';
+import { handleErrorMessage } from '@/helpers/error';
+import SomeThingError from '@/components/error-page/SomeThingError';
 
 const STEPS = [
   {
@@ -28,14 +30,50 @@ const CreateDesignPage: FC = () => {
   const [info, setInfo] = useState(DEMO_INFO);
   const [templateId, setTemplateId] = useState<number | undefined>();
   const [setting, setSetting] = useState<DesignSetting>({ domain: '' });
+  const { mutate: createDesign, isLoading, isError } = useCreateDesign();
 
+  const navigate = useNavigate();
   const handleNextStep = () => {
-    if (step < STEPS.length - 1) {
-      setStep(step + 1);
-    }
+    setStep(step + 1);
   };
 
   const currentStep = useMemo(() => STEPS[step], [step]);
+
+  useEffect(() => {
+    if (step === STEPS.length) {
+      createDesign(
+        {
+          templateId,
+          ...setting,
+          ...info,
+        },
+        {
+          onError: (e) => {
+            handleErrorMessage(e);
+          },
+          onSuccess: (data) => {
+            navigate(`/design/${data.id}`);
+          },
+        },
+      );
+    }
+  }, [step]);
+
+  if (isLoading) {
+    return (
+      <Box display="flex" alignItems="center" height="100%">
+        <CustomLoading />
+      </Box>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Box display="flex" alignItems="center" height="100%">
+        <SomeThingError />
+      </Box>
+    );
+  }
 
   return (
     <CreateDesignContext.Provider value={{ info, setInfo, templateId, setTemplateId, setting, setSetting }}>
@@ -58,7 +96,7 @@ const CreateDesignPage: FC = () => {
             }}
           >
             <Box display="flex" flex={1} flexDirection="column" maxWidth={1400}>
-              {React.createElement(currentStep.element, { handleNextStep })}
+              {currentStep && React.createElement(currentStep.element, { handleNextStep })}
             </Box>
           </Fade>
         </Box>

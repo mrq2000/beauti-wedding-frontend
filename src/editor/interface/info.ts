@@ -1,14 +1,10 @@
-export interface UserInfo {
-  name: string;
-  fartherName?: string;
-  motherName?: string;
-}
-
 export interface Info {
-  groom: UserInfo;
-  bride: UserInfo;
-  location: {
-    name: string;
-  };
+  groomName: string;
+  groomMotherName?: string;
+  groomFatherName?: string;
+  brideName: string;
+  brideMotherName?: string;
+  brideFatherName?: string;
+  location?: string;
   time: string;
 }

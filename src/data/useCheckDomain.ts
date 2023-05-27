@@ -6,7 +6,7 @@ interface CheckDomainResult {
 }
 const useCheckDomain = () => {
   return useMutation(async (domain: string) => {
-    const response = await api.get('/check-domain', {
+    const response = await api.get('/designs/check-domain', {
       params: {
         domain,
       },

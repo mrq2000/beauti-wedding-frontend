@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import yup from '@/helpers/validator';
 import { CreateDesignContext } from '../CreateDesignContext';
+import { Info } from '@/editor/interface/info';
 
 export const infoSchema = yup.object().shape({
   groomName: yup.string().required().max(30),
@@ -20,18 +21,7 @@ export const infoSchema = yup.object().shape({
   time: yup.string().required(),
 });
 
-export interface FormValues {
-  groomName: string;
-  groomMotherName?: string;
-  groomFatherName?: string;
-  brideName: string;
-  brideMotherName?: string;
-  brideFatherName?: string;
-  location: string;
-  time: string;
-}
-
-export const FORM_TEXT_FIELDS: { key: keyof FormValues; label: string }[] = [
+export const FORM_TEXT_FIELDS: { key: keyof Info; label: string }[] = [
   {
     key: 'brideName',
     label: 'Tên cô dâu *',
@@ -74,38 +64,16 @@ const InfoStep: FC<InfoStepProps> = ({ handleNextStep }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<Info>({
     mode: 'onSubmit',
     defaultValues: {
-      groomName: info.groom.name,
-      groomMotherName: info.groom.motherName,
-      groomFatherName: info.groom.fartherName,
-      brideName: info.bride.name,
-      brideMotherName: info.bride.motherName,
-      brideFatherName: info.bride.fartherName,
-      location: info.location.name,
-      time: info.time,
+      ...info,
     },
     resolver: yupResolver(infoSchema),
   });
 
-  const onSubmit = (data: FormValues) => {
-    setInfo({
-      groom: {
-        name: data.groomName,
-        fartherName: data.groomFatherName,
-        motherName: data.groomMotherName,
-      },
-      bride: {
-        name: data.brideName,
-        fartherName: data.brideFatherName,
-        motherName: data.brideMotherName,
-      },
-      location: {
-        name: data.location,
-      },
-      time: data.time,
-    });
+  const onSubmit = (data: Info) => {
+    setInfo(data);
     handleNextStep();
   };
 

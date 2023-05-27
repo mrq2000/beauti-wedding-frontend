@@ -11,7 +11,7 @@ export const GroomAndBride = ({ style, textBetween }: IGroomAndBrideSetting) => 
     connectors: { connect, drag },
   } = useNode();
   const {
-    info: { groom, bride },
+    info: { groomName, brideName },
   } = useContext(InfoContext);
   const isColumnMode = style.direction == 'column';
 
@@ -26,7 +26,7 @@ export const GroomAndBride = ({ style, textBetween }: IGroomAndBrideSetting) => 
       }}
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
     >
-      <Box>{bride.name}</Box>
+      <Box>{brideName}</Box>
       <Box
         sx={{
           padding: isColumnMode ? `${style.spaceBetween}rem 0` : `0 ${style.spaceBetween}rem`,
@@ -36,7 +36,7 @@ export const GroomAndBride = ({ style, textBetween }: IGroomAndBrideSetting) => 
       >
         {textBetween}
       </Box>
-      <Box>{groom.name}</Box>
+      <Box>{groomName}</Box>
     </Box>
   );
 };

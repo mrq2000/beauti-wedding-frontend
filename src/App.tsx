@@ -19,6 +19,7 @@ import AuthOutlet from '@/pages/auth/AuthOutlet';
 import './App.css';
 import PrivateOutlet from './PrivateOutlet';
 import CreateDesignPage from './pages/create-design/CreateDesignPage';
+import Page404 from './components/error-page/Page404';
 
 const Router = () => {
   return (
@@ -34,6 +35,8 @@ const Router = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Route>
+
+      <Route path="*" element={<Page404 />} />
     </Routes>
   );
 };

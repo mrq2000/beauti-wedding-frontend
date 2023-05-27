@@ -5,7 +5,7 @@ const SomeThingError: FC = () => {
   return (
     <Box display="flex" flex={1} flexDirection="column" alignItems="center" justifyContent="center">
       <Typography mt={5} color="error" fontSize={16}>
-        Some thing Error
+        Something Error
       </Typography>
     </Box>
   );

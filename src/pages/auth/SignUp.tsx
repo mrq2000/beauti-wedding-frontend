@@ -67,7 +67,6 @@ const SignUp = () => {
       },
       onError: (e) => {
         const errorMessage = getErrorMessage(e);
-        console.log(errorMessage);
         setErrorMessage(errorMessage);
       },
     });

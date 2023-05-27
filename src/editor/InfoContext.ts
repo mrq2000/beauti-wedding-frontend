@@ -2,19 +2,13 @@ import { Info } from './interface/info';
 import { createContext } from 'react';
 
 export const DEMO_INFO: Info = {
-  groom: {
-    name: 'Tên Chú Rể',
-    fartherName: '',
-    motherName: '',
-  },
-  bride: {
-    name: 'Tên Cô Dâu',
-    fartherName: '',
-    motherName: '',
-  },
-  location: {
-    name: 'Địa chỉ nơi tổ chức tiệc cưới',
-  },
+  groomName: 'Tên Chú Rể',
+  groomFatherName: '',
+  groomMotherName: '',
+  brideName: 'Tên Cô Dâu',
+  brideFatherName: '',
+  brideMotherName: '',
+  location: 'Địa chỉ nơi tổ chức tiệc cưới',
   time: '2023-05-04T17:00:00.000Z',
 };
 
