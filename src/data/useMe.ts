@@ -1,7 +1,7 @@
 import { api } from '@/helpers/api';
 import { useQuery } from 'react-query';
 
-const useGetMe = () => {
+const useMe = () => {
   return useQuery(
     'get me',
     async () => {
@@ -16,4 +16,4 @@ const useGetMe = () => {
   );
 };
 
-export default useGetMe;
+export default useMe;

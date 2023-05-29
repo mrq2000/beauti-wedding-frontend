@@ -29,7 +29,7 @@ export const Location = ({ style: { font, padding, borderBottom } }: ILocationSe
           borderBottom: `${borderBottom.borderWidth}px ${borderBottom.borderStyle} ${borderBottom.borderColor}`,
         }}
       >
-        {location.name}
+        {location}
       </Box>
     </Box>
   );

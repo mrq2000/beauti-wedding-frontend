@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Typography, Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Link, useNavigate } from 'react-router-dom';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
@@ -23,6 +23,7 @@ const accountSchema = yup.object().shape({
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const client = useQueryClient();
   const [showPassword, setShowPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -59,6 +60,7 @@ const SignIn = () => {
       onSuccess: (data) => {
         if (data && data.accessToken) {
           setToken(data.accessToken);
+          client.clear();
           navigate('/');
         }
       },

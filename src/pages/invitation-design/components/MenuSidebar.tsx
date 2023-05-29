@@ -11,15 +11,16 @@ import {
   Typography,
 } from '@mui/material';
 import ViewSidebarRoundedIcon from '@mui/icons-material/ViewSidebarRounded';
-
-import ElementSetting from './ElementSetting';
-import { HEADER_HEIGHT } from './Header';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CustomTooltip from '@/components/common/CustomTooltip';
 import LibraryAddRoundedIcon from '@mui/icons-material/LibraryAddRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import PermIdentityRoundedIcon from '@mui/icons-material/PermIdentityRounded';
+
+import { HEADER_HEIGHT } from './Header';
+import ElementSetting from './ElementSetting';
 import InfoSetting from './InfoSetting';
+import TemplateSetting from './TemplateSetting';
 
 const contentWidth = 388;
 const iconDrawer = 56;
@@ -50,7 +51,7 @@ const SIDEBAR_TABS: TabInfo[] = [
     id: 'template',
     icon: <ViewSidebarRoundedIcon />,
     tooltipTitle: 'Templates',
-    element: <></>,
+    element: <TemplateSetting />,
   },
   {
     id: 'setting',
@@ -105,7 +106,7 @@ const Drawer = styled(MuiDrawer, {
 
 const MenuSidebar: FC = () => {
   const theme = useTheme();
-  const [open, setOpen] = useState<null | string>(SIDEBAR_TABS[0].id);
+  const [open, setOpen] = useState<null | string>(SIDEBAR_TABS[2].id);
 
   return (
     <Fragment>

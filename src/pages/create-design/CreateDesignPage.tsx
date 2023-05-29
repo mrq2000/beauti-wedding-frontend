@@ -52,7 +52,7 @@ const CreateDesignPage: FC = () => {
             handleErrorMessage(e);
           },
           onSuccess: (data) => {
-            navigate(`/design/${data.id}`);
+            navigate(`/designs/${data.id}`);
           },
         },
       );

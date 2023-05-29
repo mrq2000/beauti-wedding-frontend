@@ -1,30 +1,26 @@
 import { api } from '@/helpers/api';
-import { useQuery, UseQueryResult } from 'react-query';
+import { Template } from '@/interface/template';
+import { useInfiniteQuery } from 'react-query';
 
 interface IUseGetTemplate {
-  offset: number;
   limit: number;
 }
 
-interface TemplateResult {
-  id: number;
-  preview_img_url: string;
-}
-const useGetTemplate = ({ offset, limit }: IUseGetTemplate): UseQueryResult<TemplateResult[]> => {
-  return useQuery(
-    ['getTemplate', offset, limit],
-    async () => {
+const useGetTemplate = ({ limit }: IUseGetTemplate) => {
+  return useInfiniteQuery(
+    ['getTemplate', limit],
+    async ({ pageParam = 0 }) => {
       const response = await api.get('/templates', {
         params: {
-          offset,
+          offset: pageParam,
           limit,
         },
       });
-      return response.data;
+      return response.data as Template[];
     },
     {
       staleTime: 600000,
-      cacheTime: 600000,
+      getNextPageParam: (lastPage, allPage) => (lastPage.length >= limit ? allPage.length * limit : undefined),
     },
   );
 };

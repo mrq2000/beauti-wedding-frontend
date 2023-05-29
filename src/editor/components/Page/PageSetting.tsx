@@ -1,6 +1,6 @@
 import { Spacing } from '@/editor/interface/setting';
 import { useNode } from '@craftjs/core';
-import { FormControl, Box, Slider } from '@mui/material';
+import { Box } from '@mui/material';
 import { DeepPartial } from '@/interface';
 import { mergeWithoutArray } from '@/utils/merge';
 import SpacingSetting from '../common/SpacingSetting';
@@ -30,6 +30,12 @@ const PageSetting = () => {
     }, 1000);
   };
 
+  const onChangeBackground = (url: string) => {
+    setProp((props: IPageSetting) => {
+      props.backgroundUrl = url;
+    });
+  };
+
   return (
     <>
       <SpacingSetting
@@ -55,7 +61,7 @@ const PageSetting = () => {
       </Box>
 
       <Box mt={2} width="100%" height={150}>
-        <AddPictureButton labelKey="upload-background-img" handleSetFile={() => console.log('done')}>
+        <AddPictureButton labelKey="upload-background-img" handleSetPicture={onChangeBackground}>
           <CardImageUpload url={pageProps.backgroundUrl} />
         </AddPictureButton>
       </Box>

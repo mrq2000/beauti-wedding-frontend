@@ -49,7 +49,7 @@ const SettingStep: FC<SettingStepProps> = ({ handleNextStep }) => {
     if (errorMessage) {
       setErrorMessage('');
     }
-  }, [watch]);
+  }, [domain]);
 
   const onSubmit = (data: FormValues) => {
     checkDomain(data.domain, {
@@ -58,7 +58,7 @@ const SettingStep: FC<SettingStepProps> = ({ handleNextStep }) => {
       },
       onSuccess: (res) => {
         if (res.isExist) {
-          setErrorMessage('Domain đã tồn tại! Vui lòng');
+          setErrorMessage('Domain đã tồn tại! Vui lòng nhạp giá trị khác');
           return;
         }
         setSetting({
@@ -82,8 +82,8 @@ const SettingStep: FC<SettingStepProps> = ({ handleNextStep }) => {
         </Typography>
         <TextField
           fullWidth
-          helperText={errors && errors['domain']?.message}
-          error={!!errors['domain']}
+          helperText={(errors && errors['domain']?.message) || errorMessage}
+          error={!!errors['domain'] || !!errorMessage}
           placeholder="dam-cuoi-lan-va-diep"
           InputProps={{
             ...register('domain'),

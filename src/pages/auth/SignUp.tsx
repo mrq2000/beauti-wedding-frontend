@@ -62,7 +62,7 @@ const SignUp = () => {
       onSuccess: (data) => {
         if (data && data.accessToken) {
           setToken(data.accessToken);
-          navigate('/');
+          navigate('/get-started');
         }
       },
       onError: (e) => {

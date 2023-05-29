@@ -48,8 +48,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 }));
 
-// interface SidebarElementSettingProps {}
-
 const SidebarElementSetting: FC = () => {
   const {
     actions: { selectNode },

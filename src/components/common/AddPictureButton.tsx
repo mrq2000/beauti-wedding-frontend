@@ -6,17 +6,22 @@ import { AppBar, Box, Button, IconButton, Toolbar, Typography, useTheme } from '
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
+import Resizer from 'react-image-file-resizer';
 
 import 'react-image-crop/dist/ReactCrop.css';
 import { useDebounceEffect } from '@/hooks/debounce';
 import { canvasPreview } from '@/utils/canvas';
+import { handleErrorMessage } from '@/helpers/error';
+import { LoadingButton } from '@mui/lab';
+import useUploadImage from '@/data/useUploadImage';
 
 interface IAddPictureProps {
-  handleSetFile: (file: string) => void;
+  handleSetPicture: (url: string) => void;
   labelKey: string;
   aspect?: number;
 }
 
+const MAX_IMAGE_SIZE = 1024 * 1024; // 1MB;
 const Input = styled('input')({
   display: 'none',
 });
@@ -47,7 +52,7 @@ const Transition = forwardRef(function Transition(
 });
 
 const AddPictureButton = ({
-  handleSetFile,
+  handleSetPicture,
   children,
   labelKey,
   aspect = 12 / 17,
@@ -59,6 +64,7 @@ const AddPictureButton = ({
   const imgRef = useRef<HTMLImageElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
+  const { mutate: uploadImg, isLoading } = useUploadImage();
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -73,6 +79,46 @@ const AddPictureButton = ({
       const { width, height } = e.currentTarget;
       setCrop(centerAspectCrop(width, height, aspect));
     }
+  };
+
+  const handleSubmitImage = async () => {
+    if (!previewCanvasRef.current) {
+      handleErrorMessage('Vui lòng cắt ảnh trước khi tải lên');
+      return;
+    }
+    previewCanvasRef.current.toBlob((blob) => {
+      if (!blob) return;
+      // Resize and compress the Blob using react-image-file-resizer
+      return Resizer.imageFileResizer(
+        blob,
+        480,
+        480 / aspect,
+        'JPEG',
+        80,
+        0,
+        (compressedBlob) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          const file = new File([compressedBlob], 'image.jpeg', { type: 'image/jpeg' });
+          if (file.size > MAX_IMAGE_SIZE) {
+            handleErrorMessage('Kích thước ảnh quá lớn xin vui lòng thử cắt lại!');
+          } else {
+            const formData = new FormData();
+            formData.set('img', file);
+            uploadImg(formData, {
+              onSuccess: (data) => {
+                handleSetPicture(data.url);
+                handleClose();
+              },
+              onError: (e) => {
+                handleErrorMessage(e);
+              },
+            });
+          }
+        },
+        'blob',
+      );
+    }, 'image/jpeg');
   };
 
   const handleClose = () => {
@@ -119,11 +165,11 @@ const AddPictureButton = ({
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Crop Image
+              Cắt Ảnh
             </Typography>
-            <Button color="inherit" variant="contained" onClick={handleClose}>
-              Crop
-            </Button>
+            <LoadingButton color="inherit" variant="contained" onClick={handleSubmitImage} loading={isLoading}>
+              Tải Lên
+            </LoadingButton>
           </Toolbar>
         </AppBar>
         <Box
@@ -156,7 +202,7 @@ const AddPictureButton = ({
 
           <Box width="45%" display="flex" justifyContent="center" alignItems="center" flexDirection="column">
             <Typography variant="h3" mb={2}>
-              After Crop
+              Ảnh sau khi cắt
             </Typography>
 
             <canvas

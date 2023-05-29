@@ -27,9 +27,9 @@ const Router = () => {
       <Route path="" element={<PrivateOutlet />}>
         <Route index element={<Home />} />
         <Route path="/demo" element={<Demo />} />
+        <Route path="/designs/:id" element={<InvitationDesignPage />} />
+        <Route path="/get-started" element={<CreateDesignPage />} />
       </Route>
-      <Route path="/design" element={<InvitationDesignPage />} />
-      <Route path="/get-started" element={<CreateDesignPage />} />
 
       <Route path="" element={<AuthOutlet />}>
         <Route path="/sign-in" element={<SignIn />} />

@@ -1,23 +1,35 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
 
 import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
 import useGetTemplate from '@/data/useGetTemplate';
 import { CreateDesignContext } from '../CreateDesignContext';
+import { Template } from '@/interface/template';
 
 interface ChooseTemplateProps {
   handleNextStep: () => void;
 }
 
 const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
-  const { data, isLoading } = useGetTemplate({ offset: 0, limit: 100 });
+  const { data, isLoading } = useGetTemplate({ limit: 100 });
+  const [templates, setTemplates] = useState<Template[]>([]);
   const { setTemplateId } = useContext(CreateDesignContext);
   const theme = useTheme();
   const handleSelect = (id: number) => {
     setTemplateId(id);
     handleNextStep();
   };
+
+  useEffect(() => {
+    if (data) {
+      const newTemplates: Template[] = [];
+      data.pages.forEach((post) => {
+        newTemplates.push(...post);
+      });
+      setTemplates(newTemplates);
+    }
+  }, [data]);
 
   if (isLoading) return <CustomLoading />;
   if (!data) return <SomeThingError />;
@@ -32,7 +44,7 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
       </Typography>
 
       <Box display="grid" gridTemplateColumns="repeat(20, 1fr)" gap={3}>
-        {data.map((template) => (
+        {templates.map((template) => (
           <Grid gridColumn={{ xs: 'span 20', sm: 'span 10', md: 'span 5', lg: 'span 4' }} key={template.id}>
             <Box
               sx={{

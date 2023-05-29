@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 
 const CustomLoading: FC = () => {
   return (
-    <Box display="flex" flex={1} flexDirection="column" alignItems="center" justifyContent="center">
+    <Box display="flex" flex={1} flexDirection="column" alignItems="center" justifyContent="center" height="100%">
       <Box display="flex" gap={5}>
         <div className="loading-1" />
         <div className="loading-2" />

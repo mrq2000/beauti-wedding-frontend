@@ -3,9 +3,11 @@ import { Box, Button, IconButton } from '@mui/material';
 import React, { FC, useEffect } from 'react';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 import { VIEW_MODE } from '../InvitationDesignPage';
 import CustomTooltip from '@/components/common/CustomTooltip';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   viewMode: VIEW_MODE;
@@ -18,6 +20,8 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
     canUndo: query.history.canUndo(),
     canRedo: query.history.canRedo(),
   }));
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!enabled) return;
@@ -51,7 +55,12 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
         flex: 1,
       }}
     >
-      <Box sx={{ flex: 1 }}></Box>
+      <Box
+        sx={{ flex: 1, color: '#383b3f', cursor: 'pointer', alignItems: 'center', display: 'flex' }}
+        onClick={() => navigate('/')}
+      >
+        <ArrowBackIosNewRoundedIcon sx={{ color: '#383b3f', mr: 0.5, fontSize: 14 }} /> Dashboard
+      </Box>
       <Box sx={{ gap: '16px', display: 'flex' }}>
         <Box
           sx={{
