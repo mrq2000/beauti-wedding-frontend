@@ -7,7 +7,7 @@ import { CreateDesignContext, DesignSetting } from './CreateDesignContext';
 import ChooseTemplate from './components/ChooseTemplateStep';
 import InfoStep from './components/InfoStep';
 import SettingStep from './components/SettingStep';
-import useCreateDesign from '@/data/useCreateDesign';
+import useCreateDesign from '@/data/design/useCreateDesign';
 import CustomLoading from '@/components/common/CustomLoading';
 import { useNavigate } from 'react-router-dom';
 import { handleErrorMessage } from '@/helpers/error';

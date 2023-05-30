@@ -6,7 +6,7 @@ import { LoadingButton } from '@mui/lab';
 
 import yup from '@/helpers/validator';
 import { CreateDesignContext } from '../CreateDesignContext';
-import useCheckDomain from '@/data/useCheckDomain';
+import useCheckDomain from '@/data/design/useCheckDomain';
 import { handleErrorMessage } from '@/helpers/error';
 
 export const infoSchema = yup.object().shape({

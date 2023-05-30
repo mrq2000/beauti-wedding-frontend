@@ -11,7 +11,7 @@ import { DEMO_INFO, InfoContext } from '@/editor/InfoContext';
 import { InviteeName } from '@/editor/components/InviteeName';
 import { useParams } from 'react-router-dom';
 import EditDesign from './components/EditDesign';
-import useGetDesignDraft from '@/data/useGetDesignDraft';
+import useGetDesignDraft from '@/data/design/useGetDesignDraft';
 import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
 import ElementWrap from './ElementWarp';
@@ -40,7 +40,7 @@ const InvitationDesignPage: FC = () => {
               <Header viewMode={viewMode} />
               <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">
                 <MenuSidebar />
-                <EditDesign defaultData={JSON.parse(data.data)} />
+                <EditDesign />
                 <SidebarElementSetting />
               </Box>
             </Box>

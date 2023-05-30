@@ -3,7 +3,7 @@ import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
 
 import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
-import useGetTemplate from '@/data/useGetTemplate';
+import useGetTemplate from '@/data/template/useGetTemplate';
 import { CreateDesignContext } from '../CreateDesignContext';
 import { Template } from '@/interface/template';
 

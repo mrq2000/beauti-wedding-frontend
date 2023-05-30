@@ -1,13 +1,19 @@
 import { useEditor } from '@craftjs/core';
-import { Box, Button, IconButton } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import { Box, Button, IconButton, Typography } from '@mui/material';
+import React, { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import CircularProgress from '@mui/material/CircularProgress';
+import Chip from '@mui/material/Chip';
 
 import { VIEW_MODE } from '../InvitationDesignPage';
 import CustomTooltip from '@/components/common/CustomTooltip';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useUpdateDraftData from '@/data/design/useUpdateDraftData';
+import { ElementContext } from '../ElementWarp';
+import { useDebounce } from 'react-use';
+import { handleErrorMessage } from '@/helpers/error';
 
 interface HeaderProps {
   viewMode: VIEW_MODE;
@@ -15,10 +21,18 @@ interface HeaderProps {
 export const HEADER_HEIGHT = 56;
 
 const Header: FC<HeaderProps> = ({ viewMode }) => {
-  const { canUndo, canRedo, actions, enabled } = useEditor((state, query) => ({
+  const { id } = useParams();
+  const [init, setInit] = useState(false);
+  const [startApi, setStartApi] = useState(false);
+  const { mutate: updateDraftData, isLoading, isError } = useUpdateDraftData();
+  const { elements } = useContext(ElementContext);
+  const draftDataAbortController = useRef<AbortController>();
+
+  const { canUndo, canRedo, actions, enabled, serializeElement } = useEditor((state, query) => ({
     enabled: state.options.enabled,
     canUndo: query.history.canUndo(),
     canRedo: query.history.canRedo(),
+    serializeElement: query.serialize(),
   }));
 
   const navigate = useNavigate();
@@ -40,6 +54,33 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
     };
   }, [enabled, canUndo, canRedo]);
 
+  const elementString = useMemo(() => {
+    return JSON.stringify(elements);
+  }, [elements, serializeElement]);
+
+  useDebounce(
+    async () => {
+      if (!init) {
+        setInit(true);
+        return;
+      }
+      if (enabled && id) {
+        if (draftDataAbortController.current) {
+          draftDataAbortController.current.abort();
+        }
+
+        draftDataAbortController.current = new window.AbortController();
+        updateDraftData({
+          data: JSON.stringify(elements),
+          designId: +id,
+        });
+        if (!startApi) setStartApi(true);
+      }
+    },
+    3000,
+    [elementString, enabled],
+  );
+
   return (
     <Box
       sx={{
@@ -60,6 +101,20 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
         onClick={() => navigate('/')}
       >
         <ArrowBackIosNewRoundedIcon sx={{ color: '#383b3f', mr: 0.5, fontSize: 14 }} /> Dashboard
+        {startApi && (
+          <Typography variant="caption" sx={{ ml: 3 }}>
+            {isLoading ? (
+              <>
+                <CircularProgress size={10} sx={{ mr: 0.5 }} />
+                Đang lưu...
+              </>
+            ) : isError ? (
+              <Chip size="small" label="Lưu bị lỗi!" color="error" sx={{ fontSize: 11 }} />
+            ) : (
+              <Chip size="small" label="Đã lưu!" color="primary" sx={{ fontSize: 11 }} />
+            )}
+          </Typography>
+        )}
       </Box>
       <Box sx={{ gap: '16px', display: 'flex' }}>
         <Box

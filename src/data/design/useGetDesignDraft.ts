@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { api } from '@/helpers/api';
-import { DesignDraft } from './../interface/design';
+import { DesignDraft } from '../../interface/design';
 
 const useGetDesignDraft = ({ id }: { id: number }) => {
   return useQuery(
