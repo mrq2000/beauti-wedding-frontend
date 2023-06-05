@@ -5,13 +5,14 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { InfoContext } from '@/editor/InfoContext';
+import { InfoContext, InfoActionContext } from '@/editor/InfoContext';
 import dayjs, { Dayjs } from 'dayjs';
 import { FORM_TEXT_FIELDS, infoSchema } from '@/pages/create-design/components/InfoStep';
 import { Info } from '@/editor/interface/info';
 
 const InfoSetting: FC = () => {
-  const { info, setInfo } = useContext(InfoContext);
+  const { info } = useContext(InfoContext);
+  const { setInfo } = useContext(InfoActionContext);
 
   const {
     register,

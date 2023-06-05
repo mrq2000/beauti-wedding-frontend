@@ -1,6 +1,6 @@
 import { Typography, Fade, styled, Drawer as MuiDrawer, Theme, CSSObject, Box } from '@mui/material';
 import React, { FC } from 'react';
-import { HEADER_HEIGHT } from './Header';
+import { HEADER_HEIGHT } from '../Header';
 import { useEditor } from '@craftjs/core';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 

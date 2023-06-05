@@ -1,4 +1,4 @@
-import React, { createContext, FC, PropsWithChildren, useRef, useState } from 'react';
+import React, { createContext, FC, PropsWithChildren, useState } from 'react';
 
 export const ElementContext = createContext<{ elements: string[]; setElements: (data: string[]) => void }>({
   elements: [],

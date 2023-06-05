@@ -10,17 +10,10 @@ import {
   useTheme,
   Typography,
 } from '@mui/material';
-import ViewSidebarRoundedIcon from '@mui/icons-material/ViewSidebarRounded';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CustomTooltip from '@/components/common/CustomTooltip';
-import LibraryAddRoundedIcon from '@mui/icons-material/LibraryAddRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import PermIdentityRoundedIcon from '@mui/icons-material/PermIdentityRounded';
 
 import { HEADER_HEIGHT } from './Header';
-import ElementSetting from './ElementSetting';
-import InfoSetting from './InfoSetting';
-import TemplateSetting from './TemplateSetting';
 
 const contentWidth = 388;
 const iconDrawer = 56;
@@ -33,33 +26,6 @@ interface TabInfo {
 }
 
 const ICON_SIDE_BAR_INDEX = 900;
-
-const SIDEBAR_TABS: TabInfo[] = [
-  {
-    id: 'info',
-    icon: <PermIdentityRoundedIcon />,
-    tooltipTitle: 'Thông tin',
-    element: <InfoSetting />,
-  },
-  {
-    id: 'element',
-    icon: <LibraryAddRoundedIcon />,
-    tooltipTitle: 'Thành phần',
-    element: <ElementSetting />,
-  },
-  {
-    id: 'template',
-    icon: <ViewSidebarRoundedIcon />,
-    tooltipTitle: 'Templates',
-    element: <TemplateSetting />,
-  },
-  {
-    id: 'setting',
-    icon: <SettingsRoundedIcon />,
-    tooltipTitle: 'Cài Đặt',
-    element: <></>,
-  },
-];
 
 const openTransition = (theme: Theme, type = 'width') => ({
   transition: theme.transitions.create(type, {
@@ -104,22 +70,26 @@ const Drawer = styled(MuiDrawer, {
   position: 'absolute',
 }));
 
-const MenuSidebar: FC = () => {
+interface SidebarProps {
+  tabs: TabInfo[];
+}
+
+const Sidebar: FC<SidebarProps> = ({ tabs }) => {
   const theme = useTheme();
-  const [open, setOpen] = useState<null | string>(SIDEBAR_TABS[2].id);
+  const [open, setOpen] = useState<null | string>(tabs[0].id);
 
   return (
     <Fragment>
       <Drawer variant="permanent" anchor="left" open={!!open} PaperProps={{ sx: { paddingTop: `${HEADER_HEIGHT}px` } }}>
         <Box
-          pt={1.5}
+          pt={2}
           display="flex"
           alignItems="center"
           flexDirection="column"
           width={`${iconDrawer}px`}
           sx={{ backgroundColor: '#fff', flexGrow: 1 }}
         >
-          {SIDEBAR_TABS.map((tab) => {
+          {tabs.map((tab) => {
             const isActive = tab.id == open;
 
             return (
@@ -132,7 +102,7 @@ const MenuSidebar: FC = () => {
                     width: '36px',
                     borderRadius: '8px',
                     fontSize: '19px',
-                    mb: 1,
+                    mb: 2,
                     '&:hover': {
                       backgroundColor: (theme) => (isActive ? theme.palette.primary.main : '#0000000a'),
                     },
@@ -147,7 +117,7 @@ const MenuSidebar: FC = () => {
         </Box>
       </Drawer>
 
-      {SIDEBAR_TABS.map((tab) => {
+      {tabs.map((tab) => {
         const isActive = tab.id == open;
 
         return (
@@ -185,4 +155,4 @@ const MenuSidebar: FC = () => {
   );
 };
 
-export default MenuSidebar;
+export default Sidebar;

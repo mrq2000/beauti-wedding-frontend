@@ -6,7 +6,7 @@ import { Template } from '@/interface/template';
 import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { ElementContext } from '../ElementWarp';
+import { ElementContext } from '../../ElementWarp';
 
 const EndMessage = (
   <Grid gridColumn={{ xs: 'span 20' }} mt={4} mb={2} sx={{ textAlign: 'center' }}>

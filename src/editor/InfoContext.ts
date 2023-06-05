@@ -14,12 +14,21 @@ export const DEMO_INFO: Info = {
 
 export interface InfoContext {
   info: Info;
-  setInfo: (data: Info) => void;
   inviteeName: string;
+  animation: string;
 }
 
 export const InfoContext = createContext<InfoContext>({
   info: DEMO_INFO,
-  setInfo: {} as any,
   inviteeName: '',
+  animation: '',
+});
+export interface InfoAction {
+  setInfo: (data: Info) => void;
+  setAnimation: (animation: string) => void;
+}
+
+export const InfoActionContext = createContext<InfoAction>({
+  setInfo: {} as any,
+  setAnimation: {} as any,
 });

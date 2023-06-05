@@ -17,10 +17,11 @@ import { handleErrorMessage } from '@/helpers/error';
 
 interface HeaderProps {
   viewMode: VIEW_MODE;
+  setViewMode: (viewMode: VIEW_MODE) => void;
 }
 export const HEADER_HEIGHT = 56;
 
-const Header: FC<HeaderProps> = ({ viewMode }) => {
+const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
   const { id } = useParams();
   const [init, setInit] = useState(false);
   const [startApi, setStartApi] = useState(false);
@@ -36,6 +37,7 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
   }));
 
   const navigate = useNavigate();
+  const isEditMode = viewMode == 'EDIT';
 
   useEffect(() => {
     if (!enabled) return;
@@ -87,6 +89,7 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
         height: HEADER_HEIGHT,
         zIndex: 1000,
         paddingX: '24px',
+        paddingY: '8px',
         background: 'white',
         position: 'fixed',
         width: '100%',
@@ -96,12 +99,14 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
         flex: 1,
       }}
     >
-      <Box
-        sx={{ flex: 1, color: '#383b3f', cursor: 'pointer', alignItems: 'center', display: 'flex' }}
-        onClick={() => navigate('/')}
-      >
-        <ArrowBackIosNewRoundedIcon sx={{ color: '#383b3f', mr: 0.5, fontSize: 14 }} /> Dashboard
-        {startApi && (
+      <Box sx={{ flex: 1, alignItems: 'center', display: 'flex' }}>
+        <Box
+          onClick={() => navigate('/')}
+          sx={{ color: '#383b3f', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+        >
+          <ArrowBackIosNewRoundedIcon sx={{ color: '#383b3f', mr: 0.5, fontSize: 14 }} /> Dashboard
+        </Box>
+        {startApi && isEditMode && (
           <Typography variant="caption" sx={{ ml: 3 }}>
             {isLoading ? (
               <>
@@ -116,53 +121,65 @@ const Header: FC<HeaderProps> = ({ viewMode }) => {
           </Typography>
         )}
       </Box>
-      <Box sx={{ gap: '16px', display: 'flex' }}>
-        <Box
-          sx={{
-            padding: '4px 16px',
-            borderRadius: '20px',
-            background: '#edf2fa',
-            display: 'flex',
-            alignItems: 'center',
+      <Box sx={{ gap: '8px', display: 'flex' }}>
+        {isEditMode && (
+          <Box
+            sx={{
+              padding: '0px 12px',
+              borderRadius: '20px',
+              background: '#edf2fa',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <CustomTooltip title="Hoàn tác (Ctrl + Z)">
+              <IconButton
+                size="small"
+                component="label"
+                disabled={!canUndo}
+                onClick={() => actions.history.undo()}
+                color="primary"
+                sx={{
+                  '&.Mui-disabled': {
+                    pointerEvents: 'auto',
+                  },
+                }}
+              >
+                <UndoRoundedIcon />
+              </IconButton>
+            </CustomTooltip>
+
+            <CustomTooltip title="Làm lại (Ctrl + Y)">
+              <IconButton
+                size="small"
+                component="label"
+                disabled={!canRedo}
+                onClick={() => actions.history.redo()}
+                color="primary"
+                sx={{
+                  '&.Mui-disabled': {
+                    pointerEvents: 'auto',
+                  },
+                }}
+              >
+                <RedoRoundedIcon />
+              </IconButton>
+            </CustomTooltip>
+          </Box>
+        )}
+
+        <Button
+          variant="outlined"
+          sx={{ borderRadius: '100px', px: '20px' }}
+          onClick={() => {
+            setViewMode(isEditMode ? 'PREVIEW' : 'EDIT');
           }}
         >
-          <CustomTooltip title="Hoàn tác (Ctrl + Z)">
-            <IconButton
-              size="small"
-              component="label"
-              disabled={!canUndo}
-              onClick={() => actions.history.undo()}
-              color="primary"
-              sx={{
-                '&.Mui-disabled': {
-                  pointerEvents: 'auto',
-                },
-              }}
-            >
-              <UndoRoundedIcon />
-            </IconButton>
-          </CustomTooltip>
+          {isEditMode ? 'Preview' : 'Edit'}
+        </Button>
 
-          <CustomTooltip title="Làm lại (Ctrl + Y)">
-            <IconButton
-              size="small"
-              component="label"
-              disabled={!canRedo}
-              onClick={() => actions.history.redo()}
-              color="primary"
-              sx={{
-                '&.Mui-disabled': {
-                  pointerEvents: 'auto',
-                },
-              }}
-            >
-              <RedoRoundedIcon />
-            </IconButton>
-          </CustomTooltip>
-        </Box>
-
-        <Button variant="contained" sx={{ ml: 1 }}>
-          Tiếp tục
+        <Button variant="contained" sx={{ borderRadius: '100px', px: '20px' }}>
+          Public
         </Button>
       </Box>
     </Box>
