@@ -12,7 +12,7 @@ interface SpacingSettingProps {
 
 const SpacingSetting: FC<SpacingSettingProps> = ({ title, spacing, min = 0, max = 150, onChange }) => {
   return (
-    <Box display="flex" flexDirection="column" sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px' }}>
+    <Box display="flex" flexDirection="column" sx={{ px: 2, py: 1, border: '1px solid #E7E8EC', borderRadius: '8px' }}>
       <Typography sx={{ fontWeight: 600, mb: 1 }}>{title}</Typography>
       {['top', 'left', 'right', 'bottom'].map((key: any) => (
         <Box display="flex" flex={1} key={key}>

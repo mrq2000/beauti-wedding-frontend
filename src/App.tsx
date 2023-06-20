@@ -9,7 +9,7 @@ import ThemeProvider from '@/theme';
 // import useAppStore from '@/stores/useAppStore';
 import { GlobalStyle } from '@/utils/GlobalStyle';
 
-import Home from '@/pages/Home';
+import Home from '@/pages/home';
 import Demo from '@/pages/invitation-design/Demo';
 import InvitationDesignPage from '@/pages/invitation-design/InvitationDesignPage';
 import SignIn from '@/pages/auth/SignIn';
@@ -27,7 +27,7 @@ const Router = () => {
       <Route path="" element={<PrivateOutlet />}>
         <Route index element={<Home />} />
         <Route path="/demo" element={<Demo />} />
-        <Route path="/designs/:id" element={<InvitationDesignPage />} />
+        <Route path="/designs/:designId" element={<InvitationDesignPage />} />
         <Route path="/get-started" element={<CreateDesignPage />} />
       </Route>
 

@@ -7,7 +7,11 @@ const useMe = () => {
     async () => {
       const response = await api.get('/auth/me');
 
-      return response.data;
+      return response.data as {
+        email: string;
+        id: number;
+        username: string;
+      };
     },
     {
       staleTime: 600000,

@@ -53,7 +53,7 @@ const BorderStyleSetting: FC<BorderStyleSettingProps> = ({ border, onChange, tit
     <Box
       display="flex"
       flexDirection="column"
-      sx={{ px: 2, pt: 1, pb: 2, border: '1px solid #D5D8DF', borderRadius: '8px', overFlow: 'hidden' }}
+      sx={{ px: 2, pt: 1, pb: 2, border: '1px solid #E7E8EC', borderRadius: '8px', overFlow: 'hidden' }}
     >
       <Typography sx={{ fontWeight: 600, mb: 1 }}>{title}</Typography>
       <Box display="flex" flex={1} width="100%" alignItems="center">

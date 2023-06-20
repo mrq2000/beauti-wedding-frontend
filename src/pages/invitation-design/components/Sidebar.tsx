@@ -80,7 +80,12 @@ const Sidebar: FC<SidebarProps> = ({ tabs }) => {
 
   return (
     <Fragment>
-      <Drawer variant="permanent" anchor="left" open={!!open} PaperProps={{ sx: { paddingTop: `${HEADER_HEIGHT}px` } }}>
+      <Drawer
+        variant="permanent"
+        anchor="left"
+        open={!!open}
+        PaperProps={{ sx: { paddingTop: `${HEADER_HEIGHT}px`, borderRight: `1px solid ${theme.palette.grey[300]}` } }}
+      >
         <Box
           pt={2}
           display="flex"
@@ -96,15 +101,15 @@ const Sidebar: FC<SidebarProps> = ({ tabs }) => {
               <CustomTooltip title={tab.tooltipTitle} arrow placement="right" key={tab.id}>
                 <IconButton
                   sx={{
-                    color: (theme) => (isActive ? theme.palette.grey[100] : theme.palette.grey[500]),
-                    backgroundColor: (theme) => (isActive ? theme.palette.primary.main : 'inherit'),
+                    color: isActive ? theme.palette.grey[100] : theme.palette.grey[500],
+                    backgroundColor: isActive ? theme.palette.primary.main : 'inherit',
                     height: '36px',
                     width: '36px',
                     borderRadius: '8px',
                     fontSize: '19px',
                     mb: 2,
                     '&:hover': {
-                      backgroundColor: (theme) => (isActive ? theme.palette.primary.main : '#0000000a'),
+                      backgroundColor: isActive ? theme.palette.primary.main : '#0000000a',
                     },
                   }}
                   onClick={() => setOpen(tab.id)}

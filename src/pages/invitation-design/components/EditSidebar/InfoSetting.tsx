@@ -4,16 +4,19 @@ import { useForm } from 'react-hook-form';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useParams } from 'react-router-dom';
 
-import { InfoContext, InfoActionContext } from '@/editor/InfoContext';
+import { InfoContext } from '@/editor/InfoContext';
 import dayjs, { Dayjs } from 'dayjs';
 import { FORM_TEXT_FIELDS, infoSchema } from '@/pages/create-design/components/InfoStep';
 import { Info } from '@/editor/interface/info';
+import useUpdateDesignUserInfo from '@/data/design/useUpdateDesignUserInfo';
+import { LoadingButton } from '@mui/lab';
 
 const InfoSetting: FC = () => {
+  const { designId } = useParams();
   const { info } = useContext(InfoContext);
-  const { setInfo } = useContext(InfoActionContext);
-
+  const { mutate: updateDesignInfo, isLoading } = useUpdateDesignUserInfo(+(designId || 0));
   const {
     register,
     handleSubmit,
@@ -28,7 +31,7 @@ const InfoSetting: FC = () => {
   });
 
   const onSubmit = (data: Info) => {
-    setInfo(data);
+    updateDesignInfo(data);
   };
 
   return (
@@ -67,9 +70,15 @@ const InfoSetting: FC = () => {
           </DemoContainer>
         </Box>
       </Box>
-      <Button sx={{ mt: 2 }} variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
+      <LoadingButton
+        sx={{ mt: 2 }}
+        variant="contained"
+        type="submit"
+        onClick={handleSubmit(onSubmit)}
+        loading={isLoading}
+      >
         Update
-      </Button>
+      </LoadingButton>
     </>
   );
 };

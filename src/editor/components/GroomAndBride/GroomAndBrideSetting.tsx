@@ -88,7 +88,7 @@ const GroomAndBrideSetting = () => {
         />
       </Box>
 
-      <Box mt={2} sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px' }}>
+      <Box mt={2} sx={{ px: 2, py: 1, border: '1px solid #E7E8EC', borderRadius: '8px' }}>
         <Typography mb={1} sx={{ fontWeight: 600 }}>
           Middle Word
         </Typography>

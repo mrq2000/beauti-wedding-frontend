@@ -2,9 +2,9 @@ import { useQuery } from 'react-query';
 import { api } from '@/helpers/api';
 import { DesignDraft } from '../../interface/design';
 
-const useGetDesignDraft = ({ id }: { id: number }) => {
+const useGetDesignDraft = (id: number) => {
   return useQuery(
-    ['my design', id],
+    ['design', 'draft', id],
     async () => {
       const response = await api.get(`/designs/${id}/draft`);
 

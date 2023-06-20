@@ -13,7 +13,7 @@ const BorderRadiusSetting: FC<BorderRadiusSettingProps> = ({ borderRadius, min =
     <Box
       display="flex"
       flexDirection="column"
-      sx={{ px: 2, py: 1, border: '1px solid #D5D8DF', borderRadius: '8px', overFlow: 'hidden' }}
+      sx={{ px: 2, py: 1, border: '1px solid #E7E8EC', borderRadius: '8px', overFlow: 'hidden' }}
     >
       <Typography sx={{ fontWeight: 600, mb: 1 }}>Border Radius</Typography>
       <Box display="flex" flex={1}>

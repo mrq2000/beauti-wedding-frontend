@@ -1,17 +1,19 @@
+import { PropsWithChildren, FC } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
+import ErrorBoundaryWrap from '@/components/common/ErrorBoundary';
 import Header from './Header';
-import ErrorBoundaryWrap from '../common/ErrorBoundary';
+import Footer from './Footer';
 
-const MainLayout = ({ children }: any) => {
+const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          minHeight: { xs: 'calc(100vh - 56px)', md: 'calc(100vh - 72px)' },
+          height: '100vh',
         }}
       >
         <Box display="flex" flex={1}>
@@ -27,11 +29,13 @@ const MainLayout = ({ children }: any) => {
           >
             <Header />
 
-            <Box component="main" flexGrow={1} pb={12} pt={2.5}>
+            <Box component="main" flexGrow={1} pb={12} pt={2.5} display="flex" flex={1}>
               <Container maxWidth="xl">
                 <ErrorBoundaryWrap>{children}</ErrorBoundaryWrap>
               </Container>
             </Box>
+
+            <Footer />
           </Box>
         </Box>
       </Box>

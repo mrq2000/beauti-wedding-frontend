@@ -7,7 +7,7 @@ import { Page, Text, GroomAndBride, Time, Location } from '@/editor/components';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import SidebarElementSetting from './components/EditSidebar/SidebarElementSetting';
 import MenuSidebar from './components/EditSidebar/MenuSidebar';
-import { DEMO_INFO, InfoActionContext, InfoContext } from '@/editor/InfoContext';
+import { InfoActionContext, InfoContext } from '@/editor/InfoContext';
 import { InviteeName } from '@/editor/components/InviteeName';
 import { useParams } from 'react-router-dom';
 import EditDesign from './components/EditDesign';
@@ -16,29 +16,29 @@ import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
 import ElementWrap from './ElementWarp';
 import PreviewDesign from './components/PreviewDesign';
+import useGetDesignInfo from '@/data/design/useGetDesignInfo';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 
 const InvitationDesignPage: FC = () => {
-  const { id } = useParams();
-  const [viewMode, setViewMode] = useState<VIEW_MODE>('PREVIEW');
-  const [info, setInfo] = useState(DEMO_INFO);
+  const { designId } = useParams();
+  const [viewMode, setViewMode] = useState<VIEW_MODE>('EDIT');
   const [animation, setAnimation] = useState('');
-  const { data, isLoading } = useGetDesignDraft({ id: +(id || 0) });
+  const { data, isLoading } = useGetDesignDraft(+(designId || 0));
+  const { data: designInfo, isLoading: loadingDesignInfo } = useGetDesignInfo(+(designId || 0));
 
-  if (isLoading) return <CustomLoading />;
-  if (data)
+  if (isLoading || loadingDesignInfo) return <CustomLoading />;
+  if (data && designInfo)
     return (
       <InfoContext.Provider
         value={{
-          info,
+          info: designInfo,
           inviteeName: 'Tên Người Nhận',
           animation,
         }}
       >
         <InfoActionContext.Provider
           value={{
-            setInfo,
             setAnimation,
           }}
         >

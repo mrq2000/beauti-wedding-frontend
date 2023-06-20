@@ -2,7 +2,6 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Box, Fade } from '@mui/material';
 import { TransitionGroup } from 'react-transition-group';
 
-import { DEMO_INFO } from '@/editor/InfoContext';
 import { CreateDesignContext, DesignSetting } from './CreateDesignContext';
 import ChooseTemplate from './components/ChooseTemplateStep';
 import InfoStep from './components/InfoStep';
@@ -12,6 +11,7 @@ import CustomLoading from '@/components/common/CustomLoading';
 import { useNavigate } from 'react-router-dom';
 import { handleErrorMessage } from '@/helpers/error';
 import SomeThingError from '@/components/error-page/SomeThingError';
+import { Info } from '@/editor/interface/info';
 
 const STEPS = [
   {
@@ -24,6 +24,17 @@ const STEPS = [
     element: SettingStep,
   },
 ];
+
+const DEMO_INFO: Info = {
+  groomName: 'Tên Chú Rể',
+  groomFatherName: '',
+  groomMotherName: '',
+  brideName: 'Tên Cô Dâu',
+  brideFatherName: '',
+  brideMotherName: '',
+  location: 'Địa chỉ nơi tổ chức tiệc cưới',
+  time: '2023-05-04T17:00:00.000Z',
+};
 
 const CreateDesignPage: FC = () => {
   const [step, setStep] = useState(0);

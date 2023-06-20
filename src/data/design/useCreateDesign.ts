@@ -1,3 +1,4 @@
+import { Info } from '@/editor/interface/info';
 import { api } from '@/helpers/api';
 import { useMutation } from 'react-query';
 
@@ -5,17 +6,9 @@ interface CreateDesignResult {
   id: number;
 }
 
-interface CreateDesignParams {
+interface CreateDesignParams extends Info {
   domain: string;
   templateId?: number;
-  groomName: string;
-  groomMotherName?: string;
-  groomFatherName?: string;
-  brideName: string;
-  brideMotherName?: string;
-  brideFatherName?: string;
-  location?: string;
-  time: string;
 }
 const useCreateDesign = () => {
   return useMutation(async (data: CreateDesignParams) => {

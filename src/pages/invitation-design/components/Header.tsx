@@ -22,7 +22,7 @@ interface HeaderProps {
 export const HEADER_HEIGHT = 56;
 
 const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
-  const { id } = useParams();
+  const { designId } = useParams();
   const [init, setInit] = useState(false);
   const [startApi, setStartApi] = useState(false);
   const { mutate: updateDraftData, isLoading, isError } = useUpdateDraftData();
@@ -66,7 +66,7 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
         setInit(true);
         return;
       }
-      if (enabled && id) {
+      if (enabled && designId) {
         if (draftDataAbortController.current) {
           draftDataAbortController.current.abort();
         }
@@ -74,7 +74,7 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
         draftDataAbortController.current = new window.AbortController();
         updateDraftData({
           data: JSON.stringify(elements),
-          designId: +id,
+          designId: +designId,
         });
         if (!startApi) setStartApi(true);
       }
@@ -93,7 +93,7 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
         background: 'white',
         position: 'fixed',
         width: '100%',
-        borderBottom: '1px solid #D5D8DF',
+        borderBottom: '1px solid #E7E8EC',
         display: 'flex',
         alignItems: 'center',
         flex: 1,
@@ -104,9 +104,9 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
           onClick={() => navigate('/')}
           sx={{ color: '#383b3f', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         >
-          <ArrowBackIosNewRoundedIcon sx={{ color: '#383b3f', mr: 0.5, fontSize: 14 }} /> Dashboard
+          Dashboard
         </Box>
-        {startApi && isEditMode && (
+        {startApi && (
           <Typography variant="caption" sx={{ ml: 3 }}>
             {isLoading ? (
               <>

@@ -42,7 +42,7 @@ const CardImageUpload = ({ url }: ICardImage) => {
           top: 0,
           width: '100%',
           height: '100%',
-          background: '#F1F2F5',
+          background: '#E7E8EC',
           opacity: '0.7',
           visibility: `${url ? 'hidden' : 'visible'}`,
           cursor: 'pointer',
