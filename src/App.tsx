@@ -15,20 +15,26 @@ import InvitationDesignPage from '@/pages/invitation-design/InvitationDesignPage
 import SignIn from '@/pages/auth/SignIn';
 import SignUp from '@/pages/auth/SignUp';
 import AuthOutlet from '@/pages/auth/AuthOutlet';
+import SettingDesign from '@/pages/setting-design';
+import CreateDesignPage from '@/pages/create-design/CreateDesignPage';
 
 import './App.css';
 import PrivateOutlet from './PrivateOutlet';
-import CreateDesignPage from './pages/create-design/CreateDesignPage';
-import Page404 from './components/error-page/Page404';
+import Page404 from '@/components/error-page/Page404';
+import MainLayoutOutlet from '@/components/layout/MainLayoutOutlet';
 
 const Router = () => {
   return (
     <Routes>
       <Route path="" element={<PrivateOutlet />}>
-        <Route index element={<Home />} />
+        <Route path="" element={<MainLayoutOutlet />}>
+          <Route index element={<Home />} />
+          <Route path="/design-setting/:designId" element={<SettingDesign />} />
+        </Route>
+
         <Route path="/demo" element={<Demo />} />
-        <Route path="/designs/:designId" element={<InvitationDesignPage />} />
         <Route path="/get-started" element={<CreateDesignPage />} />
+        <Route path="/designs/:designId" element={<InvitationDesignPage />} />
       </Route>
 
       <Route path="" element={<AuthOutlet />}>

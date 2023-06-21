@@ -1,12 +1,13 @@
-import { PropsWithChildren, FC } from 'react';
+import { FC } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 import ErrorBoundaryWrap from '@/components/common/ErrorBoundary';
-import Header from './Header';
+import Header, { HEADER_HEIGHT } from './Header';
 import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+const MainLayoutOutlet: FC = () => {
   return (
     <>
       <Box
@@ -29,9 +30,19 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
           >
             <Header />
 
-            <Box component="main" flexGrow={1} pb={12} pt={2.5} display="flex" flex={1}>
+            <Box
+              component="main"
+              flexGrow={1}
+              pt={`${HEADER_HEIGHT}px`}
+              display="flex"
+              flex={1}
+              pb={2}
+              sx={{ overflowY: 'auto' }}
+            >
               <Container maxWidth="xl">
-                <ErrorBoundaryWrap>{children}</ErrorBoundaryWrap>
+                <ErrorBoundaryWrap>
+                  <Outlet />
+                </ErrorBoundaryWrap>
               </Container>
             </Box>
 
@@ -43,4 +54,4 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default MainLayout;
+export default MainLayoutOutlet;
