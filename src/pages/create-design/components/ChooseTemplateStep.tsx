@@ -3,16 +3,17 @@ import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
 
 import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
-import useGetTemplate from '@/data/template/useGetTemplate';
+import useGetTemplates from '@/data/template/useGetTemplates';
 import { CreateDesignContext } from '../CreateDesignContext';
 import { Template } from '@/interface/template';
+import { Link } from 'react-router-dom';
 
 interface ChooseTemplateProps {
   handleNextStep: () => void;
 }
 
 const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
-  const { data, isLoading } = useGetTemplate({ limit: 100 });
+  const { data, isLoading, error } = useGetTemplates({ limit: 100 });
   const [templates, setTemplates] = useState<Template[]>([]);
   const { setTemplateId } = useContext(CreateDesignContext);
   const theme = useTheme();
@@ -24,15 +25,15 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
   useEffect(() => {
     if (data) {
       const newTemplates: Template[] = [];
-      data.pages.forEach((post) => {
-        newTemplates.push(...post);
+      data.pages.forEach((page) => {
+        newTemplates.push(...page);
       });
       setTemplates(newTemplates);
     }
   }, [data]);
 
   if (isLoading) return <CustomLoading />;
-  if (!data) return <SomeThingError />;
+  if (!data) return <SomeThingError error={error} />;
 
   return (
     <>
@@ -82,17 +83,20 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
                 >
                   Chọn
                 </Button>
-                <Button
-                  variant="text"
-                  sx={{
-                    width: 120,
-                    borderRadius: '100px',
-                    backgroundColor: '#fff',
-                    '&:hover': { backgroundColor: '#f7f1f1' },
-                  }}
-                >
-                  Xem trước
-                </Button>
+
+                <Link to={`/templates/${template.id}`} target="_blank" style={{ textDecoration: 'none' }}>
+                  <Button
+                    variant="text"
+                    sx={{
+                      width: 120,
+                      borderRadius: '100px',
+                      backgroundColor: '#fff',
+                      '&:hover': { backgroundColor: '#f7f1f1' },
+                    }}
+                  >
+                    Xem trước
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Grid>

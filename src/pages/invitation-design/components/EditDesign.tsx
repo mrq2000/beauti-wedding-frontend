@@ -14,7 +14,7 @@ import { ElementContext } from '../ElementWarp';
 const MAX_PAGE = 3;
 
 const EditDesign: FC = () => {
-  const { elements, setElements } = useContext(ElementContext);
+  const { elements } = useContext(ElementContext);
   const [elementIndex, setElementIndex] = useState(0);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [hiddenPage, setHiddenPage] = useState(false);
@@ -26,6 +26,7 @@ const EditDesign: FC = () => {
   }));
 
   useEffect(() => {
+    if (serializeElement == '{}') return;
     elements[elementIndex] = serializeElement;
   }, [serializeElement]);
 

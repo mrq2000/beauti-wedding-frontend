@@ -1,12 +1,14 @@
-import useMe from '@/data/useMe';
 import { Box, Button, Typography } from '@mui/material';
-import LetterAvatar from './LetterAvatar';
+import { useNavigate } from 'react-router-dom';
 import CoffeeRoundedIcon from '@mui/icons-material/CoffeeRounded';
+import useMe from '@/data/useMe';
+import LetterAvatar from './LetterAvatar';
 
 export const HEADER_HEIGHT = 56;
 
 const Header = () => {
   const { data } = useMe();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -25,9 +27,9 @@ const Header = () => {
         justifyContent: 'space-between',
       }}
     >
-      <Box display="flex" alignItems="center">
+      <Box display="flex" alignItems="center" onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}>
         <LetterAvatar name={data?.username || ''} />
-        <Typography variant="caption" sx={{ ml: 1, fontSize: 14 }}>
+        <Typography variant="caption" sx={{ ml: 1, fontSize: 14, display: { xs: 'none', sm: 'block' } }}>
           {data?.username}
         </Typography>
       </Box>

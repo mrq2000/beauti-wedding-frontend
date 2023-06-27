@@ -1,8 +1,8 @@
 import { createContext } from 'react';
-import { DesignInfo } from '@/interface/design';
+import { Info } from './interface/info';
 
 export interface InfoContext {
-  info: DesignInfo;
+  info: Info;
   inviteeName: string;
   animation: string;
 }

@@ -11,29 +11,34 @@ import { GlobalStyle } from '@/utils/GlobalStyle';
 
 import Home from '@/pages/home';
 import Demo from '@/pages/invitation-design/Demo';
-import InvitationDesignPage from '@/pages/invitation-design/InvitationDesignPage';
+import InvitationDesignPage from '@/pages/invitation-design';
 import SignIn from '@/pages/auth/SignIn';
 import SignUp from '@/pages/auth/SignUp';
 import AuthOutlet from '@/pages/auth/AuthOutlet';
 import SettingDesign from '@/pages/setting-design';
-import CreateDesignPage from '@/pages/create-design/CreateDesignPage';
+import CreateDesignPage from '@/pages/create-design';
 
 import './App.css';
 import PrivateOutlet from './PrivateOutlet';
 import Page404 from '@/components/error-page/Page404';
 import MainLayoutOutlet from '@/components/layout/MainLayoutOutlet';
+import TemplatePreview from './pages/template-preview';
 
 const Router = () => {
   return (
     <Routes>
       <Route path="" element={<PrivateOutlet />}>
-        <Route path="" element={<MainLayoutOutlet />}>
+        <Route path="" element={<MainLayoutOutlet showFooter={true} />}>
+          <Route index element={<Home />} />
+        </Route>
+
+        <Route path="" element={<MainLayoutOutlet showFooter={false} />}>
           <Route index element={<Home />} />
           <Route path="/design-setting/:designId" element={<SettingDesign />} />
+          <Route path="/get-started" element={<CreateDesignPage />} />
         </Route>
 
         <Route path="/demo" element={<Demo />} />
-        <Route path="/get-started" element={<CreateDesignPage />} />
         <Route path="/designs/:designId" element={<InvitationDesignPage />} />
       </Route>
 
@@ -41,6 +46,8 @@ const Router = () => {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Route>
+
+      <Route path="/templates/:templateId" element={<TemplatePreview />} />
 
       <Route path="*" element={<Page404 />} />
     </Routes>

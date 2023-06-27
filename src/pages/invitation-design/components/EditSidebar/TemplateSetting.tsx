@@ -1,11 +1,11 @@
 import ConfirmModal from '@/components/common/ConfirmModal';
 import CustomLoading from '@/components/common/CustomLoading';
-import SomeThingError from '@/components/error-page/SomeThingError';
-import useGetTemplate from '@/data/template/useGetTemplate';
+import useGetTemplates from '@/data/template/useGetTemplates';
 import { Template } from '@/interface/template';
 import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Link } from 'react-router-dom';
 import { ElementContext } from '../../ElementWarp';
 
 const EndMessage = (
@@ -20,7 +20,7 @@ const EndMessage = (
 
 const TemplateSetting: FC = () => {
   const [templates, setTemplates] = useState<Template[]>([]);
-  const { data, fetchNextPage, hasNextPage, isLoading } = useGetTemplate({ limit: 10 });
+  const { data, fetchNextPage, hasNextPage, isLoading } = useGetTemplates({ limit: 10 });
   const theme = useTheme();
   const { setElements } = useContext(ElementContext);
   const [openConfirmId, setOpenConfirmId] = useState<null | number>(null);
@@ -120,24 +120,27 @@ const TemplateSetting: FC = () => {
                 <Button
                   variant="contained"
                   size="small"
-                  sx={{ width: 100, mb: 2, borderRadius: '100px', fontSize: 12, }}
+                  sx={{ width: 100, mb: 2, borderRadius: '100px', fontSize: 12 }}
                   onClick={() => setOpenConfirmId(template.id)}
                 >
                   Chọn
                 </Button>
-                <Button
-                  variant="text"
-                  size="small"
-                  sx={{
-                    width: 100,
-                    borderRadius: '100px',
-                    fontSize: 12,
-                    backgroundColor: '#fff',
-                    '&:hover': { backgroundColor: '#f7f1f1' },
-                  }}
-                >
-                  Xem trước
-                </Button>
+
+                <Link to={`/templates/${template.id}`} target="_blank" style={{ textDecoration: 'none' }}>
+                  <Button
+                    variant="text"
+                    size="small"
+                    sx={{
+                      width: 100,
+                      borderRadius: '100px',
+                      fontSize: 12,
+                      backgroundColor: '#fff',
+                      '&:hover': { backgroundColor: '#f7f1f1' },
+                    }}
+                  >
+                    Xem trước
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Grid>

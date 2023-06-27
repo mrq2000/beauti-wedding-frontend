@@ -17,6 +17,7 @@ import SomeThingError from '@/components/error-page/SomeThingError';
 import ElementWrap from './ElementWarp';
 import PreviewDesign from './components/PreviewDesign';
 import useGetDesignInfo from '@/data/design/useGetDesignInfo';
+import useMe from '@/data/useMe';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 
@@ -24,8 +25,9 @@ const InvitationDesignPage: FC = () => {
   const { designId } = useParams();
   const [viewMode, setViewMode] = useState<VIEW_MODE>('EDIT');
   const [animation, setAnimation] = useState('');
-  const { data, isLoading } = useGetDesignDraft(+(designId || 0));
-  const { data: designInfo, isLoading: loadingDesignInfo } = useGetDesignInfo(+(designId || 0));
+  const { data: me } = useMe();
+  const { data, isLoading, error: designDraftError } = useGetDesignDraft(+(designId || 0));
+  const { data: designInfo, isLoading: loadingDesignInfo, error: designInfoError } = useGetDesignInfo(+(designId || 0));
 
   if (isLoading || loadingDesignInfo) return <CustomLoading />;
   if (data && designInfo)
@@ -45,7 +47,12 @@ const InvitationDesignPage: FC = () => {
           <Editor resolver={{ Text, Page, GroomAndBride, Time, InviteeName, Location }} onRender={RenderNode}>
             <ElementWrap data={JSON.parse(data.data)}>
               <Box flex={1} flexDirection="column" height="100%">
-                <Header viewMode={viewMode} setViewMode={setViewMode} />
+                <Header
+                  viewMode={viewMode}
+                  setViewMode={setViewMode}
+                  apiData={data.data}
+                  username={me?.username || ''}
+                />
                 <Box
                   display="flex"
                   flex={1}
@@ -70,7 +77,7 @@ const InvitationDesignPage: FC = () => {
       </InfoContext.Provider>
     );
 
-  return <SomeThingError />;
+  return <SomeThingError error={designDraftError || designInfoError} />;
 };
 
 export default InvitationDesignPage;

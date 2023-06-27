@@ -4,7 +4,7 @@ import { DesignInfo } from '../../interface/design';
 
 interface DesignResponse extends DesignInfo {
   designPublic: boolean;
-} 
+}
 const useGetDesignList = () => {
   return useQuery(
     ['design list'],
@@ -14,8 +14,8 @@ const useGetDesignList = () => {
       return response.data as DesignResponse[];
     },
     {
-      staleTime: 600000,
-      cacheTime: 600000,
+      staleTime: 0,
+      cacheTime: 0,
     },
   );
 };

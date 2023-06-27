@@ -10,6 +10,7 @@ export interface DesignDraft {
 export interface DesignInfo extends Info {
   id: number;
   animation: string;
+  domain: string;
   previewImgUrl?: string;
   receivers?: string;
   created_at: string;

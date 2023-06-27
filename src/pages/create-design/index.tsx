@@ -8,10 +8,10 @@ import InfoStep from './components/InfoStep';
 import SettingStep from './components/SettingStep';
 import useCreateDesign from '@/data/design/useCreateDesign';
 import CustomLoading from '@/components/common/CustomLoading';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { handleErrorMessage } from '@/helpers/error';
 import SomeThingError from '@/components/error-page/SomeThingError';
-import { Info } from '@/editor/interface/info';
+import { getDemoInfo } from '@/utils/editor';
 
 const STEPS = [
   {
@@ -25,23 +25,15 @@ const STEPS = [
   },
 ];
 
-const DEMO_INFO: Info = {
-  groomName: 'Tên Chú Rể',
-  groomFatherName: '',
-  groomMotherName: '',
-  brideName: 'Tên Cô Dâu',
-  brideFatherName: '',
-  brideMotherName: '',
-  location: 'Địa chỉ nơi tổ chức tiệc cưới',
-  time: '2023-05-04T17:00:00.000Z',
-};
-
 const CreateDesignPage: FC = () => {
-  const [step, setStep] = useState(0);
-  const [info, setInfo] = useState(DEMO_INFO);
-  const [templateId, setTemplateId] = useState<number | undefined>();
+  const [searchParams] = useSearchParams();
+  const [step, setStep] = useState(searchParams.get('templateId') ? 1 : 0);
+  const [templateId, setTemplateId] = useState<number | undefined>(
+    searchParams.get('templateId') ? +(searchParams.get('templateId') as string) : undefined,
+  );
+  const [info, setInfo] = useState(getDemoInfo({ hasParentInfo: false }));
   const [setting, setSetting] = useState<DesignSetting>({ domain: '' });
-  const { mutate: createDesign, isLoading, isError } = useCreateDesign();
+  const { mutate: createDesign, isLoading, error } = useCreateDesign();
 
   const navigate = useNavigate();
   const handleNextStep = () => {
@@ -78,10 +70,10 @@ const CreateDesignPage: FC = () => {
     );
   }
 
-  if (isError) {
+  if (error) {
     return (
       <Box display="flex" alignItems="center" height="100%">
-        <SomeThingError />
+        <SomeThingError error={error} />
       </Box>
     );
   }

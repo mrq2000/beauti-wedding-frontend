@@ -12,7 +12,7 @@ export const DEFAULT_IMAGE =
   'https://kenh14cdn.com/thumb_w/660/203336854389633024/2022/9/24/tumblr0a490ad7062f51c33ec0c054255256a2a1922eb2540-1664001587930930202526.jpg';
 
 const DesignTab: FC = () => {
-  const { data, isLoading } = useGetDesignList();
+  const { data, isLoading, error } = useGetDesignList();
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -97,6 +97,7 @@ const DesignTab: FC = () => {
               cursor: 'pointer',
               transition: 'all 0.2s ease-in',
               color: theme.palette.grey[400],
+              minHeight: '300px',
               border: `2px dashed ${theme.palette.grey[400]}`,
               ':hover': {
                 color: theme.palette.primary.light,
@@ -112,7 +113,7 @@ const DesignTab: FC = () => {
         </Grid>
       </Grid>
     );
-  return <SomeThingError />;
+  return <SomeThingError error={error} />;
 };
 
 export default DesignTab;

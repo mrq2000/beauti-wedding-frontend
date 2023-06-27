@@ -1,10 +1,9 @@
-import React, { FC, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-
-import BrushRoundedIcon from '@mui/icons-material/BrushRounded';
-import DesignTab from './DesignTab';
-import { Box } from '@mui/system';
+import React, { FC } from 'react';
 import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import BrushRoundedIcon from '@mui/icons-material/BrushRounded';
+
+import DesignTab from './DesignTab';
 
 const DEFAULT_TAB = 'settings';
 
@@ -18,20 +17,16 @@ export const TABS = {
   },
 };
 const Home: FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [tab, setTab] = useState(searchParams.get('tab') || DEFAULT_TAB);
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const currentTab = TABS[tab] || TABS[DEFAULT_TAB];
   return (
     <>
       <Box mt={4} mb={{ xs: 2, sm: 5, lg: 6 }}>
-        <Typography variant="h3">{currentTab.title}</Typography>
-        <Typography variant="caption">{currentTab.subtitle}</Typography>
+        <Typography variant="h3">Thiệp cưới</Typography>
+        <Typography variant="caption">
+          Danh sách thiệp cưới bạn đã tạo. Bạn có thể tạo bao nhiêu thiệp tùy thích.
+        </Typography>
       </Box>
 
-      <currentTab.element />
+      <DesignTab />
     </>
   );
 };

@@ -1,13 +1,17 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import { Outlet } from 'react-router-dom';
 
 import ErrorBoundaryWrap from '@/components/common/ErrorBoundary';
 import Header, { HEADER_HEIGHT } from './Header';
 import Footer from './Footer';
-import { Outlet } from 'react-router-dom';
 
-const MainLayoutOutlet: FC = () => {
+interface MainLayoutOutlet {
+  showFooter?: boolean;
+}
+
+const MainLayoutOutlet: FC<MainLayoutOutlet> = ({ showFooter }) => {
   return (
     <>
       <Box
@@ -17,7 +21,7 @@ const MainLayoutOutlet: FC = () => {
           height: '100vh',
         }}
       >
-        <Box display="flex" flex={1}>
+        <Box display="flex" flex={1} height="100%">
           <Box
             display="flex"
             flex={1}
@@ -26,6 +30,7 @@ const MainLayoutOutlet: FC = () => {
               width: '100%',
               backgroundColor: (theme) => theme.palette.background.default,
               overflow: 'hidden',
+              height: '100%',
             }}
           >
             <Header />
@@ -33,20 +38,19 @@ const MainLayoutOutlet: FC = () => {
             <Box
               component="main"
               flexGrow={1}
-              pt={`${HEADER_HEIGHT}px`}
+              mt={`${HEADER_HEIGHT}px`}
               display="flex"
               flex={1}
-              pb={2}
               sx={{ overflowY: 'auto' }}
             >
-              <Container maxWidth="xl">
+              <Container maxWidth="xl" sx={{ height: '100%' }}>
                 <ErrorBoundaryWrap>
                   <Outlet />
                 </ErrorBoundaryWrap>
               </Container>
             </Box>
 
-            <Footer />
+            {showFooter && <Footer />}
           </Box>
         </Box>
       </Box>

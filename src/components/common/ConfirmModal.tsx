@@ -3,7 +3,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 interface ConfirmModalProps extends DialogProps {
-  content: string;
+  content: any;
   onClose: () => void;
   title: string;
 }

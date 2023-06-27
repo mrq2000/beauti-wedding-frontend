@@ -3,27 +3,26 @@ import { Box, Button, IconButton, Typography } from '@mui/material';
 import React, { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
 
-import { VIEW_MODE } from '../InvitationDesignPage';
+import { VIEW_MODE } from '..';
 import CustomTooltip from '@/components/common/CustomTooltip';
 import { useNavigate, useParams } from 'react-router-dom';
 import useUpdateDraftData from '@/data/design/useUpdateDraftData';
 import { ElementContext } from '../ElementWarp';
 import { useDebounce } from 'react-use';
-import { handleErrorMessage } from '@/helpers/error';
-
+import LetterAvatar from '@/components/layout/LetterAvatar';
 interface HeaderProps {
   viewMode: VIEW_MODE;
   setViewMode: (viewMode: VIEW_MODE) => void;
+  apiData: string;
+  username: string;
 }
 export const HEADER_HEIGHT = 56;
 
-const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
+const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username }) => {
   const { designId } = useParams();
-  const [init, setInit] = useState(false);
   const [startApi, setStartApi] = useState(false);
   const { mutate: updateDraftData, isLoading, isError } = useUpdateDraftData();
   const { elements } = useContext(ElementContext);
@@ -62,25 +61,25 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
 
   useDebounce(
     async () => {
-      if (!init) {
-        setInit(true);
+      if (apiData == elementString) {
         return;
       }
-      if (enabled && designId) {
+
+      if (designId) {
         if (draftDataAbortController.current) {
           draftDataAbortController.current.abort();
         }
 
         draftDataAbortController.current = new window.AbortController();
         updateDraftData({
-          data: JSON.stringify(elements),
+          data: elementString,
           designId: +designId,
         });
         if (!startApi) setStartApi(true);
       }
     },
     3000,
-    [elementString, enabled],
+    [elementString, apiData],
   );
 
   return (
@@ -104,7 +103,10 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
           onClick={() => navigate('/')}
           sx={{ color: '#383b3f', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         >
-          Dashboard
+          <LetterAvatar name={username || ''} />
+          <Typography variant="caption" sx={{ ml: 1, fontSize: 14, display: { xs: 'none', sm: 'block' } }}>
+            {username}
+          </Typography>
         </Box>
         {startApi && (
           <Typography variant="caption" sx={{ ml: 3 }}>
