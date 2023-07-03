@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Editor, Frame } from '@craftjs/core';
-import { Page, GroomAndBride, Time, InviteeName, Location, Text } from '../../components';
+import { Page, GroomAndBride, Time, InviteeName, Location, Text, ParentInfo } from '../../components';
 
 interface RenderPageProps {
   data: string;
@@ -8,7 +8,7 @@ interface RenderPageProps {
 
 const RenderPage: FC<RenderPageProps> = ({ data }) => {
   return (
-    <Editor resolver={{ Text, Page, GroomAndBride, Time, InviteeName, Location }} enabled={false}>
+    <Editor resolver={{ Text, Page, GroomAndBride, Time, InviteeName, Location, ParentInfo }} enabled={false}>
       <Frame data={data} />
     </Editor>
   );

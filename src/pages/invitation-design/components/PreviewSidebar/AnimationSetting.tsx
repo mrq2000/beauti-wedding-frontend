@@ -1,13 +1,37 @@
 import React, { FC, useContext } from 'react';
 import { Box, Grid } from '@mui/material';
 import { ANIMATIONS } from '@/editor/live/animations';
-import { InfoContext, InfoActionContext } from '@/editor/InfoContext';
+import { InfoActionContext, InfoContext } from '@/editor/InfoContext';
 import { DEFAULT_ANIMATION } from '@/editor/live/RenderDesign';
+import useUpdateDesignAnimation from '@/data/design/useUpdateDesignAnimation';
+import { useParams } from 'react-router-dom';
+import { handleErrorMessage } from '@/helpers/error';
+import { LoadingButton } from '@mui/lab';
+import useGetDesignDraft from '@/data/design/useGetDesignDraft';
 
 const AnimationSetting: FC = () => {
   const { animation } = useContext(InfoContext);
+  const { designId } = useParams();
   const { setAnimation } = useContext(InfoActionContext);
+  const { data: dataDraft } = useGetDesignDraft(+(designId || 0));
+
   const currentAnimation = animation && ANIMATIONS[animation] ? animation : DEFAULT_ANIMATION;
+  const { mutate: updateDesignAnimation, isLoading: loadingUpdateAnimation } = useUpdateDesignAnimation(
+    +(designId || ''),
+  );
+
+  const handleUpdateAnimation = () => {
+    updateDesignAnimation(
+      {
+        animation: animation || '',
+      },
+      {
+        onError: (e) => {
+          handleErrorMessage(e);
+        },
+      },
+    );
+  };
 
   return (
     <Box
@@ -58,6 +82,19 @@ const AnimationSetting: FC = () => {
             </Box>
           </Grid>
         ))}
+      </Box>
+
+      <Box display="flex" flex={1} />
+      <Box display="flex" flexShrink={0}>
+        <LoadingButton
+          disabled={!dataDraft || dataDraft.animation === animation}
+          variant="contained"
+          fullWidth
+          loading={loadingUpdateAnimation}
+          onClick={handleUpdateAnimation}
+        >
+          Update
+        </LoadingButton>
       </Box>
     </Box>
   );

@@ -23,6 +23,7 @@ const TemplatePreview: FC = () => {
       <Box flex={1} flexDirection="column" height="100%">
         <InfoContext.Provider
           value={{
+            backgroundImg: data.backgroundImg || '',
             animation: data.animation || '',
             inviteeName,
             info: getDemoInfo({ hasParentInfo: true }),

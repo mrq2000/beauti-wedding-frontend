@@ -26,7 +26,9 @@ const Home: FC = () => {
         </Typography>
       </Box>
 
-      <DesignTab />
+      <Box pb={2}>
+        <DesignTab />
+      </Box>
     </>
   );
 };

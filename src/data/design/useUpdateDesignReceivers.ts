@@ -18,7 +18,7 @@ const useUpdateDesignReceivers = (designId: number) => {
     onSuccess: (_, data) => {
       const oldDesignInfo = client.getQueryData(['design', 'info', designId]) as DesignInfo;
       if (oldDesignInfo) {
-        client.setQueryData(['design', 'info', designId], {
+        client.setQueryData<DesignInfo>(['design', 'info', designId], {
           ...oldDesignInfo,
           ...data,
         });

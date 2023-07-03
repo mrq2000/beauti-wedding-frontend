@@ -1,8 +1,4 @@
-import { Text } from '@/editor/components';
-import { GroomAndBride } from '@/editor/components/GroomAndBride/GroomAndBride';
-import { InviteeName } from '@/editor/components/InviteeName';
-import { Time } from '@/editor/components/Time';
-import { Location } from '@/editor/components/Location';
+import { ParentInfo, Text, GroomAndBride, InviteeName, Time, Location } from '@/editor/components';
 import { useEditor } from '@craftjs/core';
 import { Box, Typography } from '@mui/material';
 import React, { FC, Fragment } from 'react';
@@ -15,6 +11,10 @@ const ELEMENTS = [
   {
     title: 'Groom and Bride',
     element: <GroomAndBride />,
+  },
+  {
+    title: 'Parents',
+    element: <ParentInfo />,
   },
   {
     title: 'Time',

@@ -12,7 +12,7 @@ interface RenderDesignProps {
 
 const RenderDesign: FC<RenderDesignProps> = ({ pages, isMobileMode }) => {
   const [activePage, setActivePage] = useState(0);
-  const { animation } = useContext(InfoContext);
+  const { animation, backgroundImg } = useContext(InfoContext);
   const containerRef = useRef<HTMLDivElement>();
 
   const Animation = useMemo(() => {
@@ -28,8 +28,13 @@ const RenderDesign: FC<RenderDesignProps> = ({ pages, isMobileMode }) => {
       width="100%"
       alignItems="center"
       justifyContent="center"
-      sx={{ background: '#fff' }}
       ref={containerRef}
+      sx={{
+        backgroundImage: `url(${backgroundImg})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      }}
     >
       <Box sx={{ transform: { xs: 'scale(0.7)', md: isMobileMode ? 'scale(0.7)' : 'scale(1)' } }}>
         <Animation.element pages={pages} activePage={activePage} setActivePage={setActivePage} />

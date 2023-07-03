@@ -21,7 +21,7 @@ const useUpdateDraftData = () => {
       onSuccess: (_, { data, designId }) => {
         const oldDesignDraft = client.getQueryData(['design', 'draft', designId]) as DesignDraft;
         if (oldDesignDraft) {
-          client.setQueryData(['design', 'draft', designId], {
+          client.setQueryData<DesignDraft>(['design', 'draft', designId], {
             ...oldDesignDraft,
             data,
           });

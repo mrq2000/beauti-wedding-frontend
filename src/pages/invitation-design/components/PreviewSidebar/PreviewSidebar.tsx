@@ -4,6 +4,7 @@ import WallpaperRoundedIcon from '@mui/icons-material/WallpaperRounded';
 
 import AnimationSetting from './AnimationSetting';
 import Sidebar from '../Sidebar';
+import BackgroundSetting from './BackgroundSetting';
 
 const SIDEBAR_TABS = [
   {
@@ -16,7 +17,7 @@ const SIDEBAR_TABS = [
     id: 'background',
     icon: <WallpaperRoundedIcon />,
     tooltipTitle: 'Ảnh nền',
-    element: <AnimationSetting />,
+    element: <BackgroundSetting />,
   },
 ];
 

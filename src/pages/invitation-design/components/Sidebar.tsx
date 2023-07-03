@@ -136,6 +136,7 @@ const Sidebar: FC<SidebarProps> = ({ tabs }) => {
               transform: `translateX(${isActive ? 0 : '-100%'})`,
               backgroundColor: '#fff',
               zIndex: isActive ? ICON_SIDE_BAR_INDEX - 1 : ICON_SIDE_BAR_INDEX - 2,
+              borderRight: '1px solid #E7E8EC',
               ...(isActive ? openTransition(theme, 'transform') : closeTransition(theme, 'transform')),
             }}
             height={`calc(100% - ${HEADER_HEIGHT}px)`}

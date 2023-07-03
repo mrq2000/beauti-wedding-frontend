@@ -16,7 +16,7 @@ export const HEADER_HEIGHT = 56;
 
 const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
   const navigate = useNavigate();
-  const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: 'desktop' | 'mobile' | null) => {
+  const handleChangeViewMode = (event: React.MouseEvent<HTMLElement>, newAlignment: 'desktop' | 'mobile' | null) => {
     setViewMode(newAlignment || 'desktop');
   };
   const { templateId } = useParams();
@@ -40,7 +40,7 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
       <ToggleButtonGroup
         value={viewMode}
         exclusive
-        onChange={handleAlignment}
+        onChange={handleChangeViewMode}
         size="small"
         sx={{ svg: { fontSize: '1rem' } }}
       >

@@ -2,15 +2,15 @@ import { api } from '@/helpers/api';
 import { DesignDraft } from '@/interface/design';
 import { useMutation, useQueryClient } from 'react-query';
 
-interface UpdateDesignAnimation {
-  animation: string;
+interface UpdateDesignBackgroundImg {
+  backgroundImg: string;
 }
-const useUpdateDesignAnimation = (designId: number) => {
+const useUpdateDesignBackgroundImg = (designId: number) => {
   const client = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data: UpdateDesignAnimation) => {
-      const response = await api.post(`/designs/${designId}/draft/animation`, {
+    mutationFn: async (data: UpdateDesignBackgroundImg) => {
+      const response = await api.post(`/designs/${designId}/draft/background-img`, {
         ...data,
       });
       return response.data;
@@ -27,4 +27,4 @@ const useUpdateDesignAnimation = (designId: number) => {
   });
 };
 
-export default useUpdateDesignAnimation;
+export default useUpdateDesignBackgroundImg;

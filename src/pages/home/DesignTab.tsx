@@ -20,6 +20,34 @@ const DesignTab: FC = () => {
   if (data)
     return (
       <Grid container spacing={2}>
+        <Grid item xs={12} sm={4} lg={2.4}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              height: '100%',
+              width: '100%',
+              background: '#fff',
+              borderRadius: '8px',
+              boxShadow: '-2px 3px 5px #00000015',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease-in',
+              color: theme.palette.grey[400],
+              minHeight: '300px',
+              border: `2px dashed ${theme.palette.grey[400]}`,
+              ':hover': {
+                color: theme.palette.primary.light,
+                border: `2px dashed ${theme.palette.primary.light}`,
+              },
+            }}
+            onClick={() => {
+              navigate(`/get-started`);
+            }}
+          >
+            <AddRoundedIcon fontSize="large" />
+          </Box>
+        </Grid>
         {data.map((design) => (
           <Grid key={design.id} item xs={12} sm={4} lg={2.4}>
             <Box
@@ -83,34 +111,6 @@ const DesignTab: FC = () => {
             </Box>
           </Grid>
         ))}
-        <Grid item xs={12} sm={4} lg={2.4}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-              height: '100%',
-              width: '100%',
-              background: '#fff',
-              borderRadius: '8px',
-              boxShadow: '-2px 3px 5px #00000015',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease-in',
-              color: theme.palette.grey[400],
-              minHeight: '300px',
-              border: `2px dashed ${theme.palette.grey[400]}`,
-              ':hover': {
-                color: theme.palette.primary.light,
-                border: `2px dashed ${theme.palette.primary.light}`,
-              },
-            }}
-            onClick={() => {
-              navigate(`/get-started`);
-            }}
-          >
-            <AddRoundedIcon fontSize="large" />
-          </Box>
-        </Grid>
       </Grid>
     );
   return <SomeThingError error={error} />;

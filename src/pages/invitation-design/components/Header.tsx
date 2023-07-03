@@ -1,12 +1,14 @@
 import { useEditor } from '@craftjs/core';
-import { Box, Button, IconButton, Typography } from '@mui/material';
+import { Box, Button, IconButton, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import React, { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import UndoRoundedIcon from '@mui/icons-material/UndoRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chip from '@mui/material/Chip';
+import StayCurrentPortraitRoundedIcon from '@mui/icons-material/StayCurrentPortraitRounded';
+import LaptopRoundedIcon from '@mui/icons-material/LaptopRounded';
 
-import { VIEW_MODE } from '..';
+import { VIEW_DEVICE, VIEW_MODE } from '..';
 import CustomTooltip from '@/components/common/CustomTooltip';
 import { useNavigate, useParams } from 'react-router-dom';
 import useUpdateDraftData from '@/data/design/useUpdateDraftData';
@@ -18,10 +20,12 @@ interface HeaderProps {
   setViewMode: (viewMode: VIEW_MODE) => void;
   apiData: string;
   username: string;
+  viewDevice: VIEW_DEVICE;
+  setViewDevice: (viewMode: VIEW_DEVICE) => void;
 }
 export const HEADER_HEIGHT = 56;
 
-const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username }) => {
+const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username, setViewDevice, viewDevice }) => {
   const { designId } = useParams();
   const [startApi, setStartApi] = useState(false);
   const { mutate: updateDraftData, isLoading, isError } = useUpdateDraftData();
@@ -37,6 +41,10 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username }) =
 
   const navigate = useNavigate();
   const isEditMode = viewMode == 'EDIT';
+
+  const handleChangeViewDevice = (event: React.MouseEvent<HTMLElement>, newDevice: VIEW_DEVICE) => {
+    setViewDevice(newDevice || 'desktop');
+  };
 
   useEffect(() => {
     if (!enabled) return;
@@ -170,6 +178,22 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username }) =
           </Box>
         )}
 
+        {!isEditMode && (
+          <ToggleButtonGroup
+            value={viewDevice}
+            exclusive
+            onChange={handleChangeViewDevice}
+            size="small"
+            sx={{ svg: { fontSize: '1rem' } }}
+          >
+            <ToggleButton value="desktop">
+              <LaptopRoundedIcon />
+            </ToggleButton>
+            <ToggleButton value="mobile">
+              <StayCurrentPortraitRoundedIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
+        )}
         <Button
           variant="outlined"
           sx={{ borderRadius: '100px', px: '20px' }}

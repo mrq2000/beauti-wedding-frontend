@@ -3,4 +3,5 @@ export interface Template {
   preview_img_url: string;
   data: string;
   animation?: string;
+  backgroundImg?: string;
 }
