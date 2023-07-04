@@ -7,6 +7,7 @@ import RenderDesign from '@/editor/live/RenderDesign';
 import { Box } from '@mui/material';
 import Page404 from '@/components/error-page/Page404';
 import { getErrorMessage } from '@/helpers/error';
+import HomeLabel from './HomeLabel';
 
 const LivePage: FC = () => {
   const { designDomain, receiverId } = useParams();
@@ -25,8 +26,11 @@ const LivePage: FC = () => {
           },
         }}
       >
-        <Box display="flex" height="100%">
+        <Box display="flex" height="100%" position="relative">
           <RenderDesign pages={JSON.parse(data.design.designPublic.data)} />
+          <Box position="absolute" top="20px" right="20px">
+            <HomeLabel />
+          </Box>
         </Box>
       </InfoContext.Provider>
     );

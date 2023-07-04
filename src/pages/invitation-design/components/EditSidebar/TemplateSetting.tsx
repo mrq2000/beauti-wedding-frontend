@@ -135,7 +135,7 @@ const TemplateSetting: FC = () => {
                       borderRadius: '100px',
                       fontSize: 12,
                       backgroundColor: '#fff',
-                      '&:hover': { backgroundColor: '#f7f1f1' },
+                      '&:hover': { backgroundColor: '#E7E8EC' },
                     }}
                   >
                     Xem trước

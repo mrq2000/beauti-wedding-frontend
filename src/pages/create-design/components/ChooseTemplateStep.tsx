@@ -66,7 +66,7 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
                 sx={{
                   width: '100%',
                   height: '100%',
-                  backgroundColor: '#80808073',
+                  backgroundColor: '#66626273',
                   borderRadius: '8px',
                   opacity: 0,
                   '&:hover': { opacity: 1 },
@@ -91,7 +91,7 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
                       width: 120,
                       borderRadius: '100px',
                       backgroundColor: '#fff',
-                      '&:hover': { backgroundColor: '#f7f1f1' },
+                      '&:hover': { backgroundColor: '#E7E8EC' },
                     }}
                   >
                     Xem trước

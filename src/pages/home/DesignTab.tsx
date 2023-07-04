@@ -25,6 +25,7 @@ const DesignTab: FC = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
+            flexDirection="column"
             sx={{
               height: '100%',
               width: '100%',
@@ -46,6 +47,9 @@ const DesignTab: FC = () => {
             }}
           >
             <AddRoundedIcon fontSize="large" />
+            <Box fontSize={16} fontWeight={600} mt={1}>
+              Tạo Mới
+            </Box>
           </Box>
         </Grid>
         {data.map((design) => (

@@ -21,7 +21,7 @@ const Home: FC = () => {
     <>
       <Box mt={4} mb={{ xs: 2, sm: 5, lg: 6 }}>
         <Typography variant="h3">Thiệp cưới</Typography>
-        <Typography variant="caption">
+        <Typography variant="caption" fontSize={14}>
           Danh sách thiệp cưới bạn đã tạo. Bạn có thể tạo bao nhiêu thiệp tùy thích.
         </Typography>
       </Box>

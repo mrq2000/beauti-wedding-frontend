@@ -34,9 +34,10 @@ const RenderDesign: FC<RenderDesignProps> = ({ pages, isMobileMode }) => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+        overflow: 'hidden',
       }}
     >
-      <Box sx={{ transform: { xs: 'scale(0.7)', md: isMobileMode ? 'scale(0.7)' : 'scale(1)' } }}>
+      <Box sx={{ transform: { xs: 'scale(0.6)', md: isMobileMode ? 'scale(0.6)' : 'scale(1)' } }}>
         <Animation.element pages={pages} activePage={activePage} setActivePage={setActivePage} />
       </Box>
       <Box sx={{ zIndex: 2, position: 'fixed', bottom: 50, display: 'flex' }}>
