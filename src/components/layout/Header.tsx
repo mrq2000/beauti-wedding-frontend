@@ -44,6 +44,7 @@ const Header = () => {
             backgroundColor: '#704F4F',
           },
         }}
+        onClick={() => navigate('/buy-coffee')}
       >
         Buy us a Coffee
       </Button>

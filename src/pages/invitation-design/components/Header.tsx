@@ -15,6 +15,7 @@ import useUpdateDraftData from '@/data/design/useUpdateDraftData';
 import { ElementContext } from '../ElementWarp';
 import { useDebounce } from 'react-use';
 import LetterAvatar from '@/components/layout/LetterAvatar';
+import PublishButton from './PublishButton';
 interface HeaderProps {
   viewMode: VIEW_MODE;
   setViewMode: (viewMode: VIEW_MODE) => void;
@@ -204,9 +205,7 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username, set
           {isEditMode ? 'Preview' : 'Edit'}
         </Button>
 
-        <Button variant="contained" sx={{ borderRadius: '100px', px: '20px' }}>
-          Public
-        </Button>
+        <PublishButton designId={+(designId || '')} />
       </Box>
     </Box>
   );

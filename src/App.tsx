@@ -17,12 +17,14 @@ import SignUp from '@/pages/auth/SignUp';
 import AuthOutlet from '@/pages/auth/AuthOutlet';
 import SettingDesign from '@/pages/setting-design';
 import CreateDesignPage from '@/pages/create-design';
+import LivePage from '@/pages/live';
 
 import './App.css';
 import PrivateOutlet from './PrivateOutlet';
 import Page404 from '@/components/error-page/Page404';
 import MainLayoutOutlet from '@/components/layout/MainLayoutOutlet';
 import TemplatePreview from './pages/template-preview';
+import BuyCoffee from './pages/coffee';
 
 const Router = () => {
   return (
@@ -48,6 +50,8 @@ const Router = () => {
       </Route>
 
       <Route path="/templates/:templateId" element={<TemplatePreview />} />
+      <Route path="/live/:designDomain/:receiverId" element={<LivePage />} />
+      <Route path="/buy-coffee" element={<BuyCoffee />} />
 
       <Route path="*" element={<Page404 />} />
     </Routes>
