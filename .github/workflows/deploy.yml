@@ -33,4 +33,4 @@ jobs:
 
       - run: echo "${{ secrets.ENV }}" > ./.env
       - run: yarn build
-      - run: rsync -azP ./build/ ssh root@172.104.182.12:/var/www/beauty-wedding-front --delete
+      - run: rsync -azP ./dist/ ssh root@172.104.182.12:/var/www/beauty-wedding-front --delete
