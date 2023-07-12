@@ -51,9 +51,9 @@ export const ParentInfoDefaultProps: IParentInfoSetting = {
     font: {
       fontSize: 24,
       fontFamily: 'Dancing Script',
-      fontWeight: '600',
+      fontWeight: '400',
       color: '#000000',
-      textAlign: 'left',
+      textAlign: 'center',
       fontStyle: 'unset',
     },
     titleFont: {
@@ -61,7 +61,7 @@ export const ParentInfoDefaultProps: IParentInfoSetting = {
       fontFamily: 'Dancing Script',
       fontWeight: '400',
       color: '#602e2e',
-      textAlign: 'left',
+      textAlign: 'center',
       fontStyle: 'unset',
     },
   },

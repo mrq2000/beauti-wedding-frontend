@@ -1,7 +1,7 @@
-import { useEditor, useNode } from '@craftjs/core';
-import React, { useState, useEffect, PropsWithChildren } from 'react';
+import { useNode } from '@craftjs/core';
+import React, { PropsWithChildren } from 'react';
 import PageSetting, { IPageSetting } from './PageSetting';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
 import demo from '@/assets/demo.jpg';
 
@@ -9,6 +9,7 @@ export const Page = ({ children, style, backgroundUrl }: PropsWithChildren<IPage
   const {
     connectors: { connect, drag },
   } = useNode();
+  const theme = useTheme();
 
   return (
     <Box
@@ -21,6 +22,7 @@ export const Page = ({ children, style, backgroundUrl }: PropsWithChildren<IPage
         overflow: 'hidden',
         backgroundSize: 'cover',
         backgroundImage: `url(${backgroundUrl})`,
+        boxShadow: theme.shadows[1],
       }}
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
     >
