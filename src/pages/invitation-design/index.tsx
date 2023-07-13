@@ -9,7 +9,7 @@ import { Page, Text, GroomAndBride, Time, Location, ParentInfo } from '@/editor/
 import RenderNode from './setting/RenderNode';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import SidebarElementSetting from './components/EditSidebar/SidebarElementSetting';
-import MenuSidebar from './components/EditSidebar/MenuSidebar';
+import EditSidebar from './components/EditSidebar/EditSidebar';
 import { useParams } from 'react-router-dom';
 import EditDesign from './components/EditDesign';
 import CustomLoading from '@/components/common/CustomLoading';
@@ -31,6 +31,7 @@ interface IInvitationContext {
 const InvitationContext: FC<PropsWithChildren<IInvitationContext>> = ({ designInfo, children, designDraft }) => {
   const [animation, setAnimation] = useState(designDraft.animation || '');
   const [backgroundImg, setBackgroundImg] = useState(designDraft.backgroundImg || '');
+
   return (
     <InfoContext.Provider
       value={{
@@ -78,7 +79,7 @@ const InvitationDesignPage: FC = () => {
               <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">
                 {viewMode == 'EDIT' ? (
                   <>
-                    <MenuSidebar />
+                    <EditSidebar />
                     <EditDesign />
                     <SidebarElementSetting />
                   </>

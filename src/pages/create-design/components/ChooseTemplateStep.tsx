@@ -86,11 +86,12 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
 
                 <Link to={`/templates/${template.id}`} target="_blank" style={{ textDecoration: 'none' }}>
                   <Button
-                    variant="text"
+                    variant="contained"
                     sx={{
                       width: 120,
                       borderRadius: '100px',
                       backgroundColor: '#fff',
+                      color: '#333841',
                       '&:hover': { backgroundColor: '#E7E8EC' },
                     }}
                   >

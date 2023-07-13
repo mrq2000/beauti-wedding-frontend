@@ -51,7 +51,7 @@ const PublishButton: FC<PublishButtonProps> = ({ designId }) => {
         open={openModal}
       >
         <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Box width="60%" component="img" src={SuccessPublishImg} />
+          <Box mt={3} width="50%" component="img" src={SuccessPublishImg} />
           <Box onClick={onClose} sx={{ cursor: 'pointer', position: 'absolute', right: 20, top: 20 }}>
             <HighlightOffIcon />
           </Box>
@@ -63,7 +63,7 @@ const PublishButton: FC<PublishButtonProps> = ({ designId }) => {
 
           <Typography mt={1} textAlign="center" variant="caption">
             Nếu bạn cảm thấy hài lòng về sản phẩm, ngại gì ủng hộ chúng tôi &nbsp;
-            <Link style={{ color: 'inherit' }} to="/buy-coffee">
+            <Link style={{ color: 'inherit' }} to="/buy-coffee" target="_blank">
               cốc coffee
             </Link>
           </Typography>

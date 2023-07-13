@@ -128,13 +128,14 @@ const TemplateSetting: FC = () => {
 
                 <Link to={`/templates/${template.id}`} target="_blank" style={{ textDecoration: 'none' }}>
                   <Button
-                    variant="text"
+                    variant="contained"
                     size="small"
                     sx={{
                       width: 100,
                       borderRadius: '100px',
                       fontSize: 12,
                       backgroundColor: '#fff',
+                      color: '#333841',
                       '&:hover': { backgroundColor: '#E7E8EC' },
                     }}
                   >
