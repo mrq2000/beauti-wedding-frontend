@@ -43,7 +43,7 @@ const Footer = () => {
         justifyContent: 'center',
       }}
     >
-      <Stack direction="row" spacing={3}>
+      <Stack direction="row" spacing={{ xs: 3, md: 5 }}>
         {FOOTER_TABS.map((tab) => (
           <Box
             key={tab.path}

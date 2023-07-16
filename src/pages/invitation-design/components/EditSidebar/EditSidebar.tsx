@@ -27,6 +27,7 @@ const SIDEBAR_TABS = [
     icon: <ViewSidebarRoundedIcon />,
     tooltipTitle: 'Templates',
     element: <TemplateSetting />,
+    hasApi: true,
   },
   {
     id: 'setting',
@@ -36,8 +37,8 @@ const SIDEBAR_TABS = [
   },
 ];
 
-const MenuSidebar: FC = () => {
+const EditSidebar: FC = () => {
   return <Sidebar tabs={SIDEBAR_TABS} />;
 };
 
-export default MenuSidebar;
+export default EditSidebar;

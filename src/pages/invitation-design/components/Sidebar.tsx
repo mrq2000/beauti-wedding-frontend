@@ -1,4 +1,4 @@
-import React, { FC, useState, Fragment } from 'react';
+import React, { FC, useState, Fragment, PropsWithChildren, useEffect } from 'react';
 import {
   Box,
   CSSObject,
@@ -23,6 +23,7 @@ interface TabInfo {
   icon: React.ReactElement;
   tooltipTitle: string;
   element: JSX.Element;
+  hasApi?: boolean;
 }
 
 const ICON_SIDE_BAR_INDEX = 900;
@@ -73,6 +74,27 @@ const Drawer = styled(MuiDrawer, {
 interface SidebarProps {
   tabs: TabInfo[];
 }
+
+interface HandleFirstRenderProps {
+  isActive: boolean;
+  shouldHandle: boolean;
+}
+const HandleFirstRender: FC<PropsWithChildren<HandleFirstRenderProps>> = ({ children, shouldHandle, isActive }) => {
+  const [firstInit, setFirstInit] = useState(true);
+
+  useEffect(() => {
+    if (isActive) {
+      setFirstInit(false);
+    }
+  }, [isActive]);
+
+  if (!shouldHandle) return <>{children}</>;
+  if (!firstInit) {
+    return <>{children}</>;
+  }
+
+  return isActive ? <>{children}</> : null;
+};
 
 const Sidebar: FC<SidebarProps> = ({ tabs }) => {
   const theme = useTheme();
@@ -151,7 +173,9 @@ const Sidebar: FC<SidebarProps> = ({ tabs }) => {
                   <HighlightOffIcon color="action" />
                 </Box>
               </Box>
-              {tab.element}
+              <HandleFirstRender isActive={isActive} shouldHandle={!!tab.hasApi}>
+                {tab.element}
+              </HandleFirstRender>
             </Box>
           </Box>
         );
