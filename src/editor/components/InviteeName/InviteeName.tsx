@@ -60,7 +60,7 @@ export const InviteeNameDefaultProps: IInviteeNameSetting = {
       fontFamily: 'Dancing Script',
       fontWeight: '400',
       color: '#c41515',
-      textAlign: 'left',
+      textAlign: 'center',
       fontStyle: 'unset',
     },
     padding: {

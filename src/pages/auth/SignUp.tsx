@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 
 import yup from '@/helpers/validator';
@@ -28,6 +28,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [errorMessage, setErrorMessage] = React.useState('');
+  const { search } = useLocation();
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -130,7 +131,7 @@ const SignUp = () => {
       </LoadingButton>
 
       <Typography variant="caption">
-        Bạn đã có tài khoản? <Link to="/sign-in">Đăng nhập ngay</Link>
+        Bạn đã có tài khoản? <Link to={`/sign-in${search}`}>Đăng nhập ngay</Link>
       </Typography>
     </Box>
   );
