@@ -21,7 +21,7 @@ export const Page = ({ children, style, backgroundUrl }: PropsWithChildren<IPage
         borderRadius: `${style.borderRadius}px`,
         overflow: 'hidden',
         backgroundSize: 'cover',
-        backgroundImage: `url(${backgroundUrl})`,
+        backgroundImage: `url("${backgroundUrl}")`,
         boxShadow: theme.shadows[1],
       }}
       ref={(ref: HTMLDivElement) => connect(drag(ref))}
