@@ -1,6 +1,6 @@
 import { useNode } from '@craftjs/core';
 import ContentEditable from 'react-contenteditable';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TextSetting, { ITextSetting } from './TextSetting';
 import { Box } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
@@ -16,6 +16,7 @@ export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
   }));
 
   const [editable, setEditable] = useState(false);
+  const contentEditableRef = useRef<HTMLElement>();
 
   useEffect(() => {
     if (selected) {
@@ -24,6 +25,23 @@ export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
 
     setEditable(false);
   }, [selected]);
+
+  useEffect(() => {
+    if (!contentEditableRef.current) return;
+    const handlePaste = (e: ClipboardEvent) => {
+      e.preventDefault();
+
+      const text = e?.clipboardData?.getData('text/plain');
+      document.execCommand('insertHTML', false, text);
+    };
+    contentEditableRef.current.addEventListener('paste', handlePaste);
+
+    return () => {
+      if (!contentEditableRef.current) return;
+
+      contentEditableRef.current.removeEventListener('paste', handlePaste);
+    };
+  }, [contentEditableRef.current]);
 
   return (
     <Box
@@ -43,6 +61,7 @@ export const Text = ({ text, style: { font, padding } }: ITextSetting) => {
         onChange={(e) => setProp((props: ITextSetting) => (props.text = e.target.value), 1000)}
         tagName="p"
         style={genFont(font)}
+        innerRef={contentEditableRef}
       />
     </Box>
   );

@@ -30,7 +30,7 @@ const RenderDesign: FC<RenderDesignProps> = ({ pages, isMobileMode }) => {
       justifyContent="center"
       ref={containerRef}
       sx={{
-        backgroundImage: `url(${backgroundImg})`,
+        backgroundImage: `url("${backgroundImg}")`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

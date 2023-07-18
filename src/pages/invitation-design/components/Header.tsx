@@ -70,24 +70,22 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username, set
 
   useDebounce(
     async () => {
-      if (apiData == elementString) {
+      if (apiData == elementString || !designId) {
         return;
       }
 
-      if (designId) {
-        if (draftDataAbortController.current) {
-          draftDataAbortController.current.abort();
-        }
-
-        draftDataAbortController.current = new window.AbortController();
-        updateDraftData({
-          data: elementString,
-          designId: +designId,
-        });
-        if (!startApi) setStartApi(true);
+      if (draftDataAbortController.current) {
+        draftDataAbortController.current.abort();
       }
+
+      draftDataAbortController.current = new window.AbortController();
+      updateDraftData({
+        data: elementString,
+        designId: +designId,
+      });
+      if (!startApi) setStartApi(true);
     },
-    3000,
+    2000,
     [elementString, apiData],
   );
 

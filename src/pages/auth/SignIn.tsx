@@ -3,7 +3,7 @@ import { Typography, Box, TextField, IconButton, InputAdornment } from '@mui/mat
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -27,7 +27,10 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [searchParams] = useSearchParams();
+  const { search } = useLocation();
 
+  const redirectUrl = searchParams.get('redirect') || '/';
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
@@ -61,7 +64,7 @@ const SignIn = () => {
         if (data && data.accessToken) {
           setToken(data.accessToken);
           client.clear();
-          navigate('/');
+          navigate(redirectUrl);
         }
       },
       onError: (e) => {
@@ -122,7 +125,7 @@ const SignIn = () => {
       </LoadingButton>
 
       <Typography variant="caption">
-        Chưa có tài khoản? <Link to="/sign-up">Đăng ký ngay</Link>
+        Chưa có tài khoản? <Link to={`/sign-up${search}`}>Đăng ký ngay</Link>
       </Typography>
     </Box>
   );
