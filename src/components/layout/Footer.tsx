@@ -13,11 +13,11 @@ const FOOTER_TABS = [
     icon: HomeRoundedIcon,
     title: 'Home',
   },
-  {
-    path: '/setting',
-    icon: SettingsRoundedIcon,
-    title: 'Setting',
-  },
+  // {
+  //   path: '/setting',
+  //   icon: SettingsRoundedIcon,
+  //   title: 'Setting',
+  // },
   {
     path: '/help',
     icon: HelpOutlineRoundedIcon,

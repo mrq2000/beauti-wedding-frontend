@@ -4,11 +4,24 @@ import React, { FC } from 'react';
 import Logo from '@/assets/logo.png';
 import TKNH from '@/assets/tknh.jpg';
 
+const BACKGROUND_IMG = 'https://taothiepcuoi.s3.ap-southeast-1.amazonaws.com/taothiepcuoi/background_v1.jpg';
+
 const BuyCoffee: FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Box display="flex" flex={1} width="100%" height="100%" alignItems="center" justifyContent="center">
+    <Box
+      display="flex"
+      flex={1}
+      width="100%"
+      height="100%"
+      alignItems="center"
+      justifyContent="center"
+      sx={{
+        backgroundImage: `url('${BACKGROUND_IMG}')`,
+        backgroundSize: 'cover',
+      }}
+    >
       <Box
         display="flex"
         flexDirection={{ xs: 'column', md: 'row' }}
@@ -18,9 +31,31 @@ const BuyCoffee: FC = () => {
         justifyContent="center"
       >
         <Box display="flex" flex={1} justifyItems="center" alignItems="center">
-          <Box component="img" src={TKNH} sx={{ maxWidth: 400, width: '100%' }} />
+          <Box
+            component="img"
+            src={TKNH}
+            sx={{
+              maxWidth: 400,
+              width: '100%',
+              boxShadow: '-11px 11px 8px #00000020',
+              borderRadius: '16px',
+            }}
+          />
         </Box>
-        <Box display="flex" flex={1} flexDirection="column" alignItems="center" height="fit-content">
+        <Box
+          display="flex"
+          flex={1}
+          flexDirection="column"
+          alignItems="center"
+          height="fit-content"
+          sx={{
+            bgcolor: '#fff',
+            paddingBottom: 5,
+            boxShadow: '-11px 11px 8px #00000020',
+            borderRadius: '16px',
+            maxWidth: 500,
+          }}
+        >
           <Box component="img" src={Logo} sx={{ maxWidth: 400, width: '100%' }} />
           <Box
             display="flex"
@@ -28,7 +63,7 @@ const BuyCoffee: FC = () => {
             alignItems="center"
             flexDirection="column"
             justifyContent="center"
-            sx={{ maxWidth: 500 }}
+            sx={{ maxWidth: 400 }}
           >
             <Typography variant="h4" textAlign="center">
               💞 Ủng hộ chúng tôi bằng cốc coffee 💞

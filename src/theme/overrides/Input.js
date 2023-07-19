@@ -71,7 +71,7 @@ export default function Input(theme) {
         },
         input: {
           '&.Mui-disabled': {
-            '-webkit-text-fill-color': '#919EAB',
+            WebkitTextFillColor: '#919EAB',
           },
         },
       },
