@@ -3,7 +3,6 @@ import React, { PropsWithChildren } from 'react';
 import PageSetting, { IPageSetting } from './PageSetting';
 import { Box, useTheme } from '@mui/material';
 import { genPaddingSpacing } from '@/utils/spacing';
-import demo from '@/assets/demo.jpg';
 
 export const Page = ({ children, style, backgroundUrl }: PropsWithChildren<IPageSetting>) => {
   const {
@@ -41,7 +40,7 @@ export const PageDefaultProps: IPageSetting = {
     },
     borderRadius: 8,
   },
-  backgroundUrl: `url(${demo})`,
+  backgroundUrl: '',
 };
 
 Page.craft = {
