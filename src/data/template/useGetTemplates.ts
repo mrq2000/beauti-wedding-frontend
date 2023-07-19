@@ -19,8 +19,9 @@ const useGetTemplates = ({ limit }: IUseGetTemplate) => {
       return response.data as Template[];
     },
     {
-      staleTime: 600000,
-      getNextPageParam: (lastPage, allPage) => (lastPage.length >= limit ? allPage.length * limit : undefined),
+      getNextPageParam: (lastPage, allPage) => {
+        return lastPage.length >= limit ? allPage.length * limit : undefined;
+      },
     },
   );
 };

@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Box, Button, Grid, Typography, useTheme } from '@mui/material';
+import { useInView } from 'react-intersection-observer';
 
 import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
@@ -12,15 +13,33 @@ interface ChooseTemplateProps {
   handleNextStep: () => void;
 }
 
+const EndMessage = (
+  <Grid gridColumn={{ xs: 'span 20' }} mt={4} mb={2} sx={{ textAlign: 'center' }}>
+    <Typography variant="caption">
+      {
+        'Bạn đã xem hết tất cả Template. Chúng tôi đang tiếp tục tạo thêm những template tuyệt vời nữa trong tương lai <3.'
+      }
+    </Typography>
+  </Grid>
+);
+
 const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
-  const { data, isLoading, error } = useGetTemplates({ limit: 100 });
+  const { data, isLoading, error, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetTemplates({ limit: 10 });
   const [templates, setTemplates] = useState<Template[]>([]);
   const { setTemplateId } = useContext(CreateDesignContext);
   const theme = useTheme();
+  const { ref: scrollEl, inView } = useInView();
+
   const handleSelect = (id: number) => {
     setTemplateId(id);
     handleNextStep();
   };
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   useEffect(() => {
     if (data) {
@@ -102,6 +121,15 @@ const ChooseTemplate: FC<ChooseTemplateProps> = ({ handleNextStep }) => {
             </Box>
           </Grid>
         ))}
+      </Box>
+
+      <Box ref={scrollEl} width="100%">
+        {isFetchingNextPage && (
+          <Box mt={4}>
+            <CustomLoading />
+          </Box>
+        )}
+        {!hasNextPage && EndMessage}
       </Box>
     </>
   );

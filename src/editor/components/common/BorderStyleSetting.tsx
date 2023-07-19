@@ -62,7 +62,7 @@ const BorderStyleSetting: FC<BorderStyleSettingProps> = ({ border, onChange, tit
             value={currentBorderIndex == -1 ? 'none' : currentBorderIndex}
             size="small"
             sx={{
-              '& div:first-child': {
+              '& div:first-of-type': {
                 display: 'flex',
                 alignItems: 'center',
               },
