@@ -10,23 +10,22 @@ const BuyCoffee: FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      display="flex"
-      flex={1}
-      width="100%"
-      height="100%"
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        backgroundImage: `url('${BACKGROUND_IMG}')`,
-        backgroundSize: 'cover',
-      }}
-    >
+    <Box display="flex" flex={1} width="100%" height="100%" alignItems="center" justifyContent="center">
+      <Box
+        sx={{
+          height: '100vh',
+          backgroundImage: `url('${BACKGROUND_IMG}')`,
+          backgroundSize: 'cover',
+          width: '100vw',
+          position: 'fixed',
+          filter: 'contrast(0.9)',
+        }}
+      />
       <Box
         display="flex"
         flexDirection={{ xs: 'column', md: 'row' }}
         gap="16px"
-        sx={{ maxWidth: 1200, padding: '16px', width: '100%' }}
+        sx={{ maxWidth: 1200, padding: '16px', width: '100%', zIndex: 10 }}
         alignItems="center"
         justifyContent="center"
       >

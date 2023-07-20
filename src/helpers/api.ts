@@ -11,6 +11,7 @@ export const api = axios.create({
 
 const set = (token: string) => {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
+  api.defaults.headers.common.current_design_id = window.location.pathname.split('/')[2];
 };
 
 export function setToken(token: string) {
