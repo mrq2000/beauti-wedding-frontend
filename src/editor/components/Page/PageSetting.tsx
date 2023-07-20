@@ -7,7 +7,9 @@ import SpacingSetting from '../common/SpacingSetting';
 import BorderRadiusSetting from '../common/BorderRadiusSetting';
 import AddPictureButton from '@/components/common/AddPictureButton';
 import CardImageUpload from '@/components/common/CardImgUpload';
-
+import { useContext } from 'react';
+import { InfoContext } from '@/editor/InfoContext';
+import { DesignPlan } from '@/interface/design';
 export interface PageStyle {
   padding: Spacing;
   borderRadius: number;
@@ -23,6 +25,7 @@ const PageSetting = () => {
   } = useNode((node) => ({
     pageProps: node.data.props as IPageSetting,
   }));
+  const { info } = useContext(InfoContext);
 
   const onChangeStyle = (data: DeepPartial<PageStyle>) => {
     setProp((props: IPageSetting) => {
@@ -61,9 +64,13 @@ const PageSetting = () => {
       </Box>
 
       <Box mt={2} width="100%" height={150}>
-        <AddPictureButton labelKey="upload-background-img" handleSetPicture={onChangeBackground}>
-          <CardImageUpload url={pageProps.backgroundUrl} />
-        </AddPictureButton>
+        {info.plan == DesignPlan.FREE ? (
+          <CardImageUpload url={pageProps.backgroundUrl} disabled />
+        ) : (
+          <AddPictureButton labelKey="upload-background-img" handleSetPicture={onChangeBackground}>
+            <CardImageUpload url={pageProps.backgroundUrl} />
+          </AddPictureButton>
+        )}
       </Box>
     </>
   );

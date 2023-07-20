@@ -1,8 +1,8 @@
+import { DesignInfo } from '@/interface/design';
 import { createContext } from 'react';
-import { Info } from './interface/info';
 
 export interface InfoContext {
-  info: Info;
+  info: DesignInfo;
   inviteeName: string;
   animation: string;
   backgroundImg?: string;

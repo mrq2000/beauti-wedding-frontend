@@ -7,15 +7,17 @@ import logo from '@/assets/logo.png';
 const BACKGROUND_IMG = 'https://taothiepcuoi.s3.ap-southeast-1.amazonaws.com/taothiepcuoi/background_v1.jpg';
 const AuthOutlet = () => {
   return (
-    <Grid
-      container
-      component="main"
-      sx={{
-        height: '100vh',
-        backgroundImage: `url('${BACKGROUND_IMG}')`,
-        backgroundSize: 'cover',
-      }}
-    >
+    <Grid container component="main">
+      <Box
+        sx={{
+          height: '100vh',
+          backgroundImage: `url('${BACKGROUND_IMG}')`,
+          backgroundSize: 'cover',
+          width: '100vw',
+          position: 'fixed',
+          filter: 'contrast(0.9)',
+        }}
+      />
       <Grid
         item
         md={7}
