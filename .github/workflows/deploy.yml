@@ -11,7 +11,7 @@ jobs:
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: 'none'
-      - run: ssh-keyscan -H '34.143.203.251'  >> ~/.ssh/known_hosts
+      - run: ssh-keyscan -H '34.143.253.211'  >> ~/.ssh/known_hosts
 
       - name: Cache node modules
         id: cache-nodemodules
@@ -33,4 +33,4 @@ jobs:
 
       - run: echo "${{ secrets.ENV }}" > ./.env
       - run: yarn build
-      - run: rsync -azP ./dist/ ssh anhchang1412@34.143.203.251:/var/www/beauty-wedding-front --delete
+      - run: rsync -azP ./dist/ ssh anhchang1412@34.143.253.211:/var/www/beauty-wedding-front --delete
