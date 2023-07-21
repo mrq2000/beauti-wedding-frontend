@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Grid, Typography } from '@mui/material';
+import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 
 import useGetDesignInfo from '@/data/design/useGetDesignInfo';
 import CustomLoading from '@/components/common/CustomLoading';
@@ -30,22 +31,28 @@ const SettingDesign: FC = () => {
             }}
             src={design.previewImgUrl || DEFAULT_IMAGE}
           />
-          <Box mt={2} display="flex" justifyContent="space-between" alignItems="center" flexDirection="column">
+          <Box
+            mt={2}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection={{ xs: 'column', md: 'row' }}
+          >
             <Typography
               sx={{ fontWeight: 600, fontSize: 22 }}
             >{`${design.brideName} - ${design.groomName}`}</Typography>
 
-            <Box mt={1}>
+            <Box ml={2}>
               <Button
-                variant="outlined"
-                sx={{ mr: 1 }}
+                variant="contained"
+                sx={{ borderRadius: '50px' }}
                 onClick={() => {
                   navigate(`/designs/${designId}`);
                 }}
+                endIcon={<EditNoteRoundedIcon />}
               >
                 Chỉnh sửa
               </Button>
-              <Button variant="contained">Xem trước</Button>
             </Box>
           </Box>
         </Grid>

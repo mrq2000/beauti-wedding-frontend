@@ -1,9 +1,10 @@
 import { Alert, Card } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
+
 const ErrorFallback = () => {
   return (
-    <Card sx={{ p: 3 }}>
+    <Card sx={{ p: 3, mt: 2 }}>
       <Alert severity="error">Something went wrong!</Alert>
     </Card>
   );

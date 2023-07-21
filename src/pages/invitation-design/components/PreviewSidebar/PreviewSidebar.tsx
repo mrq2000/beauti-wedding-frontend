@@ -18,6 +18,7 @@ const SIDEBAR_TABS = [
     icon: <WallpaperRoundedIcon />,
     tooltipTitle: 'Ảnh nền',
     element: <BackgroundSetting />,
+    hasApi: true,
   },
 ];
 

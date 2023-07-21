@@ -24,8 +24,12 @@ import { DesignDraft, DesignInfo } from '@/interface/design';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 export type VIEW_DEVICE = 'desktop' | 'mobile';
+
+interface Design extends DesignInfo  {
+  designPublic: boolean;
+}
 interface IInvitationContext {
-  designInfo: DesignInfo;
+  designInfo: Design;
   designDraft: DesignDraft;
 }
 const InvitationContext: FC<PropsWithChildren<IInvitationContext>> = ({ designInfo, children, designDraft }) => {
@@ -39,6 +43,7 @@ const InvitationContext: FC<PropsWithChildren<IInvitationContext>> = ({ designIn
         inviteeName: 'Tên Người Nhận',
         animation,
         backgroundImg,
+        isPublic: designInfo.designPublic,
       }}
     >
       <InfoActionContext.Provider
@@ -76,17 +81,27 @@ const InvitationDesignPage: FC = () => {
                 apiData={data.data}
                 username={me?.username || ''}
               />
-              <Box display="flex" flex={1} height="100%" sx={{ paddingTop: `${HEADER_HEIGHT}px` }} flexDirection="row">
-                {viewMode == 'EDIT' ? (
-                  <>
-                    <EditSidebar />
-                    <EditDesign />
-                    <SidebarElementSetting />
-                  </>
-                ) : (
-                  <PreviewDesign isMobileMode={viewDevice == 'mobile'} />
-                )}
+              <Box
+                flex={1}
+                height="100%"
+                sx={{ paddingTop: `${HEADER_HEIGHT}px`, display: viewMode == 'EDIT' ? 'flex' : 'none' }}
+                flexDirection="row"
+              >
+                <EditSidebar />
+                <EditDesign />
+                <SidebarElementSetting />
               </Box>
+              {viewMode == 'PREVIEW' && (
+                <Box
+                  display="flex"
+                  flex={1}
+                  height="100%"
+                  sx={{ paddingTop: `${HEADER_HEIGHT}px` }}
+                  flexDirection="row"
+                >
+                  <PreviewDesign isMobileMode={viewDevice == 'mobile'} />
+                </Box>
+              )}
             </Box>
           </ElementWrap>
         </Editor>
