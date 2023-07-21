@@ -6,6 +6,7 @@ export interface InfoContext {
   inviteeName: string;
   animation: string;
   backgroundImg?: string;
+  isPublic?: boolean;
 }
 
 export const InfoContext = createContext<InfoContext>({

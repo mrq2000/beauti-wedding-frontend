@@ -105,3 +105,12 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
+
+@keyframes HomeLabel {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}

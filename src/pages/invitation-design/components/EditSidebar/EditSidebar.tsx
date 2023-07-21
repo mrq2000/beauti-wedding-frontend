@@ -8,6 +8,7 @@ import ElementSetting from '../ElementSetting';
 import InfoSetting from './InfoSetting';
 import TemplateSetting from './TemplateSetting';
 import Sidebar from '../Sidebar';
+import Setting from './Setting';
 
 const SIDEBAR_TABS = [
   {
@@ -33,7 +34,7 @@ const SIDEBAR_TABS = [
     id: 'setting',
     icon: <SettingsRoundedIcon />,
     tooltipTitle: 'Cài Đặt',
-    element: <></>,
+    element: <Setting />,
   },
 ];
 

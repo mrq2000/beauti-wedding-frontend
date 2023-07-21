@@ -35,60 +35,83 @@ const BackgroundSetting: FC = () => {
   };
 
   return (
-    <Box
-      display="flex"
-      flex={1}
-      flexDirection="column"
-      gap="8px"
-      sx={{ overflowY: 'auto', margin: '-8px', padding: '8px' }}
-      id="template-list"
-    >
-      {isLoading && <CustomLoading />}
-      {isError && <RetryButton onClick={() => refetch()} />}
-      {data && (
-        <>
-          {data.map((img) => (
+    <>
+      <Box
+        display="flex"
+        flex={1}
+        flexDirection="column"
+        gap="8px"
+        sx={{ overflowY: 'auto', margin: '-8px', padding: '8px' }}
+      >
+        {isLoading && <CustomLoading />}
+        {isError && <RetryButton onClick={() => refetch()} />}
+        {data && (
+          <>
             <Box
               width="100%"
               height="140px"
-              key={img.backgroundImg}
-              sx={{ cursor: 'pointer' }}
+              sx={{
+                cursor: 'pointer',
+                flexShrink: 0,
+                borderRadius: '8px',
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex',
+                border: `1px solid ${!backgroundImg ? theme.palette.primary.light : '#E7E8EC'}`,
+                '&:hover': {
+                  border: `1px solid ${theme.palette.primary.light}`,
+                  filter: 'contrast(0.6)',
+                },
+              }}
               onClick={() => {
-                setBackgroundImg(img.backgroundImg);
+                setBackgroundImg('');
               }}
             >
-              <Box
-                component="img"
-                src={img.backgroundImg}
-                sx={{
-                  height: '100%',
-                  width: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '8px',
-                  border: `1px solid ${backgroundImg == img.backgroundImg ? theme.palette.primary.light : '#E7E8EC'}`,
-                  '&:hover': {
-                    border: `1px solid ${theme.palette.primary.light}`,
-                  },
-                }}
-              />
+              None
             </Box>
-          ))}
-        </>
-      )}
-
-      <Box display="flex" flex={1} />
-      <Box display="flex" flexShrink={0}>
+            {data.map((img) => (
+              <Box
+                width="100%"
+                height="140px"
+                key={img.backgroundImg}
+                sx={{ cursor: 'pointer', flexShrink: 0 }}
+                onClick={() => {
+                  setBackgroundImg(img.backgroundImg);
+                }}
+              >
+                <Box
+                  component="img"
+                  src={img.backgroundImg}
+                  sx={{
+                    height: '100%',
+                    width: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                    border: `1px solid ${backgroundImg == img.backgroundImg ? theme.palette.primary.light : '#E7E8EC'}`,
+                    '&:hover': {
+                      border: `1px solid ${theme.palette.primary.light}`,
+                      filter: 'contrast(0.6)',
+                    },
+                  }}
+                />
+              </Box>
+            ))}
+          </>
+        )}
+      </Box>
+      <Box display="flex" flexShrink={0} flexDirection="column">
         <LoadingButton
           disabled={!dataDraft || dataDraft.backgroundImg == backgroundImg}
           variant="contained"
           fullWidth
           loading={loadingUpdateBackground}
           onClick={handleUpdateBackground}
+          sx={{ mt: 2 }}
         >
           Update
         </LoadingButton>
       </Box>
-    </Box>
+    </>
   );
 };
 

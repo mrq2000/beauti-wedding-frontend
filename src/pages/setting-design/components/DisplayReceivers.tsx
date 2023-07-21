@@ -95,6 +95,20 @@ const DisplayReceivers: FC<DisplayReceiversProps> = ({ receivers, domain }) => {
     [receiverString],
   );
 
+  const handleAdd = () => {
+    const randomId = uuidv4().substr(0, 6);
+    const clone = [
+      {
+        name: input,
+        id: randomId,
+      },
+      ...currentReceivers,
+    ];
+
+    setCurrentReceivers(clone);
+    setInput('');
+  };
+
   return (
     <Box
       width="100%"
@@ -124,29 +138,25 @@ const DisplayReceivers: FC<DisplayReceiversProps> = ({ receivers, domain }) => {
         )}
       </Box>
 
-      <TextField
-        placeholder="Enter để thêm"
-        sx={{ display: 'flex', flex: 1 }}
-        value={input}
-        size="small"
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            const randomId = uuidv4().substr(0, 6);
-            const clone = [
-              {
-                name: input,
-                id: randomId,
-              },
-              ...currentReceivers,
-            ];
-
-            setCurrentReceivers(clone);
-            setInput('');
-          }
-        }}
-      />
+      <Box display="flex">
+        <TextField
+          placeholder="Enter để thêm"
+          sx={{ display: 'flex', flex: 1 }}
+          value={input}
+          size="small"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              if (!input) return;
+              e.preventDefault();
+              handleAdd();
+            }
+          }}
+        />
+        <Button variant="contained" sx={{ ml: 2 }} disabled={!input} onClick={handleAdd}>
+          Thêm
+        </Button>
+      </Box>
 
       <Box mt={2} width="100%">
         <Typography variant="h6">Danh sách người nhận</Typography>
