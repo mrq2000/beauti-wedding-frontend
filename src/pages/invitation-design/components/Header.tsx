@@ -14,7 +14,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useUpdateDraftData from '@/data/design/useUpdateDraftData';
 import { ElementContext } from '../ElementWarp';
 import { useDebounce } from 'react-use';
-import LetterAvatar from '@/components/layout/LetterAvatar';
+import LetterAvatar from '@/components/common/LetterAvatar';
 import PublishButton from './PublishButton';
 interface HeaderProps {
   viewMode: VIEW_MODE;

@@ -6,7 +6,6 @@ import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import useGetDesignInfo from '@/data/design/useGetDesignInfo';
 import CustomLoading from '@/components/common/CustomLoading';
 import SomeThingError from '@/components/error-page/SomeThingError';
-import { DEFAULT_IMAGE } from '../home/DesignTab';
 import DisplayReceivers from './components/DisplayReceivers';
 
 const SettingDesign: FC = () => {
@@ -29,7 +28,7 @@ const SettingDesign: FC = () => {
               borderRadius: '12px',
               display: { xs: 'none', sm: 'block' },
             }}
-            src={design.previewImgUrl || DEFAULT_IMAGE}
+            src={design.previewImgUrl}
           />
           <Box
             mt={2}

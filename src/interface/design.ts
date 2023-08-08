@@ -1,11 +1,11 @@
 import { Info } from '@/editor/interface/info';
+import { valueof } from '.';
 
 export const DesignPlan = {
   FREE: 1,
   ADVANCE: 2,
 };
 
-type valueof<T> = T[keyof T];
 export interface DesignDraft {
   design_id: number;
   animation: string;

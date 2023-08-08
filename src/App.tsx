@@ -23,8 +23,16 @@ import './App.css';
 import PrivateOutlet from './PrivateOutlet';
 import Page404 from '@/components/error-page/Page404';
 import MainLayoutOutlet from '@/components/layout/MainLayoutOutlet';
-import TemplatePreview from './pages/template-preview';
-import BuyCoffee from './pages/coffee';
+import TemplatePreview from '@/pages/template-preview';
+import BuyCoffee from '@/pages/coffee';
+import SettingTab from '@/pages/home/SettingTab';
+
+import DesignerAuthOutlet from '@/pages/designer/auth/DesignerAuthOutlet';
+import DesignerSignIn from '@/pages/designer/auth/SignIn';
+import PrivateDesignerOutlet from './PrivateDesignerOutlet';
+import HomeDesigner from '@/pages/designer/Home';
+import MainLayoutDesignerOutlet from '@/pages/designer/layout/MainLayoutOutlet';
+
 
 const Router = () => {
   return (
@@ -32,21 +40,31 @@ const Router = () => {
       <Route path="" element={<PrivateOutlet />}>
         <Route path="" element={<MainLayoutOutlet showFooter={true} />}>
           <Route index element={<Home />} />
+          <Route path="/setting" element={<SettingTab />} />
         </Route>
 
         <Route path="" element={<MainLayoutOutlet showFooter={false} />}>
-          <Route index element={<Home />} />
           <Route path="/design-setting/:designId" element={<SettingDesign />} />
           <Route path="/get-started" element={<CreateDesignPage />} />
         </Route>
 
-        <Route path="/demo" element={<Demo />} />
         <Route path="/designs/:designId" element={<InvitationDesignPage />} />
+        <Route path="/demo" element={<Demo />} />
       </Route>
 
       <Route path="" element={<AuthOutlet />}>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+      </Route>
+
+      <Route path="" element={<DesignerAuthOutlet />}>
+        <Route path="/designer/sign-in" element={<DesignerSignIn />} />
+      </Route>
+
+      <Route path="" element={<PrivateDesignerOutlet />}>
+        <Route path="" element={<MainLayoutDesignerOutlet showFooter={true} />}>
+          <Route path="/designer" element={<HomeDesigner />} />
+        </Route>
       </Route>
 
       <Route path="/templates/:templateId" element={<TemplatePreview />} />

@@ -1,13 +1,12 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import CoffeeRoundedIcon from '@mui/icons-material/CoffeeRounded';
-import useMe from '@/data/useMe';
 import LetterAvatar from '@/components/common/LetterAvatar';
+import useDesigner from '@/data/designer/useDesigner';
 
 export const HEADER_HEIGHT = 56;
 
 const Header = () => {
-  const { data } = useMe();
+  const { data } = useDesigner();
   const navigate = useNavigate();
 
   return (
@@ -27,27 +26,12 @@ const Header = () => {
         justifyContent: 'space-between',
       }}
     >
-      <Box display="flex" alignItems="center" onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}>
+      <Box display="flex" alignItems="center" onClick={() => navigate('/designer')} sx={{ cursor: 'pointer' }}>
         <LetterAvatar name={data?.username || ''} />
         <Typography variant="caption" sx={{ ml: 1, fontSize: 14, display: { xs: 'none', sm: 'block' } }}>
           {data?.username}
         </Typography>
       </Box>
-
-      <Button
-        variant="contained"
-        startIcon={<CoffeeRoundedIcon />}
-        sx={{
-          borderRadius: '100px',
-          backgroundColor: '#553939',
-          '&:hover': {
-            backgroundColor: '#704F4F',
-          },
-        }}
-        onClick={() => navigate('/buy-coffee')}
-      >
-        Buy us a Coffee
-      </Button>
     </Box>
   );
 };

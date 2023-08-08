@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { api } from '@/helpers/api';
-import { Template } from '../../interface/template';
+import { Template } from '@/interface/template';
 
 const useGetTemplate = (templateId: number) => {
   return useQuery(
