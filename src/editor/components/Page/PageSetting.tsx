@@ -44,7 +44,7 @@ const PageSetting = () => {
       <SpacingSetting
         title="Padding"
         spacing={pageProps.style.padding}
-        max={48}
+        max={100}
         onChange={(value) => {
           onChangeStyle({
             padding: value,

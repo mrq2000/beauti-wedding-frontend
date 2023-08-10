@@ -8,9 +8,6 @@ import SomeThingError from '@/components/error-page/SomeThingError';
 import useGetDesignList from '@/data/design/useGetDesignList';
 import dayjs from '@/helpers/date';
 
-export const DEFAULT_IMAGE =
-  'https://kenh14cdn.com/thumb_w/660/203336854389633024/2022/9/24/tumblr0a490ad7062f51c33ec0c054255256a2a1922eb2540-1664001587930930202526.jpg';
-
 const DesignTab: FC = () => {
   const { data, isLoading, error } = useGetDesignList();
   const theme = useTheme();
@@ -102,7 +99,7 @@ const DesignTab: FC = () => {
                   borderTopLeftRadius: '12px',
                   borderTopRightRadius: '12px',
                 }}
-                src={design.previewImgUrl || DEFAULT_IMAGE}
+                src={design.previewImgUrl}
               />
               <Box sx={{ p: 2 }} width="100%">
                 <Typography

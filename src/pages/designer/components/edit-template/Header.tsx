@@ -8,14 +8,14 @@ import Chip from '@mui/material/Chip';
 import StayCurrentPortraitRoundedIcon from '@mui/icons-material/StayCurrentPortraitRounded';
 import LaptopRoundedIcon from '@mui/icons-material/LaptopRounded';
 
-import { VIEW_DEVICE, VIEW_MODE } from '..';
+import { VIEW_DEVICE, VIEW_MODE } from '../../EditTemplate';
 import CustomTooltip from '@/components/common/CustomTooltip';
 import { useNavigate, useParams } from 'react-router-dom';
 import useUpdateDraftData from '@/data/design/useUpdateDraftData';
-import { ElementContext } from '../ElementWarp';
 import { useDebounce } from 'react-use';
 import LetterAvatar from '@/components/common/LetterAvatar';
-import PublishButton from './PublishButton';
+import { ElementContext } from '@/pages/invitation-design/ElementWarp';
+
 interface HeaderProps {
   viewMode: VIEW_MODE;
   setViewMode: (viewMode: VIEW_MODE) => void;
@@ -107,7 +107,7 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username, set
     >
       <Box sx={{ flex: 1, alignItems: 'center', display: 'flex' }}>
         <Box
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/designer')}
           sx={{ color: '#383b3f', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         >
           <LetterAvatar name={username || ''} />
@@ -203,7 +203,9 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode, apiData, username, set
           {isEditMode ? 'Preview' : 'Edit'}
         </Button>
 
-        <PublishButton designId={+(designId || '')} />
+        <Button variant="contained" sx={{ borderRadius: '100px', px: '20px' }}>
+          Request Review
+        </Button>
       </Box>
     </Box>
   );

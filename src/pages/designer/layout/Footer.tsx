@@ -3,25 +3,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 
 export const FOOTER_HEIGHT = 56;
 
 const FOOTER_TABS = [
   {
-    path: '/',
+    path: '/designer',
     icon: HomeRoundedIcon,
     title: 'Home',
   },
   {
-    path: '/setting',
+    path: '/designer/setting',
     icon: SettingsRoundedIcon,
     title: 'Setting',
-  },
-  {
-    path: '/help',
-    icon: HelpOutlineRoundedIcon,
-    title: 'Help',
   },
 ];
 const Footer = () => {

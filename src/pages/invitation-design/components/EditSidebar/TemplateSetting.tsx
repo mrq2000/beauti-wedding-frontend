@@ -93,7 +93,7 @@ const TemplateSetting: FC = () => {
                   width: '100%',
                   aspectRatio: '12 / 17',
                   borderRadius: '8px',
-                  backgroundImage: `url("${template.preview_img_url}")`,
+                  backgroundImage: `url("${template.previewImgUrl}")`,
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'cover',

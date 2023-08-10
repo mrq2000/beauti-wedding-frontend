@@ -4,9 +4,9 @@ import { Template } from '@/interface/template';
 
 const useGetTemplate = (templateId: number) => {
   return useQuery(
-    ['template', templateId],
+    ['designer', 'template', templateId],
     async () => {
-      const response = await api.get(`/templates/${templateId}`);
+      const response = await api.get(`/designers/templates/${templateId}`);
 
       return response.data as Template;
     },

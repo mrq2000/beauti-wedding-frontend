@@ -3,8 +3,6 @@ import { Editor } from '@craftjs/core';
 import { Box } from '@mui/material';
 
 import { InfoActionContext, InfoContext } from '@/editor/InfoContext';
-import { InviteeName } from '@/editor/components/InviteeName';
-import { Page, Text, GroomAndBride, Time, Location, ParentInfo } from '@/editor/components';
 
 import RenderNode from './setting/RenderNode';
 import Header, { HEADER_HEIGHT } from './components/Header';
@@ -19,13 +17,14 @@ import PreviewDesign from './components/PreviewDesign';
 
 import useGetDesignDraft from '@/data/design/useGetDesignDraft';
 import useGetDesignInfo from '@/data/design/useGetDesignInfo';
-import useMe from '@/data/useMe';
 import { DesignDraft, DesignInfo } from '@/interface/design';
+import useDesigner from '@/data/designer/useDesigner';
+import { resolvers } from '@/editor';
 
 export type VIEW_MODE = 'PREVIEW' | 'EDIT';
 export type VIEW_DEVICE = 'desktop' | 'mobile';
 
-interface Design extends DesignInfo  {
+interface Design extends DesignInfo {
   designPublic: boolean;
 }
 interface IInvitationContext {
@@ -62,7 +61,7 @@ const InvitationDesignPage: FC = () => {
   const { designId } = useParams();
   const [viewMode, setViewMode] = useState<VIEW_MODE>('EDIT');
   const [viewDevice, setViewDevice] = useState<VIEW_DEVICE>('desktop');
-  const { data: me } = useMe();
+  const { data: me } = useDesigner();
   const { data, isLoading, error: designDraftError } = useGetDesignDraft(+(designId || 0));
   const { data: designInfo, isLoading: loadingDesignInfo, error: designInfoError } = useGetDesignInfo(+(designId || 0));
 
@@ -70,7 +69,7 @@ const InvitationDesignPage: FC = () => {
   if (data && designInfo)
     return (
       <InvitationContext designDraft={data} designInfo={designInfo}>
-        <Editor resolver={{ Text, Page, GroomAndBride, Time, InviteeName, Location, ParentInfo }} onRender={RenderNode}>
+        <Editor resolver={resolvers} onRender={RenderNode}>
           <ElementWrap data={JSON.parse(data.data)}>
             <Box flex={1} flexDirection="column" height="100%">
               <Header

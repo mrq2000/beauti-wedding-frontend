@@ -1,4 +1,4 @@
-import { Box, Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Box, Button, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import React, { FC } from 'react';
 
 import StayCurrentPortraitRoundedIcon from '@mui/icons-material/StayCurrentPortraitRounded';
@@ -12,9 +12,9 @@ interface HeaderProps {
   viewMode: string;
   setViewMode: (viewMode: 'desktop' | 'mobile') => void;
 }
-export const HEADER_HEIGHT = 56;
+export const HEADER_HEIGHT = 72;
 
-const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
+const Header: FC<HeaderProps> = ({ viewMode, setViewMode, inviteeName, setInviteeName }) => {
   const navigate = useNavigate();
   const handleChangeViewMode = (event: React.MouseEvent<HTMLElement>, newAlignment: 'desktop' | 'mobile' | null) => {
     setViewMode(newAlignment || 'desktop');
@@ -37,6 +37,14 @@ const Header: FC<HeaderProps> = ({ viewMode, setViewMode }) => {
         justifyContent: 'flex-end',
       }}
     >
+      <TextField
+        value={inviteeName}
+        label="Tên người nhận"
+        onChange={(e) => setInviteeName(e.target.value)}
+        size="small"
+        sx={{ mr: 2 }}
+      />
+
       <ToggleButtonGroup
         value={viewMode}
         exclusive
