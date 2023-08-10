@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 const useDesigner = () => {
   return useQuery(
-    'get designer',
+    'designer',
     async () => {
       const response = await api.get('/designers/me');
 

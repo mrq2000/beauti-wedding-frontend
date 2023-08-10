@@ -1,12 +1,13 @@
 import CustomLoading from '@/components/common/CustomLoading';
 import useGetTemplates from '@/data/designer/useGetTemplates';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 import SomeThingError from '@/components/error-page/SomeThingError';
 import dayjs from 'dayjs';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { DesignStatus, Template } from '@/interface/template';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ReviewTemplateInfoModal from './components/home/ReviewTemplateInfoModal';
 
 const STATUS_LABEL = {
   [DesignStatus.ACTIVE]: {
@@ -25,9 +26,9 @@ const STATUS_LABEL = {
 
 const Home: FC = () => {
   const { isLoading, data } = useGetTemplates();
-  const location = useLocation();
+  const [openReviewReviewTemplateInfo, setOpenReviewTemplateInfo] = useState(false);
   const theme = useTheme();
-  console.log(location);
+  const navigate = useNavigate();
 
   const handleSelectTemplate = (template: Template) => {
     if (template.status == DesignStatus.ACTIVE) {
@@ -36,6 +37,12 @@ const Home: FC = () => {
     }
 
     if (template.status == DesignStatus.EDITING) {
+      navigate(`/designer/templates/${template.id}`);
+      return;
+    }
+
+    if (template.status == DesignStatus.IN_REVIEW) {
+      setOpenReviewTemplateInfo(true);
       return;
     }
   };
@@ -51,6 +58,13 @@ const Home: FC = () => {
             muốn public hoặc xóa template.
           </Typography>
         </Box>
+
+        <ReviewTemplateInfoModal
+          open={openReviewReviewTemplateInfo}
+          onClose={() => {
+            setOpenReviewTemplateInfo(false);
+          }}
+        />
 
         <Box pb={2}>
           <Grid container spacing={2}>

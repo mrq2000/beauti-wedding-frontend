@@ -32,7 +32,7 @@ import DesignerSignIn from '@/pages/designer/auth/SignIn';
 import PrivateDesignerOutlet from './PrivateDesignerOutlet';
 import HomeDesigner from '@/pages/designer/Home';
 import MainLayoutDesignerOutlet from '@/pages/designer/layout/MainLayoutOutlet';
-
+import EditTemplate from './pages/designer/EditTemplate';
 
 const Router = () => {
   return (
@@ -60,6 +60,7 @@ const Router = () => {
       <Route path="" element={<DesignerAuthOutlet />}>
         <Route path="/designer/sign-in" element={<DesignerSignIn />} />
       </Route>
+      <Route path="/designer/templates/:templateId" element={<EditTemplate />} />
 
       <Route path="" element={<PrivateDesignerOutlet />}>
         <Route path="" element={<MainLayoutDesignerOutlet showFooter={true} />}>
